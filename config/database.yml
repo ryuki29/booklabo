@@ -49,6 +49,12 @@ test:
 #
 production:
   <<: *default
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  pool: 5
+  username: admin
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
+  host: database-1.crmcbj9tb0h5.ap-northeast-1.rds.amazonaws.com
   database: booklabo_production
-  username: booklabo
-  password: <%= ENV['BOOKLABO_DATABASE_PASSWORD'] %>
