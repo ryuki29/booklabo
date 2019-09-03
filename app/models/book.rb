@@ -3,7 +3,7 @@ class Book < ApplicationRecord
 
   def initialize(title, author, image_url)
     @title = title
+    @author = author
     @image_url = image_url
-    
   end
 end

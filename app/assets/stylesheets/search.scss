@@ -1,0 +1,62 @@
+@import "config/variables";
+
+.search-result {
+  margin: 0 auto;
+  max-width: 700px;
+
+  .card-header {
+    background-color: $white;
+    color: $gray-9;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .card-img-top {
+    height: 145px;
+    max-width: 100px;
+    padding: 10px 0;
+  }
+
+  .search-item-body {
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .search-main {
+    margin: 20px 0;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .search-main {
+    margin: 120px 0 30px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .search-item {
+    flex-direction: row;
+
+    .card-title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .search-result {
+    .card-img-top {
+      margin: 0 auto;
+    }
+
+    .card-title,
+    .card-text {
+      color: #666;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  }
+}
