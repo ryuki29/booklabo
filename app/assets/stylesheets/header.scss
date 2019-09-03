@@ -47,3 +47,15 @@
 .search-form {
   margin-top: 90px;
 }
+
+@media screen and (max-width: 480px) {
+  .header-logo {
+    height: 43px;
+  }
+}
+
+@media screen and (min-width: 481px) {
+  .header-logo {
+    height: 50px;
+  }
+}
