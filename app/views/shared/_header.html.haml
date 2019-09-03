@@ -1,32 +1,30 @@
 %nav.navbar.navbar-white.py-2.fixed-top
   .container
     %h1
-      %a.navbar-brand{href: "/", class: 'mr-0'}
+      %a.navbar-brand.mr-0{ href: "/" }
         = image_tag('header-logo.png',
           alt: 'BOOKLABO',
           height: '50px')
     %form.form-inline.d-none.d-sm-inline
       .input-group
-        %input{type: "search",
-               class: 'form-control form-control-sm',
-               placeholder: '本のタイトル・著者名'}
+        %input.form-control.form-control-sm{ type: "search",
+         placeholder: '本のタイトル・著者名' }
         .input-group-append
-          .input-group-text{style: 'background-color: #fff;'}
+          .input-group-text{ tyle: 'background-color: #fff;' }
             %i.fas.fa-search
     %ul.navbar-nav
       %li.nav-item
-        %a{href: "#", class:'nav-link'}
+        %a.nav-link{ href: "#" }
           %i.fas.fa-user-circle.fa-2x
       %li.nav-item.pl-1
-        %a{href: "#", class:'nav-link'}
+        %a.nav-link{ href: "#" }
           %i.fas.fa-cog.fa-2x
 .search-form.bg-white.d-sm-none.py-4
   .container
     %form.form-inline.px-4
       .input-group
-        %input{type: "search",
-               class: 'form-control',
-               placeholder: '本のタイトル・著者名'}
+        %input.form-control{ type: "search",
+               placeholder: '本のタイトル・著者名' }
         .input-group-append
-          .input-group-text{style: 'background-color: #fff;'}
+          .input-group-text{ style: 'background-color: #fff;' }
             %i.fas.fa-search
