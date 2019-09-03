@@ -1,0 +1,42 @@
+.navbar {
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
+
+  .form-control {
+    background-color: #fafafa;
+    text-align: center;
+    width: 190px;
+    z-index: 10;
+
+    &:active,
+    &:focus {
+      background-color: #fff;
+      border-color: #ced4da;
+      box-shadow: none;
+      text-align: left;
+    }
+
+    .input-group {
+      display: flex;
+      flex-wrap: nowrap;
+      color: #999;
+    }
+  }
+
+  .navbar-nav {
+    flex-direction: row;
+
+    .fas {
+      border-radius: 50%;
+      color: #bbb;
+      padding: 7px;
+
+      &:hover,
+      &:active {
+        color: #fff;
+        background-color: #ccc;
+        transition: 0.8s;
+      }
+    }
+  }
+}

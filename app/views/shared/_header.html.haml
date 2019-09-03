@@ -1,0 +1,22 @@
+%nav.navbar.navbar-white.py-2.fixed-top
+  .container
+    %h1
+      %a.navbar-brand{href: "/", class: 'mr-0'}
+        = image_tag('header-logo.png',
+          alt: 'BOOKLABO',
+          height: '50px')
+    %form.form-inline.d-none.d-sm-inline
+      .input-group
+        %input{type: "search",
+               class: 'form-control form-control-sm',
+               placeholder: '本のタイトル・著者名'}
+        .input-group-append
+          .input-group-text{style: 'background-color: #fff;'}
+            %i.fas.fa-search
+    %ul.navbar-nav
+      %li.nav-item
+        %a{href: "#", class:'nav-link'}
+          %i.fas.fa-user-circle.fa-2x
+      %li.nav-item.pl-1
+        %a{href: "#", class:'nav-link'}
+          %i.fas.fa-cog.fa-2x

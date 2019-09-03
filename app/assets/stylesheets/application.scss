@@ -1,2 +1,10 @@
+$theme-colors: (
+  "primary": #0074d9,
+  "danger": #ff4136
+);
+
+@import "font-awesome-sprockets";
+@import "font-awesome";
 @import "bootstrap";
-@import "books";
+@import "header";
+@import "main";
