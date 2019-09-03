@@ -1,6 +1,7 @@
-.navbar {
+.navbar,
+.search-form {
   background-color: #fff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
+  border-bottom: 1px solid #ddd;
 
   .form-control {
     background-color: #fafafa;
@@ -11,7 +12,7 @@
     &:active,
     &:focus {
       background-color: #fff;
-      border-color: #ced4da;
+      border-color: #ddd;
       box-shadow: none;
       text-align: left;
     }
@@ -39,4 +40,8 @@
       }
     }
   }
+}
+
+.search-form {
+  margin-top: 90px;
 }

@@ -20,3 +20,13 @@
       %li.nav-item.pl-1
         %a{href: "#", class:'nav-link'}
           %i.fas.fa-cog.fa-2x
+.search-form.bg-white.d-sm-none.py-4
+  .container
+    %form.form-inline.px-4
+      .input-group
+        %input{type: "search",
+               class: 'form-control',
+               placeholder: '本のタイトル・著者名'}
+        .input-group-append
+          .input-group-text{style: 'background-color: #fff;'}
+            %i.fas.fa-search
