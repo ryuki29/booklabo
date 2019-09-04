@@ -1,5 +1,5 @@
 .card-footer.bg-white
-  %nav#pagination-nav{data: {page: page, total: total_items}}
+  %nav#pagination-nav{ data: {page: page, total: total_items} }
     %ul.pagination.justify-content-center.mt-3
       %li.page-item.paginate-prev
         = link_to(search_books_path(keyword: keyword,
@@ -30,6 +30,6 @@
           %i.fas.fa-angle-double-right
     %p.pagination-text
       - unless books.length == 1
-        = "全#{total_items}件中 #{page.to_i * 20 + 1} - #{page.to_i * 20 + @books.length}件を表示"
+        全#{total_items}件中 #{page.to_i * 20 + 1} - #{page.to_i * 20 + @books.length}件を表示
       - else
-        = "全#{total_items}件中 #{page.to_i * 20 + 1}件を表示"
+        全#{total_items}件中 #{page.to_i * 20 + 1}件を表示
