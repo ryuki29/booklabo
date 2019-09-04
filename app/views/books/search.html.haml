@@ -13,3 +13,9 @@
                 = book[:title]
               .card-text
                 = book[:authors].join(', ')
+      - if @total_items > 20
+        = render partial: 'shared/pagination',
+          locals: { page: @page, 
+                    total_items: @total_items,
+                    keyword: @keyword,
+                    books: @books }

@@ -8,17 +8,21 @@ class BooksController < ApplicationController
     require 'json'
 
     @books = []
+    @keyword = params[:keyword]
+    @total_items = 0
+    @page = params[:page]
 
-    unless params[:keyword].present?
-      render :search
-      return
-    end
+    return if params[:keyword].empty?
 
     encoded_uri = URI.encode(
-      "https://www.googleapis.com/books/v1/volumes?maxResults=20&q=#{params[:keyword]}&fields=items(id,volumeInfo(title,authors,imageLinks/thumbnail))"
+      "https://www.googleapis.com/books/v1/volumes?maxResults=20&startIndex=#{params[:page]}&q=#{params[:keyword]}&fields=totalItems,items(id,volumeInfo(title,authors,imageLinks/thumbnail))"
     )
     parsed_uri = URI.parse(encoded_uri)
     result = JSON.parse(Net::HTTP.get(parsed_uri))
+
+    @total_items = result["totalItems"]
+    return if @total_items == 0
+    @total_items = 100 if @total_items > 0
     
     result["items"].each do |item|
       title = item["volumeInfo"]["title"] ||= ""
