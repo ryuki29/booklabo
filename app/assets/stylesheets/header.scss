@@ -1,5 +1,9 @@
 @import "config/variables";
 
+button:focus {
+  outline: none;
+}
+
 .navbar,
 .search-form {
   background-color: $white;
@@ -7,6 +11,7 @@
 
   .form-control {
     background-color: $bg-white;
+    height: 38px;
     text-align: center;
     width: 190px;
     z-index: 10;
@@ -23,6 +28,10 @@
       color: $gray-9;
       display: flex;
       flex-wrap: nowrap;
+    }
+
+    .input-group-text {
+      opacity: 0.5;
     }
   }
 }
