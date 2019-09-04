@@ -4,11 +4,12 @@
       %h1.card-header
         検索結果
       .card-body.row
-        - 16.times do
+        - @books.each do |book|
           .search-item.card.col-md-3.border-0
-            %img.card-img-top{ src: "https://picsum.photos/100" }
+            = image_tag(book[:image_url],
+              class: 'card-img-top')
             .search-item-body.card-body
               %h5.card-title
-                すベてがFになる (講談社文庫)
+                = book[:title]
               .card-text
-                森博嗣
+                = book[:authors].join(', ')

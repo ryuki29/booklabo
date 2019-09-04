@@ -1,33 +1,28 @@
 class BooksController < ApplicationController
-  require 'net/http'
-  require 'uri'
-  require 'json'
-  
   def index
   end
 
   def search
+    require 'net/http'
+    require 'uri'
+    require 'json'
+
     @books = []
 
-    if params[:keyword].empty?
+    unless params[:keyword].present?
       render :search
       return
     end
 
     encoded_uri = URI.encode(
-      "https://www.googleapis.com/books/v1/volumes?q=#{params[:keyword]}
-       &fields=items(id,volumeInfo(title,authors,imageLinks/thumbnail))"
+      "https://www.googleapis.com/books/v1/volumes?maxResults=20&q=#{params[:keyword]}&fields=items(id,volumeInfo(title,authors,imageLinks/thumbnail))"
     )
     parsed_uri = URI.parse(encoded_uri)
     result = JSON.parse(Net::HTTP.get(parsed_uri))
     
     result["items"].each do |item|
-      title = item["volumeInfo"]["title"] ?
-        item["volumeInfo"]["title"] :
-        ""
-      authors = item["volumeInfo"]["authors"] ?
-        item["volumeInfo"]["authors"] :
-        ""
+      title = item["volumeInfo"]["title"] ||= ""
+      authors = item["volumeInfo"]["authors"] ||= []
       image_url = item["volumeInfo"]["imageLinks"] ? 
         item["volumeInfo"]["imageLinks"]["thumbnail"] : 
         ""
