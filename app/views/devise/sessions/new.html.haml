@@ -1,17 +1,44 @@
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+.signup.pt-5
+  .container
+    .card.mx-auto.mb-3
+      .container.text-center.pb-4
+        = image_tag('booklabo-logo.png',
+          alt: 'BOOKLABO',
+          class: 'signup-logo')
+        = form_with(model: @user,
+          url: new_user_registration_path,
+          local: true,
+          class: 'signup-form') do |f|
+          = f.email_field(:email,
+            placeholder: 'メールアドレス',
+            class: 'form-control')
+          = f.password_field(:password,
+            placeholder: 'パスワード',
+            class: 'form-control')
+        .signup-border
+          .border-line
+          %span.signup-border-text 
+            または
+        = link_to(root_path,
+          class: 'signin-fb py-2 d-block') do
+          %i.fab.fa-facebook-square.fa-lg.mr-1
+          Facebookでログイン
+        = link_to(root_path,
+          class: 'signin-twitter py-2 d-block') do
+          %i.fab.fa-twitter.fa-lg
+          Twitterでログイン
+        = link_to(root_path,
+          class: 'signin-google pt-2 pb-3 d-block') do
+          = image_tag('google-icon.png',
+          class: 'google-icon')
+          Googleでログイン
+        = link_to('パスワードを忘れた場合',
+          new_user_password_path,
+          class: 'signin-password-link')
+    .card.mx-auto
+      .signin-footer
+        アカウントをお持ちではありませんか？
+        %br
+        = link_to('登録する',
+          new_user_registration_path,
+          class: 'signup-footer-link font-weight-bold')

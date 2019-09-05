@@ -1,0 +1,66 @@
+@import "config/variables";
+
+.signin-footer {
+  color: $gray-6;
+  font-size: 0.85rem;
+  margin: 20px auto;
+  text-align: center;
+  width: 260px;
+
+  &-link {
+    color: $color-twitter;
+
+    &:hover {
+      color: $color-twitter;
+      text-decoration: none;
+    }
+  }
+}
+
+.signin-fb {
+  color: $color-facebook;
+  font-size: 0.9rem;
+  font-weight: bold;
+
+  &:hover {
+    color: $color-facebook;
+    text-decoration: none;
+  }
+}
+
+.signin-twitter {
+  color: $color-twitter;
+  font-size: 0.9rem;
+  font-weight: bold;
+
+  &:hover {
+    color: $color-twitter;
+    text-decoration: none;
+  }
+}
+
+.signin-google {
+  color: $gray-6;
+  font-size: 0.9rem;
+  font-weight: bold;
+
+  &:hover {
+    color: $gray-6;
+    text-decoration: none;
+  }
+
+  .google-icon {
+    bottom: 1px;
+    height: 22px;
+    position: relative;
+  }
+}
+
+.signin-password-link {
+  color: $gray-6;
+  font-size: 0.8rem;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
