@@ -1,0 +1,48 @@
+.signup.pt-5
+  .container
+    .card.mx-auto.mb-3
+      .container.text-center
+        = image_tag('booklabo-logo.png',
+          alt: 'BOOKLABO',
+          class: 'signup-logo')
+        %h5.signup-text
+          読んだ本を登録・公開しましょう
+        %button.btn.btn-fb.mt-4
+          %i.fab.fa-facebook-square.fa-lg.mr-1
+          Facebookで登録
+        %button.btn.btn-twitter
+          %i.fab.fa-twitter.fa-lg
+          Twitterで登録
+        %button.btn.btn-google
+          = image_tag('google-icon.png',
+          class: 'google-icon')
+          Googleで登録
+        .signup-border
+          .border-line
+          %span.signup-border-text 
+            または
+        = form_with(model: @user,
+          url: new_user_registration_path,
+          local: true,
+          class: 'signup-form') do |f|
+          = f.text_field(:name,
+            placeholder: 'ユーザーネーム',
+            class: 'form-control')
+          = f.email_field(:email,
+            placeholder: 'メールアドレス',
+            class: 'form-control')
+          = f.password_field(:password,
+            placeholder: 'パスワード',
+            class: 'form-control')
+          = f.password_field(:password_confirmation,
+            placeholder: 'パスワード (確認)',
+            class: 'form-control')
+          = f.submit('登録する',
+            class: 'btn btn-primary btn-submit')
+    .card.mx-auto
+      .signup-footer
+        アカウントをお持ちですか？
+        %br
+        = link_to('ログインする',
+          new_user_session_path,
+          class: 'signup-footer-link')

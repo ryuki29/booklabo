@@ -6,6 +6,7 @@ $theme-colors: (
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "bootstrap";
-@import "header";
-@import "search";
-@import "main";
+@import "shared/header";
+@import "shared/main";
+@import "books/search";
+@import "devise/new";
