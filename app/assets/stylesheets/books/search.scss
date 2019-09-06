@@ -100,3 +100,46 @@
   text-align: center;
   visibility: hidden;
 }
+
+.modal {
+  h5 {
+    color: $gray-6;
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
+
+.modal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .modal-book-image {
+    width: 100px;
+  }
+
+  &-btn {
+    border: 1px solid $gray-d;
+    border-radius: 5px;
+    color: $gray-6;
+    cursor: pointer;
+    font-size: 0.8rem;
+    line-height: 2.5;
+    margin: 5px;
+    text-align: center;
+    width: 80%;
+
+    &:hover {
+      background-color: $gray-9;
+      border: 1px solid $gray-9;
+      color: $white;
+      transition: 0.2s;
+    }
+  }
+}
+
+.modal-text {
+  color: $gray-6;
+  font-size: 0.85rem;
+  font-weight: bold;
+}

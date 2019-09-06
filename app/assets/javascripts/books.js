@@ -18,18 +18,18 @@ $(document).on("turbolinks:load", function() {
     }
   }
 
-  if ($(".search-main").length) {
-    $(".add-book-cover").hover(
-      function() {
-        $(this)
-          .find(".add-book")
-          .css("visibility", "visible");
-      },
-      function() {
-        $(this)
-          .find(".add-book")
-          .css("visibility", "hidden");
-      }
-    );
-  }
+  // if ($(".search-main").length) {
+  $(".add-book-cover").hover(
+    function() {
+      $(this)
+        .find(".add-book")
+        .css("visibility", "visible");
+    },
+    function() {
+      $(this)
+        .find(".add-book")
+        .css("visibility", "hidden");
+    }
+  );
+  // }
 });
