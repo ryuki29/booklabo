@@ -1,0 +1,55 @@
+.container.user-show
+  .row.pb-4.border-bottom
+    .col-sm-4.text-center
+      = image_tag('default-user-image.jpg',
+        class: 'user-show-avatar')
+    .col-sm-8
+      .user-info-head
+        %h1.user-name
+          = current_user.name
+        = link_to('プロフィールを編集',
+          edit_user_registration_path,
+          class: 'user-edit')
+      .user-info
+        .followers.d-inline.pr-4
+          %strong 10
+          フォロー中
+        .follows.d-inline
+          %strong 10
+          フォロワー
+      .user-description
+        I'm an university student in Kyoto, Japan.
+  %ul.nav.user-show-nav
+    %li.nav-item.active
+      %span.nav-link
+        %i.fas.fa-book
+        %span 読んだ本
+    %li.nav-item
+      %span.nav-link
+        %i.fas.fa-book-open
+        %span 読んでる本
+    %li.nav-item
+      %span.nav-link
+        %i.fas.fa-sticky-note
+        %span 読みたい本
+    %li.nav-item
+      %span.nav-link
+        %i.fas.fa-chart-bar
+        %span 読書グラフ
+  .card.book-list.border-0
+    .card-body.row
+      - 20.times do
+        .card.col-md-3.border-0
+          = image_tag('https://picsum.photos/100/160',
+            class: 'card-img-top')
+          .card-body
+            %h5.card-title
+              我輩は猫である
+            .card-text
+              夏目漱石
+    -# - if @total_items > 20
+    -#   = render partial: 'shared/pagination',
+    -#     locals: { page: @page,
+    -#               total_items: @total_items,
+    -#               keyword: @keyword,
+    -#               books: @books }

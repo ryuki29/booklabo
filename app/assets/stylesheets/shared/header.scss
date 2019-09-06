@@ -46,8 +46,8 @@ button:focus {
 
     &:hover,
     &:active {
-      color: #fff;
-      background-color: #ccc;
+      background-color: $gray-c;
+      color: $white;
       transition: 0.8s;
     }
   }

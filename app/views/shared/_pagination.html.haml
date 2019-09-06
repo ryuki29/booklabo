@@ -1,33 +1,13 @@
 .card-footer.bg-white
   %nav#pagination-nav{ data: {page: page, total: total_items} }
     %ul.pagination.justify-content-center.mt-3
-      %li.page-item.paginate-prev
-        = link_to(search_books_path(keyword: keyword,
-          page: 0),
-          class: "page-link rounded") do
-          %i.fas.fa-angle-double-left
-      %li.page-item.paginate-prev.mr-auto
-        = link_to(search_books_path(keyword: keyword,
-          page: page.to_i - 1),
-          class: "page-link rounded") do
-          %i.fas.fa-angle-left
-        - ((total_items / 20).ceil).times do |i|
-          %li.page-item
-            = link_to(search_books_path(keyword: keyword,
-              page: i),
-              data: {page: i},
-              class: "page-link page-link-num rounded") do
-              = i + 1
-      %li.page-item.paginate-next.ml-auto
-        = link_to(search_books_path(keyword: keyword,
-          page: page.to_i + 1),
-          class: "page-link rounded") do
-          %i.fas.fa-angle-right
-      %li.page-item.paginate-next
-        = link_to(search_books_path(keyword: keyword,
-          page: (total_items / 20).ceil - 1 ),
-          class: "page-link rounded") do
-          %i.fas.fa-angle-double-right
+      - ((total_items / 20).ceil).times do |i|
+        %li.page-item
+          = link_to(search_books_path(keyword: keyword,
+            page: i),
+            data: {page: i},
+            class: "page-link page-link-num rounded") do
+            = i + 1
     %p.pagination-text
       - unless books.length == 1
         全#{total_items}件中 #{page.to_i * 20 + 1} - #{page.to_i * 20 + @books.length}件を表示

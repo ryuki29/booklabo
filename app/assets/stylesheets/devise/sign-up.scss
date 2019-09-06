@@ -1,0 +1,132 @@
+@import "config/variables";
+
+.btn {
+  display: block;
+  font-size: 0.8rem;
+  margin: 7px auto;
+  width: 240px;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.btn:focus {
+  box-shadow: none;
+}
+
+.signup-logo {
+  margin: 15px auto;
+  width: 200px;
+}
+
+.signup-text {
+  color: $gray-9;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.btn-fb {
+  background-color: $color-facebook;
+  color: $white;
+
+  &:hover {
+    color: $white;
+  }
+}
+
+.btn-google {
+  background-color: $gray-e;
+  color: $gray-6;
+
+  .google-icon {
+    height: 20px;
+  }
+}
+
+.btn-twitter {
+  background-color: $color-twitter;
+  color: $white;
+
+  &:hover {
+    color: $white;
+  }
+}
+
+.border-line {
+  background-color: $gray-e;
+  height: 1px;
+  margin: 30px auto 0;
+  width: 80%;
+}
+
+.signup-border-text {
+  background-color: $white;
+  bottom: 13px;
+  color: $gray-9;
+  font-size: 0.85rem;
+  font-weight: bold;
+  padding: 0 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.signup-form {
+  .form-control {
+    background-color: $bg-white;
+    font-size: 0.75rem;
+    margin: 5px auto;
+    opacity: 0.8;
+    width: 240px;
+
+    &:focus {
+      border: 1px solid $gray-9;
+      box-shadow: none;
+      opacity: 1;
+    }
+  }
+
+  .btn-submit {
+    color: $white;
+    margin: 20px auto;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.signup-footer {
+  color: $gray-6;
+  font-size: 0.85rem;
+  margin: 20px auto;
+  text-align: center;
+  width: 240px;
+
+  &-link {
+    color: $color-twitter;
+
+    &:hover {
+      color: $color-twitter;
+      text-decoration: none;
+    }
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .signup {
+    .card {
+      background-color: $bg-white;
+      border: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .signup {
+    .card {
+      width: 350px;
+    }
+  }
+}
