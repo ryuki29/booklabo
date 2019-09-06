@@ -6,7 +6,6 @@ $(document).on("turbolinks:load", function() {
     $(".page-link-num").each(function() {
       if ($(this).data("page") === Number(page)) {
         $(this).addClass("bg-primary text-white");
-        console.log($(this));
       }
     });
 
@@ -17,5 +16,20 @@ $(document).on("turbolinks:load", function() {
     if (page + 1 >= total / 20) {
       $(".paginate-next").css("visibility", "hidden");
     }
+  }
+
+  if ($(".search-main").length) {
+    $(".add-book-cover").hover(
+      function() {
+        $(this)
+          .find(".add-book")
+          .css("visibility", "visible");
+      },
+      function() {
+        $(this)
+          .find(".add-book")
+          .css("visibility", "hidden");
+      }
+    );
   }
 });

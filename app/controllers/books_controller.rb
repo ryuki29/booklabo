@@ -25,13 +25,15 @@ class BooksController < ApplicationController
     @total_items = 100 if @total_items > 0
     
     result["items"].each do |item|
+      id = item["id"]
       title = item["volumeInfo"]["title"] ||= ""
       authors = item["volumeInfo"]["authors"] ||= []
       image_url = item["volumeInfo"]["imageLinks"] ? 
         item["volumeInfo"]["imageLinks"]["thumbnail"] : 
-        ""
+        "book-default.png"
 
       book = {
+        id: id,
         title: title,
         authors: authors,
         image_url: image_url

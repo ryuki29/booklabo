@@ -76,3 +76,27 @@
   font-size: 0.8rem;
   text-align: center;
 }
+
+.add-book-cover {
+  align-items: center;
+  display: flex;
+  height: 150px;
+  justify-content: center;
+  margin: 0 auto -160px;
+  position: relative;
+  width: 100px;
+}
+
+.add-book {
+  background-color: $white;
+  border: 1px solid $gray-b;
+  border-radius: 5px;
+  color: $black-3;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin: 0 auto 0;
+  padding: 5px;
+  text-align: center;
+  visibility: hidden;
+}
