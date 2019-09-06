@@ -9,5 +9,6 @@ $theme-colors: (
 @import "shared/header";
 @import "shared/main";
 @import "books/search";
-@import "devise/signup";
-@import "devise/signin";
+@import "devise/sign-up";
+@import "devise/sign-in";
+@import "users/show";

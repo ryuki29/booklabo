@@ -1,0 +1,137 @@
+@import "config/variables";
+
+.user-show {
+  margin-top: 120px;
+
+  &-avatar {
+    border: 1px $gray-9;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+  }
+}
+
+.user-info-head {
+  align-items: center;
+  color: $black-3;
+  display: flex;
+  padding: 0 0 15px;
+
+  .user-name {
+    display: inline;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .user-edit {
+    background-color: transparent;
+    border: 1px solid $gray-d;
+    border-radius: 5px;
+    color: $black-3;
+    display: inline;
+    font-size: 0.85rem;
+    font-weight: bold;
+    padding: 5px 10px;
+    margin: 0 15px;
+
+    &:hover {
+      color: $black-3;
+      text-decoration: none;
+    }
+  }
+}
+
+.user-info {
+  flex-wrap: nowrap;
+  padding: 0 0 15px;
+}
+
+.user-show-nav {
+  bottom: 1px;
+  justify-content: center;
+  position: relative;
+
+  .nav-link {
+    color: $gray-9;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+}
+
+.book-list {
+  background-color: $bg-white;
+  margin: 0 auto;
+  max-width: 700px;
+
+  .card {
+    background-color: $bg-white;
+  }
+
+  .card-img-top {
+    height: 166px;
+    margin: 0 auto;
+    width: 100px;
+  }
+
+  .card-title {
+    font-size: 0.8rem;
+  }
+
+  .card-text {
+    font-size: 0.8rem;
+  }
+}
+
+.active {
+  border-top: 1px solid $black-3;
+
+  span,
+  i {
+    color: $black-3;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .user-show {
+    margin-top: 20px;
+
+    &-avatar {
+      height: 75px;
+      margin-bottom: 10px;
+      width: 75px;
+    }
+
+    .user-info-head {
+      flex-wrap: wrap;
+    }
+
+    .user-name {
+      margin-bottom: 10px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .user-edit {
+      margin: 10px auto;
+      order: 3;
+      text-align: center;
+      width: 240px;
+    }
+
+    .user-info {
+      padding: 0 20px 10px;
+    }
+
+    .user-description {
+      padding: 0 20px;
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .user-show {
+    padding: 0 100px;
+  }
+}
