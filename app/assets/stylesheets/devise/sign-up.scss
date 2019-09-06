@@ -77,8 +77,8 @@
     background-color: $bg-white;
     font-size: 0.75rem;
     margin: 5px auto;
-    width: 240px;
     opacity: 0.8;
+    width: 240px;
 
     &:focus {
       border: 1px solid $gray-9;
@@ -118,7 +118,7 @@
   .signup {
     .card {
       background-color: $bg-white;
-      border: none;
+      border: 0;
     }
   }
 }
