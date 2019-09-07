@@ -143,3 +143,101 @@
   font-size: 0.85rem;
   font-weight: bold;
 }
+
+.post-review-title {
+  color: $gray-6;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.post-review-img {
+  max-width: 100px;
+}
+
+.book-rating {
+  color: $gray-d;
+  display: flex;
+
+  .fa-star {
+    cursor: pointer;
+  }
+
+  .star-hover,
+  .star-active {
+    color: #ffcc00;
+  }
+}
+
+#rating-reset {
+  border: 1px solid $gray-d;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+
+  &:hover {
+    background-color: $gray-e;
+    transition: 0.2s;
+  }
+}
+
+.post-review-label {
+  color: $gray-9;
+  font-size: 0.85rem;
+}
+
+.review-text,
+.review-date {
+  background-color: $bg-white;
+  border: 1px solid $gray-e;
+
+  &:focus {
+    background-color: $bg-white;
+    border: 1px solid $gray-9;
+    box-shadow: none;
+  }
+}
+
+.word-count {
+  color: $color-twitter;
+  font-size: 1.2rem;
+
+  &-text {
+    color: $gray-9;
+  }
+}
+
+.tweet-btn {
+  align-items: center;
+  background-color: $gray-b;
+  border-radius: 10px;
+  color: $white;
+  cursor: pointer;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+
+  &:hover,
+  &:active {
+    background-color: $color-twitter;
+  }
+}
+
+.review-submit {
+  background-color: $color-twitter;
+  border: 1px solid $color-twitter;
+  border-radius: 5px;
+  color: $white;
+  height: 40px;
+  width: 100px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.submit-disabled {
+  background-color: $gray-9;
+  border: 1px solid $gray-9;
+  cursor: not-allowed;
+}

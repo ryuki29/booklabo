@@ -10,7 +10,7 @@
               .add-book{ data: { toggle: 'modal',
                                  target: '#postBookModal',
                                  title: book[:title],
-                                 author: book[:authors],
+                                 authors: book[:authors],
                                  image: book[:image_url],
                                  uid: book[:uid] }}
                 本を登録する
@@ -40,10 +40,41 @@
                        type: "button" }
           %span{ aria: { hidden: true }}
             %i.fas.fa-times.text-muted
-      #modal-book-data.modal-body.row
+      .modal-body.row
         = image_tag('',
             class: 'modal-book-img col-4',
             id: 'modal-book-img')
+        .modal-text.col-8
+          %h6#modal-book-title
+          %p#modal-book-author
+      .modal-footer
+        #readBook.modal-footer-btn{ data: {toggle: 'modal',
+                                           target: 'postReviewModal' }}
+          %i.fas.fa-book.pr-2
+          読んだ本に登録
+        .modal-footer-btn
+          %i.fas.fa-book-open.pr-1
+          読んでる本に登録
+        .modal-footer-btn 
+          %i.fas.fa-sticky-note.pr-1
+          読みたい本に登録
+
+#postReviewModal.modal.fade{ aria: {hidden: true }, 
+                             role: "dialog", 
+                             tabindex: "-1" }
+  .modal-dialog.modal-dialog-centered{role: "document" }
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title 本を登録する
+        %button.close{ aria: { label: "Close"},
+                       data: {dismiss: "modal"},
+                       type: "button" }
+          %span{ aria: { hidden: true }}
+            %i.fas.fa-times.text-muted
+      #modal-book-data.modal-body.row
+        = image_tag('',
+                    class: 'modal-book-img col-4',
+                    id: 'modal-book-img')
         .modal-text.col-8
           %h6#modal-book-title
           %p#modal-book-author
