@@ -25,7 +25,7 @@ class BooksController < ApplicationController
     @total_items = 100 if @total_items > 0
     
     result["items"].each do |item|
-      id = item["id"]
+      uid = item["id"]
       title = item["volumeInfo"]["title"] ||= ""
       authors = item["volumeInfo"]["authors"] ||= []
       image_url = item["volumeInfo"]["imageLinks"] ? 
@@ -33,7 +33,7 @@ class BooksController < ApplicationController
         "book-default.png"
 
       book = {
-        id: id,
+        uid: uid,
         title: title,
         authors: authors,
         image_url: image_url

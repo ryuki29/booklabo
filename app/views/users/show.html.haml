@@ -40,9 +40,6 @@
     .card-body.row
       - 20.times do
         .card.col-sm-3.border-0
-          .add-book-cover
-            .add-book{data: {toggle: 'modal', target: '#exampleModal'}}
-              本を登録する
           = image_tag('https://picsum.photos/100/160',
             class: 'card-img-top')
           .card-body
@@ -50,33 +47,3 @@
               我輩は猫である
             .card-text
               夏目漱石
-
-#exampleModal.modal.fade{ aria: {hidden: true, 
-                          labelledby: 'exampleModalLabel' }, 
-                          role: "dialog", 
-                          tabindex: "-1" }
-  .modal-dialog.modal-dialog-centered{role: "document" }
-    .modal-content
-      .modal-header
-        %h5#exampleModalLabel.modal-title 本を登録する
-        %button.close{ aria: { label: "Close"},
-                       data: {dismiss: "modal"},
-                       type: "button" }
-          %span{ aria: { hidden: true }}
-            %i.fas.fa-times.text-muted
-      .modal-body.row
-        = image_tag('https://picsum.photos/100/160',
-            class: 'modal-book-img col-4')
-        .modal-text.col-8
-          %h6 我輩は猫である
-          %p 夏目漱石
-      .modal-footer
-        .modal-footer-btn 
-          %i.fas.fa-book.pr-2
-          読んだ本に登録
-        .modal-footer-btn
-          %i.fas.fa-book-open.pr-1
-          読んでる本に登録
-        .modal-footer-btn 
-          %i.fas.fa-sticky-note.pr-1
-          読みたい本に登録
