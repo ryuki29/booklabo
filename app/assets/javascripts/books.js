@@ -47,16 +47,12 @@ $(document).on("turbolinks:load", function() {
     $("#readBook").attr("data-authors", authors);
     $("#readBook").attr("data-image", image);
     $("#readBook").attr("data-uid", uid);
-  });
-
-  $("#readBook").on("click", function() {
-    let title = $(this).data("title");
-    let authors = $(this).data("authors");
-    let image = $(this).data("image");
-    let uid = $(this).data("uid");
-    console.log(image);
 
     $("#post-review-img").attr("src", image);
+    $("#readBookTitle").attr("value", title);
+    $("#readBookAuthors").attr("value", authors);
+    $("#readBookImage").attr("value", image);
+    $("#readBookUid").attr("value", uid);
   });
 
   $(".fa-star").hover(
@@ -126,6 +122,6 @@ $(document).on("turbolinks:load", function() {
   $("#datetimepicker").datetimepicker({
     format: "L",
     format: "YYYY/MM/DD",
-    defaultDate: moment().format("YYYY/MM/DD")
+    defaultDate: moment(new Date(), "YYYY/MM/DD")
   });
 });
