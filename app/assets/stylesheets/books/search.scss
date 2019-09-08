@@ -241,3 +241,29 @@
   border: 1px solid $gray-9;
   cursor: not-allowed;
 }
+
+.bootstrap-datetimepicker-widget {
+  border-radius: 10px;
+  font-weight: 400;
+
+  .dow,
+  .picker-switch,
+  .prev,
+  .next {
+    color: $gray-6;
+    font-weight: 400;
+  }
+
+  .day {
+    color: $black-3;
+
+    .new {
+      color: $gray-9;
+    }
+  }
+}
+
+.form-disabled {
+  color: $gray-9;
+  cursor: not-allowed;
+}

@@ -1,93 +1,3 @@
-.container.user-show
-  .row.pb-4.border-bottom
-    .col-sm-4.text-center
-      = image_tag('default-user-image.jpg',
-        class: 'user-show-avatar')
-    .col-sm-8
-      .user-info-head
-        %h1.user-name
-          = current_user.name
-        = link_to('プロフィールを編集',
-          edit_user_registration_path,
-          class: 'user-edit')
-      .user-info
-        .followers.d-inline.pr-4
-          %strong 10
-          フォロー中
-        .follows.d-inline
-          %strong 10
-          フォロワー
-      .user-description
-        I'm an university student in Kyoto, Japan.
-  %ul.nav.user-show-nav
-    %li.nav-item.active
-      %span.nav-link
-        %i.fas.fa-book
-        %span 読んだ本
-    %li.nav-item
-      %span.nav-link
-        %i.fas.fa-book-open
-        %span 読んでる本
-    %li.nav-item
-      %span.nav-link
-        %i.fas.fa-sticky-note
-        %span 読みたい本
-    %li.nav-item
-      %span.nav-link
-        %i.fas.fa-chart-bar
-        %span 読書グラフ
-  .card.book-list.border-0
-    .card-body.row
-      - 20.times do
-        .card.col-sm-3.border-0
-          .add-book-cover
-            .add-book{ data: { toggle: 'modal',
-                               target: '#postBookModal',
-                               title: "我輩は猫である",
-                               author: "夏目漱石",
-                               image: 'http://books.google.com/books/content?id=lFE-DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-                               uid: 'example-uid' }}
-              本を登録する
-          = image_tag('https://picsum.photos/100/160',
-            class: 'card-img-top')
-          .card-body
-            %h5.card-title
-              我輩は猫である
-            .card-text
-              夏目漱石
-
-#postBookModal.modal.fade{ aria: {hidden: true }, 
-                           role: "dialog", 
-                           tabindex: "-1" }
-  .modal-dialog.modal-dialog-centered{role: "document" }
-    .modal-content
-      .modal-header
-        %h5.modal-title 本を登録する
-        %button.close{ aria: { label: "Close"},
-                       data: {dismiss: "modal"},
-                       type: "button" }
-          %span{ aria: { hidden: true }}
-            %i.fas.fa-times.text-muted
-      .modal-body.row
-        = image_tag('',
-            class: 'modal-book-img col-4',
-            id: 'modal-book-img')
-        .modal-text.col-8
-          %h6#modal-book-title
-          %p#modal-book-author
-      .modal-footer
-        #readBook.modal-footer-btn{ data: { dismiss: 'modal',
-                                            toggle: 'modal' },
-                                    href: '#postReviewModal' }
-          %i.fas.fa-book.pr-2
-          読んだ本に登録
-        .modal-footer-btn
-          %i.fas.fa-book-open.pr-1
-          読んでる本に登録
-        .modal-footer-btn 
-          %i.fas.fa-sticky-note.pr-1
-          読みたい本に登録
-
 #postReviewModal.modal.fade{ aria: {hidden: true }, 
                              role: "dialog", 
                              tabindex: "-1" }
@@ -102,7 +12,7 @@
             %i.fas.fa-times.text-muted
       #modal-book-data.modal-body.row
         .col-sm-3.border-right
-          = image_tag('http://books.google.com/books/content?id=lFE-DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
+          = image_tag('',
               class: 'post-review-img',
               id: 'post-review-img')
         .modal-text.col-sm-9
@@ -163,4 +73,3 @@
                   = f.submit('登録する',
                             id: 'review-submit',
                             class: 'review-submit ml-auto my-0')
-

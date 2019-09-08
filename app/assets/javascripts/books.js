@@ -40,13 +40,23 @@ $(document).on("turbolinks:load", function() {
     let uid = $(this).data("uid");
 
     $("#modal-book-title").text(title);
-    $("#modal-book-author").text(author);
+    $("#modal-book-author").text(authors);
     $("#modal-book-img").attr("src", image);
 
     $("#readBook").attr("data-title", title);
     $("#readBook").attr("data-authors", authors);
     $("#readBook").attr("data-image", image);
     $("#readBook").attr("data-uid", uid);
+  });
+
+  $("#readBook").on("click", function() {
+    let title = $(this).data("title");
+    let authors = $(this).data("authors");
+    let image = $(this).data("image");
+    let uid = $(this).data("uid");
+    console.log(image);
+
+    $("#post-review-img").attr("src", image);
   });
 
   $(".fa-star").hover(
@@ -81,11 +91,11 @@ $(document).on("turbolinks:load", function() {
 
   $("#date-check").on("click", function() {
     if ($(this).prop("checked") === true) {
-      $("#date-input")
+      $("#date-input, #calender")
         .attr("disabled", true)
         .addClass("form-disabled");
     } else {
-      $("#date-input")
+      $("#date-input, #calender")
         .attr("disabled", false)
         .removeClass("form-disabled");
     }
@@ -112,4 +122,10 @@ $(document).on("turbolinks:load", function() {
       $(this).css("opacity", 1);
     }
   );
+
+  $("#datetimepicker").datetimepicker({
+    format: "L",
+    format: "YYYY/MM/DD",
+    defaultDate: moment().format("YYYY/MM/DD")
+  });
 });
