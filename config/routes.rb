@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[show]
 
-  resources :books, only: %i[index, create] do
+  resources :books, only: %i[create] do
     collection do
       get 'search'
       get 'fetch'
