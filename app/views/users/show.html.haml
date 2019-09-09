@@ -19,16 +19,16 @@
           フォロワー
       .user-description
         I'm an university student in Kyoto, Japan.
-  %ul.nav.user-show-nav
-    %li.nav-item.active
+  %ul.nav.user-show-nav{ data: { status: @status } }
+    %li.nav-item.users-show-nav-item.active#read{ data: { status: 0 } }
       %span.nav-link
         %i.fas.fa-book
         %span 読んだ本
-    %li.nav-item
+    %li.nav-item.users-show-nav-item#reading{ data: { status: 1 } }
       %span.nav-link
         %i.fas.fa-book-open
         %span 読んでる本
-    %li.nav-item
+    %li.nav-item.users-show-nav-item#will-read{ data: { status: 2 } }
       %span.nav-link
         %i.fas.fa-sticky-note
         %span 読みたい本
@@ -37,19 +37,14 @@
         %i.fas.fa-chart-bar
         %span 読書グラフ
   .card.book-list.border-0
-    .card-body.row
-      - 20.times do
-        .card.col-md-3.border-0
-          = image_tag('https://picsum.photos/100/160',
-            class: 'card-img-top')
-          .card-body
-            %h5.card-title
-              我輩は猫である
-            .card-text
-              夏目漱石
-    -# - if @total_items > 20
-    -#   = render partial: 'shared/pagination',
-    -#     locals: { page: @page,
-    -#               total_items: @total_items,
-    -#               keyword: @keyword,
-    -#               books: @books }
+    .card-body.row#user-show-item-list
+      - @books.each do |book|
+        - if book.user_books[0].status == @status
+          .users-show-items.card.col-sm-3.border-0
+            = image_tag(book.image_url,
+              class: 'card-img-top')
+            .card-body
+              %h5.card-title
+                = book.title
+              .card-text
+                = book.authors

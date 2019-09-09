@@ -76,3 +76,194 @@
   font-size: 0.8rem;
   text-align: center;
 }
+
+.add-book-cover {
+  align-items: center;
+  display: flex;
+  height: 150px;
+  justify-content: center;
+  margin: 0 auto -160px;
+  position: relative;
+  width: 100px;
+}
+
+.add-book {
+  background-color: $white;
+  border: 1px solid $gray-b;
+  border-radius: 5px;
+  color: $black-3;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin: 0 auto;
+  padding: 5px;
+  text-align: center;
+  visibility: hidden;
+}
+
+.modal {
+  h5 {
+    color: $gray-6;
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
+
+.modal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .modal-book-image {
+    width: 100px;
+  }
+
+  &-btn {
+    border: 1px solid $gray-d;
+    border-radius: 5px;
+    color: $gray-6;
+    cursor: pointer;
+    font-size: 0.8rem;
+    line-height: 2.5;
+    margin: 5px;
+    text-align: center;
+    width: 80%;
+
+    &:hover {
+      background-color: $gray-9;
+      border: 1px solid $gray-9;
+      color: $white;
+      transition: 0.2s;
+    }
+  }
+}
+
+.modal-text {
+  color: $gray-6;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.post-review-title {
+  color: $gray-6;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.post-review-img {
+  max-width: 100px;
+}
+
+.book-rating {
+  color: $gray-d;
+  display: flex;
+
+  .fa-star {
+    cursor: pointer;
+  }
+
+  .star-hover,
+  .star-active {
+    color: $color-star;
+  }
+}
+
+.rating-reset {
+  border: 1px solid $gray-d;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+
+  &:hover {
+    background-color: $gray-e;
+    transition: 0.2s;
+  }
+}
+
+.post-review-label {
+  color: $gray-9;
+  font-size: 0.85rem;
+}
+
+.review-text,
+.review-date {
+  background-color: $bg-white;
+  border: 1px solid $gray-e;
+
+  &:focus {
+    background-color: $bg-white;
+    border: 1px solid $gray-9;
+    box-shadow: none;
+  }
+}
+
+.word-count {
+  color: $color-twitter;
+  font-size: 1.2rem;
+
+  &-text {
+    color: $gray-9;
+  }
+}
+
+.tweet-btn {
+  align-items: center;
+  background-color: $gray-b;
+  border-radius: 10px;
+  color: $white;
+  cursor: pointer;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+
+  &:hover,
+  &:active {
+    background-color: $color-twitter;
+  }
+}
+
+.review-submit {
+  background-color: $color-twitter;
+  border: 1px solid $color-twitter;
+  border-radius: 5px;
+  color: $white;
+  height: 40px;
+  width: 100px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.submit-disabled {
+  background-color: $gray-9;
+  border: 1px solid $gray-9;
+  cursor: not-allowed;
+}
+
+.bootstrap-datetimepicker-widget {
+  border-radius: 10px;
+  font-weight: 400;
+
+  .dow,
+  .picker-switch,
+  .prev,
+  .next {
+    color: $gray-6;
+    font-weight: 400;
+  }
+
+  .day {
+    color: $black-3;
+
+    .new {
+      color: $gray-9;
+    }
+  }
+}
+
+.form-disabled {
+  color: $gray-9;
+  cursor: not-allowed;
+}

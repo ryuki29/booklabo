@@ -1,0 +1,31 @@
+.modal.fade#post-book-modal{ aria: {hidden: true },
+                           role: "dialog",
+                           tabindex: "-1" }
+  .modal-dialog.modal-dialog-centered{ role: "document" }
+    .modal-content
+      .modal-header
+        %h5.modal-title 本を登録する
+        %button.close{ aria: { label: "Close"},
+                       data: {dismiss: "modal"},
+                       type: "button" }
+          %span{ aria: { hidden: true } }
+            %i.fas.fa-times.text-muted
+      .modal-body.row
+        = image_tag('',
+            class: 'modal-book-img col-4',
+            id: 'modal-book-img')
+        .modal-text.col-8
+          %h6#modal-book-title
+          %p#modal-book-author
+      .modal-footer
+        .modal-footer-btn#read-book{ data: { dismiss: 'modal',
+                                            toggle: 'modal' },
+                                    href: '#post-review-modal' }
+          %i.fas.fa-book.pr-2
+          読んだ本に登録
+        .modal-footer-btn#reading-book
+          %i.fas.fa-book-open.pr-1
+          読んでる本に登録
+        .modal-footer-btn#will-read-book
+          %i.fas.fa-sticky-note.pr-1
+          読みたい本に登録

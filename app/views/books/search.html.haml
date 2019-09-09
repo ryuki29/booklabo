@@ -6,8 +6,16 @@
       .card-body.row
         - @books.each do |book|
           .search-item.card.col-md-3.border-0
+            .add-book-cover
+              .add-book{ data: { toggle: 'modal',
+                                 target: '#post-book-modal',
+                                 title:   book[:title],
+                                 authors: book[:authors],
+                                 image:   book[:image_url],
+                                 uid:     book[:uid] } }
+                本を登録する
             = image_tag(book[:image_url],
-              class: 'card-img-top')
+                        class: 'card-img-top')
             .search-item-body.card-body
               %h5.card-title
                 = book[:title]
@@ -19,3 +27,5 @@
                     total_items: @total_items,
                     keyword: @keyword,
                     books: @books }
+= render "shared/post-book-modal"
+= render "shared/post-review-modal"

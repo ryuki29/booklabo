@@ -58,6 +58,19 @@
     font-size: 0.8rem;
     font-weight: bold;
   }
+
+  .active {
+    border-top: 1px solid $black-3;
+
+    span {
+      color: $black-3;
+      padding-top: 7px;
+    }
+
+    i {
+      color: $black-3;
+    }
+  }
 }
 
 .book-list {
@@ -81,15 +94,6 @@
 
   .card-text {
     font-size: 0.8rem;
-  }
-}
-
-.active {
-  border-top: 1px solid $black-3;
-
-  span,
-  i {
-    color: $black-3;
   }
 }
 
