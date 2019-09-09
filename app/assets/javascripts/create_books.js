@@ -1,13 +1,8 @@
 $(function() {
   function createBook(status) {
-    let title = $("#readBook").data("title");
-    let authors = $("#readBook").data("authors");
-    let image_url = $("#readBook").data("image");
-    let uid = $("#readBook").data("uid");
-
     $.ajax({
       url: "/books",
-      type: "POST",
+      method: "post",
       data: {
         book: {
           title: $("#readBook").data("title"),
@@ -20,7 +15,14 @@ $(function() {
         }
       },
       dataType: "json"
-    });
+    })
+      .done(function(data) {
+        let url = "/users/" + data.user_id + "?status=" + data.status;
+        window.location.replace(url);
+      })
+      .fail(function() {
+        alert("エラーが発生しました");
+      });
   }
 
   $("#readingBook").on("click", function() {

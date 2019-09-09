@@ -43,16 +43,29 @@ $(document).on("turbolinks:load", function() {
     $("#modal-book-author").text(authors);
     $("#modal-book-img").attr("src", image);
 
-    $("#readBook").attr("data-title", title);
-    $("#readBook").attr("data-authors", authors);
-    $("#readBook").attr("data-image", image);
-    $("#readBook").attr("data-uid", uid);
+    $("#readBook")
+      .attr("data-title", title)
+      .attr("data-authors", authors)
+      .attr("data-image", image)
+      .attr("data-uid", uid);
 
     $("#post-review-img").attr("src", image);
     $("#readBookTitle").attr("value", title);
     $("#readBookAuthors").attr("value", authors);
     $("#readBookImage").attr("value", image);
     $("#readBookUid").attr("value", uid);
+  });
+
+  $("#readBook").on("click", function() {
+    $("#date-check").prop("checked", false);
+    $("#date-input").val(moment().format("YYYY/MM/DD"));
+    $("#date-input, #calender")
+      .attr("disabled", false)
+      .removeClass("form-disabled");
+    $("#review-text").val("");
+    $("#word-count").text("0");
+    $("#book-rating").attr("value", 0);
+    $(".fa-star").removeClass("star-active");
   });
 
   $(".fa-star").hover(

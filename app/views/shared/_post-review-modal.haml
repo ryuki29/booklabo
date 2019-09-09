@@ -16,17 +16,24 @@
                       class: 'post-review-img',
                       id: 'post-review-img')
         .modal-text.col-sm-9
-          = form_with(model: @book, html: {class: "post-review"}) do |f|
-            = f.hidden_field(:title,     id: 'readBookTitle')
-            = f.hidden_field(:authors,   id: 'readBookAuthors')
-            = f.hidden_field(:image_url, id: 'readBookImage')
-            = f.hidden_field(:uid,       id: 'readBookUid')
-            = f.fields_for :reviews do |reviews_f|
+          = form_with(model: @book,
+                      url: books_path,
+                      method: :post,
+                      remote: true,
+                      html: {class: "post-review"}) do |f|
+            = f.fields_for :book do |book_f|
+              = book_f.hidden_field(:title,     id: 'readBookTitle')
+              = book_f.hidden_field(:authors,   id: 'readBookAuthors')
+              = book_f.hidden_field(:image_url, id: 'readBookImage')
+              = book_f.hidden_field(:uid,       id: 'readBookUid')
+            = f.fields_for :user_book do |user_book_f|
+              = user_book_f.hidden_field(:status, value: 0)
+            = f.fields_for :review do |review_f|
               .row.mb-2
-                = reviews_f.label(:date, '読み終わった日',
+                = review_f.label(:date, '読み終わった日',
                                   class: 'col-3 post-review-label my-auto')
                 #datetimepicker.input-group.date.col-5.pl-0{data: {target: {input: "nearest"}}}
-                  = reviews_f.text_field(:date,
+                  = review_f.text_field(:date,
                                           data: { target: '#datetimepicker' },
                                           id: 'date-input',
                                           class: 'form-control datetimepicker-input review-date')
@@ -40,10 +47,10 @@
                          class: 'date-check'}
                   読了日を指定しない
               .row.mb-1
-                = reviews_f.label(:text,
+                = review_f.label(:text,
                                   '感想・レビュー',
                                   class: 'col-3 post-review-label')
-                = reviews_f.text_area(:text,
+                = review_f.text_area(:text,
                                       id: 'review-text',
                                       class: 'review-text col form-control mr-3')
               .row.mb-1
@@ -52,7 +59,7 @@
                   ／255文字
               .row.mb-2
                 .col-3
-                = reviews_f.hidden_field(:rating,
+                = review_f.hidden_field(:rating,
                                         value: 0,
                                         id: 'book-rating')
                 .book-rating.pl-0.pr-3.my-auto
@@ -69,5 +76,5 @@
                   .tweet-btn.my-o
                     %i.fab.fa-twitter
                   = f.submit('登録する',
-                            id: 'review-submit',
-                            class: 'review-submit ml-auto my-0')
+                             id: 'review-submit',
+                             class: 'review-submit ml-auto my-0')

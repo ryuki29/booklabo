@@ -4,16 +4,48 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
+    status = user_books_params[:status].to_i
+
     user_book = UserBook.new(
       user: current_user, 
       book: @book,
-      status: user_books_params[:status].to_i
+      status: status
     )
 
-    if @book.save && user_book.save
-      render json: { "status": 'ok', "code": 200  }
+    if params[:review].present?
+      require 'Date'
+      date = review_params[:date].present? ?
+        Date.strptime(review_params[:date], '%Y/%m/%d') :
+        nil
+
+      review = Review.new(
+        user: current_user, 
+        book: @book,
+        date: date,
+        text: review_params[:text],
+        rating: review_params[:rating].to_i
+      )
+
+      if @book.save && review.save && user_book.save
+        redirect_to user_path(current_user, status: status)
+      else
+        redirect_to root_path(alert: "登録に失敗しました")
+      end
+
     else
-      render json: { "status": "ng", "code": 500 }
+      if @book.save && user_book.save
+        render json: {
+          "status": "ok",
+          "code": 200,
+          "user_id": current_user.id, 
+          "status": status
+        }
+      else
+        render json: {
+          "status": "ng",
+          "code": 500
+        }
+      end
     end
   end
 
@@ -58,13 +90,11 @@ class BooksController < ApplicationController
   end
 
   def fetch
-    @books = []
-    user_books = current_user.user_books.where(status: params[:status])
-    if user_books.length > 0
-      user_books.each do |user_book|
-        @books << user_book.book
-      end
-    end
+    status = params[:status].to_i
+    @books = current_user.books.includes(:user_books).order(created_at: 'desc')
+    @books = @books.select {|book|
+      book.user_books[0].status == status
+    }
   end
 
   private
@@ -79,5 +109,9 @@ class BooksController < ApplicationController
 
   def user_books_params
     params.require(:user_book).permit(:status)
+  end
+
+  def review_params
+    params.require(:review).permit(:date, :text, :rating)
   end
 end

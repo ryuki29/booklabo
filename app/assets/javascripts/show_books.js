@@ -42,4 +42,21 @@ $(function() {
         });
     }
   });
+
+  if ($(".user-show-nav").length) {
+    $(".users-show-nav-item").removeClass("active");
+    let status = Number($(".user-show-nav").data("status"));
+
+    switch (status) {
+      case 0:
+        $("#read").addClass("active");
+        break;
+      case 1:
+        $("#reading").addClass("active");
+        break;
+      case 2:
+        $("#willRead").addClass("active");
+        break;
+    }
+  }
 });

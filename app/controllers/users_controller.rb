@@ -1,12 +1,9 @@
 class UsersController < ApplicationController
   def show
-    @books = []
-    user_books = current_user.user_books.where(status: 0)
-
-    if user_books.length > 0
-      user_books.each do |user_book|
-        @books << user_book.book
-      end
-    end
+    @status = params[:status] ? params[:status].to_i : 0
+    @books = current_user.books.includes(:user_books).order(created_at: 'desc')
+    @books = @books.select {|book|
+      book.user_books[0].status == @status
+    }
   end
 end

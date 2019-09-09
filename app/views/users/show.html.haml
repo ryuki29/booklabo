@@ -19,16 +19,16 @@
           フォロワー
       .user-description
         I'm an university student in Kyoto, Japan.
-  %ul.nav.user-show-nav
-    %li.nav-item.users-show-nav-item.active{data: {status: 0}}
+  %ul.nav.user-show-nav{data: {status: @status}}
+    %li#read.nav-item.users-show-nav-item.active{data: {status: 0}}
       %span.nav-link
         %i.fas.fa-book
         %span 読んだ本
-    %li.nav-item.users-show-nav-item{data: {status: 1}}
+    %li#reading.nav-item.users-show-nav-item{data: {status: 1}}
       %span.nav-link
         %i.fas.fa-book-open
         %span 読んでる本
-    %li.nav-item.users-show-nav-item{data: {status: 2}}
+    %li#willRead.nav-item.users-show-nav-item{data: {status: 2}}
       %span.nav-link
         %i.fas.fa-sticky-note
         %span 読みたい本
@@ -39,7 +39,7 @@
   .card.book-list.border-0
     #user-show-item-list.card-body.row
       - @books.each do |book|
-        - if book.user_books[0].status == 1
+        - if book.user_books[0].status == @status
           .users-show-items.card.col-sm-3.border-0
             = image_tag(book.image_url,
               class: 'card-img-top')
