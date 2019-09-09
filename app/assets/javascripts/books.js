@@ -43,20 +43,20 @@ $(document).on("turbolinks:load", function() {
     $("#modal-book-author").text(authors);
     $("#modal-book-img").attr("src", image);
 
-    $("#readBook")
+    $("#read-book")
       .attr("data-title", title)
       .attr("data-authors", authors)
       .attr("data-image", image)
       .attr("data-uid", uid);
 
     $("#post-review-img").attr("src", image);
-    $("#readBookTitle").attr("value", title);
-    $("#readBookAuthors").attr("value", authors);
-    $("#readBookImage").attr("value", image);
-    $("#readBookUid").attr("value", uid);
+    $("#read-bookTitle").attr("value", title);
+    $("#read-bookAuthors").attr("value", authors);
+    $("#read-bookImage").attr("value", image);
+    $("#read-bookUid").attr("value", uid);
   });
 
-  $("#readBook").on("click", function() {
+  $("#read-book").on("click", function() {
     $("#date-check").prop("checked", false);
     $("#date-input").val(moment().format("YYYY/MM/DD"));
     $("#date-input, #calender")
@@ -133,7 +133,6 @@ $(document).on("turbolinks:load", function() {
   );
 
   $("#datetimepicker").datetimepicker({
-    format: "L",
     format: "YYYY/MM/DD",
     defaultDate: moment(new Date(), "YYYY/MM/DD")
   });

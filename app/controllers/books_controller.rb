@@ -35,15 +35,8 @@ class BooksController < ApplicationController
     else
       if @book.save && user_book.save
         render json: {
-          "status": "ok",
-          "code": 200,
           "user_id": current_user.id, 
           "status": status
-        }
-      else
-        render json: {
-          "status": "ng",
-          "code": 500
         }
       end
     end

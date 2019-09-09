@@ -95,7 +95,7 @@
   cursor: pointer;
   font-size: 0.85rem;
   font-weight: bold;
-  margin: 0 auto 0;
+  margin: 0 auto;
   padding: 5px;
   text-align: center;
   visibility: hidden;
@@ -164,11 +164,11 @@
 
   .star-hover,
   .star-active {
-    color: #ffcc00;
+    color: $color-star;
   }
 }
 
-#rating-reset {
+.rating-reset {
   border: 1px solid $gray-d;
   border-radius: 5px;
   cursor: pointer;

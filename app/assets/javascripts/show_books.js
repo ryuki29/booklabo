@@ -55,7 +55,7 @@ $(function() {
         $("#reading").addClass("active");
         break;
       case 2:
-        $("#willRead").addClass("active");
+        $("#will-read").addClass("active");
         break;
     }
   }

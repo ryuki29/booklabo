@@ -1,16 +1,16 @@
-#postReviewModal.modal.fade{ aria: {hidden: true }, 
-                             role: "dialog", 
-                             tabindex: "-1" }
-  .modal-dialog.modal-lg.modal-dialog-centered{role: "document" }
+.modal.fade#post-review-modal{ aria: { hidden: true },
+                               role: "dialog",
+                               tabindex: "-1" }
+  .modal-dialog.modal-lg.modal-dialog-centered{ role: "document" }
     .modal-content
       .modal-header
         .modal-title.post-review-title 読んだ本に登録する
         %button.close{ aria: { label: "Close"},
                        data: {dismiss: "modal"},
                        type: "button" }
-          %span{ aria: { hidden: true }}
+          %span{ aria: { hidden: true } }
             %i.fas.fa-times.text-muted
-      #modal-book-data.modal-body.row
+      .modal-body.row#modal-book-data
         .col-sm-3.border-right
           = image_tag('',
                       class: 'post-review-img',
@@ -22,37 +22,35 @@
                       remote: true,
                       html: {class: "post-review"}) do |f|
             = f.fields_for :book do |book_f|
-              = book_f.hidden_field(:title,     id: 'readBookTitle')
-              = book_f.hidden_field(:authors,   id: 'readBookAuthors')
-              = book_f.hidden_field(:image_url, id: 'readBookImage')
-              = book_f.hidden_field(:uid,       id: 'readBookUid')
+              = book_f.hidden_field(:title,     id: 'read-bookTitle')
+              = book_f.hidden_field(:authors,   id: 'read-bookAuthors')
+              = book_f.hidden_field(:image_url, id: 'read-bookImage')
+              = book_f.hidden_field(:uid,       id: 'read-bookUid')
             = f.fields_for :user_book do |user_book_f|
               = user_book_f.hidden_field(:status, value: 0)
             = f.fields_for :review do |review_f|
               .row.mb-2
                 = review_f.label(:date, '読み終わった日',
-                                  class: 'col-3 post-review-label my-auto')
-                #datetimepicker.input-group.date.col-5.pl-0{data: {target: {input: "nearest"}}}
+                  class: 'col-3 post-review-label my-auto')
+                .input-group.date.col-5.pl-0#datetimepicker{ data: { target: { input: "nearest" } } }
                   = review_f.text_field(:date,
-                                          data: { target: '#datetimepicker' },
-                                          id: 'date-input',
-                                          class: 'form-control datetimepicker-input review-date')
+                    data: { target: '#datetimepicker' },
+                    id: 'date-input',
+                    class: 'form-control datetimepicker-input review-date')
                   .input-group-append{ data: { target: '#datetimepicker',
-                                       toggle: "datetimepicker" }}
-                    .input-group-text#calender.border-0
+                                       toggle: "datetimepicker" } }
+                    .input-group-text.border-0#calender
                       %i.fa.fa-calendar
                 .col-4.my-auto.post-review-label
-                  %input{type: "checkbox",
-                         id: 'date-check',
-                         class: 'date-check'}
+                  %input.date-check#date-check{ type: "checkbox" }
                   読了日を指定しない
               .row.mb-1
                 = review_f.label(:text,
-                                  '感想・レビュー',
-                                  class: 'col-3 post-review-label')
+                  '感想・レビュー',
+                  class: 'col-3 post-review-label')
                 = review_f.text_area(:text,
-                                      id: 'review-text',
-                                      class: 'review-text col form-control mr-3')
+                  id: 'review-text',
+                  class: 'review-text col form-control mr-3')
               .row.mb-1
                 .word-count-text.ml-auto.mr-3
                   %span.word-count#word-count<>0
@@ -68,7 +66,7 @@
                   %i.fas.fa-star.fa-lg{ data: { rating: 3 } }
                   %i.fas.fa-star.fa-lg{ data: { rating: 4 } }
                   %i.fas.fa-star.fa-lg{ data: { rating: 5 } }
-                %span#rating-reset
+                %span#rating-reset.rating-reset
                   評価なし
               .row
                 .col-3

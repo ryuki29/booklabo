@@ -5,10 +5,10 @@ $(function() {
       method: "post",
       data: {
         book: {
-          title: $("#readBook").data("title"),
-          authors: $("#readBook").data("authors"),
-          image_url: $("#readBook").data("image"),
-          uid: $("#readBook").data("uid")
+          title: $("#read-book").data("title"),
+          authors: $("#read-book").data("authors"),
+          image_url: $("#read-book").data("image"),
+          uid: $("#read-book").data("uid")
         },
         user_book: {
           status: status
@@ -25,11 +25,11 @@ $(function() {
       });
   }
 
-  $("#readingBook").on("click", function() {
+  $("#reading-book").on("click", function() {
     createBook(1);
   });
 
-  $("#willReadBook").on("click", function() {
+  $("#will-read-book").on("click", function() {
     createBook(2);
   });
 });

@@ -19,16 +19,16 @@
           フォロワー
       .user-description
         I'm an university student in Kyoto, Japan.
-  %ul.nav.user-show-nav{data: {status: @status}}
-    %li#read.nav-item.users-show-nav-item.active{data: {status: 0}}
+  %ul.nav.user-show-nav{ data: { status: @status } }
+    %li.nav-item.users-show-nav-item.active#read{ data: { status: 0 } }
       %span.nav-link
         %i.fas.fa-book
         %span 読んだ本
-    %li#reading.nav-item.users-show-nav-item{data: {status: 1}}
+    %li.nav-item.users-show-nav-item#reading{ data: { status: 1 } }
       %span.nav-link
         %i.fas.fa-book-open
         %span 読んでる本
-    %li#willRead.nav-item.users-show-nav-item{data: {status: 2}}
+    %li.nav-item.users-show-nav-item#will-read{ data: { status: 2 } }
       %span.nav-link
         %i.fas.fa-sticky-note
         %span 読みたい本
@@ -37,7 +37,7 @@
         %i.fas.fa-chart-bar
         %span 読書グラフ
   .card.book-list.border-0
-    #user-show-item-list.card-body.row
+    .card-body.row#user-show-item-list
       - @books.each do |book|
         - if book.user_books[0].status == @status
           .users-show-items.card.col-sm-3.border-0
