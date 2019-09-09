@@ -20,15 +20,15 @@
       .user-description
         I'm an university student in Kyoto, Japan.
   %ul.nav.user-show-nav
-    %li.nav-item.active
+    %li.nav-item.users-show-nav-item.active{data: {status: 0}}
       %span.nav-link
         %i.fas.fa-book
         %span 読んだ本
-    %li.nav-item
+    %li.nav-item.users-show-nav-item{data: {status: 1}}
       %span.nav-link
         %i.fas.fa-book-open
         %span 読んでる本
-    %li.nav-item
+    %li.nav-item.users-show-nav-item{data: {status: 2}}
       %span.nav-link
         %i.fas.fa-sticky-note
         %span 読みたい本
@@ -37,130 +37,14 @@
         %i.fas.fa-chart-bar
         %span 読書グラフ
   .card.book-list.border-0
-    .card-body.row
-      - 20.times do
-        .card.col-sm-3.border-0
-          .add-book-cover
-            .add-book{ data: { toggle: 'modal',
-                               target: '#postBookModal',
-                               title: "我輩は猫である",
-                               author: "夏目漱石",
-                               image: 'http://books.google.com/books/content?id=lFE-DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-                               uid: 'example-uid' }}
-              本を登録する
-          = image_tag('https://picsum.photos/100/160',
-            class: 'card-img-top')
-          .card-body
-            %h5.card-title
-              我輩は猫である
-            .card-text
-              夏目漱石
-
-#postBookModal.modal.fade{ aria: {hidden: true }, 
-                           role: "dialog", 
-                           tabindex: "-1" }
-  .modal-dialog.modal-dialog-centered{role: "document" }
-    .modal-content
-      .modal-header
-        %h5.modal-title 本を登録する
-        %button.close{ aria: { label: "Close"},
-                       data: {dismiss: "modal"},
-                       type: "button" }
-          %span{ aria: { hidden: true }}
-            %i.fas.fa-times.text-muted
-      .modal-body.row
-        = image_tag('',
-            class: 'modal-book-img col-4',
-            id: 'modal-book-img')
-        .modal-text.col-8
-          %h6#modal-book-title
-          %p#modal-book-author
-      .modal-footer
-        #readBook.modal-footer-btn{ data: { dismiss: 'modal',
-                                            toggle: 'modal' },
-                                    href: '#postReviewModal' }
-          %i.fas.fa-book.pr-2
-          読んだ本に登録
-        .modal-footer-btn
-          %i.fas.fa-book-open.pr-1
-          読んでる本に登録
-        .modal-footer-btn 
-          %i.fas.fa-sticky-note.pr-1
-          読みたい本に登録
-
-#postReviewModal.modal.fade{ aria: {hidden: true }, 
-                             role: "dialog", 
-                             tabindex: "-1" }
-  .modal-dialog.modal-lg.modal-dialog-centered{role: "document" }
-    .modal-content
-      .modal-header
-        .modal-title.post-review-title 読んだ本に登録する
-        %button.close{ aria: { label: "Close"},
-                        data: {dismiss: "modal"},
-                        type: "button" }
-          %span{ aria: { hidden: true }}
-            %i.fas.fa-times.text-muted
-      #modal-book-data.modal-body.row
-        .col-sm-3.border-right
-          = image_tag('http://books.google.com/books/content?id=lFE-DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-              class: 'post-review-img',
-              id: 'post-review-img')
-        .modal-text.col-sm-9
-          = form_with(model: @book, html: {class: "post-review"}) do |f|
-            = f.hidden_field(:title, value: 'title')
-            = f.hidden_field(:authors, value: 'authors')
-            = f.hidden_field(:image_url, value: 'image_url')
-            = f.hidden_field(:uid, value: 'uid')
-            = f.hidden_field(:status, value: 1)
-            = f.fields_for :reviews do |reviews_f|
-              .row.mb-2
-                = reviews_f.label(:date,
-                                  '読み終わった日',
-                                  class: 'col-3 post-review-label my-auto')
-                #datetimepicker.input-group.date.col-5.pl-0{data: {target: {input: "nearest"}}}
-                  = reviews_f.text_field(:date,
-                                          data: { target: '#datetimepicker' },
-                                          id: 'date-input',
-                                          class: 'form-control datetimepicker-input review-date')
-                  .input-group-append{ data: { target: '#datetimepicker',
-                                      toggle: "datetimepicker" }}
-                    .input-group-text#calender.border-0
-                      %i.fa.fa-calendar
-                .col-4.my-auto.post-review-label
-                  %input{type: "checkbox",
-                        id: 'date-check',
-                        class: 'date-check'}
-                  読了日を指定しない
-              .row.mb-1
-                = reviews_f.label(:text,
-                                  '感想・レビュー',
-                                  class: 'col-3 post-review-label')
-                = reviews_f.text_area(:text,
-                                      id: 'review-text',
-                                      class: 'review-text col form-control mr-3')
-              .row.mb-1
-                .word-count-text.ml-auto.mr-3
-                  %span.word-count#word-count<>0
-                  ／255文字
-              .row.mb-2
-                .col-3
-                = reviews_f.hidden_field(:rating,
-                                        value: 0,
-                                        id: 'book-rating')
-                .book-rating.pl-0.pr-3.my-auto
-                  %i.fas.fa-star.fa-lg{ data: { rating: 1 } }
-                  %i.fas.fa-star.fa-lg{ data: { rating: 2 } }
-                  %i.fas.fa-star.fa-lg{ data: { rating: 3 } }
-                  %i.fas.fa-star.fa-lg{ data: { rating: 4 } }
-                  %i.fas.fa-star.fa-lg{ data: { rating: 5 } }
-                %span#rating-reset
-                  評価なし
-              .row
-                .col-3
-                .col-9.d-flex.pl-0
-                  .tweet-btn.my-o
-                    %i.fab.fa-twitter
-                  = f.submit('登録する',
-                            id: 'review-submit',
-                            class: 'review-submit ml-auto my-0')
-
+    #user-show-item-list.card-body.row
+      - @books.each do |book|
+        - if book.user_books[0].status == 1
+          .users-show-items.card.col-sm-3.border-0
+            = image_tag(book.image_url,
+              class: 'card-img-top')
+            .card-body
+              %h5.card-title
+                = book.title
+              .card-text
+                = book.authors

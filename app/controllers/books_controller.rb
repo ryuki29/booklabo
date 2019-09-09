@@ -2,6 +2,21 @@ class BooksController < ApplicationController
   def index
   end
 
+  def create
+    @book = Book.new(book_params)
+    user_book = UserBook.new(
+      user: current_user, 
+      book: @book,
+      status: user_books_params[:status].to_i
+    )
+
+    if @book.save && user_book.save
+      render json: { "status": 'ok', "code": 200  }
+    else
+      render json: { "status": "ng", "code": 500 }
+    end
+  end
+
   def search
     require 'net/http'
     require 'uri'
@@ -40,5 +55,29 @@ class BooksController < ApplicationController
       }
       @books << book
     end
+  end
+
+  def fetch
+    @books = []
+    user_books = current_user.user_books.where(status: params[:status])
+    if user_books.length > 0
+      user_books.each do |user_book|
+        @books << user_book.book
+      end
+    end
+  end
+
+  private
+  def book_params
+    params.require(:book).permit(
+      :title,
+      :authors,
+      :image_url,
+      :uid
+    )
+  end
+
+  def user_books_params
+    params.require(:user_book).permit(:status)
   end
 end
