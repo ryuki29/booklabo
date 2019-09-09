@@ -1,4 +1,4 @@
-$(function() {
+$(document).on("turbolinks:load", function() {
   function buildHTML(book) {
     var html = `
     <div class="users-show-items card col-sm-3 border-0">
@@ -44,7 +44,6 @@ $(function() {
   });
 
   if ($(".user-show-nav").length) {
-    $(".users-show-nav-item").removeClass("active");
     let status = Number($(".user-show-nav").data("status"));
 
     switch (status) {
