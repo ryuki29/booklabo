@@ -8,7 +8,7 @@
       = render 'shared/search-form'
     %ul.navbar-nav
       %li.nav-item
-        %a.nav-link{ href: "#" }
+        = link_to(user_path(current_user), class: 'nav-link') do
           %i.fas.fa-user-circle.fa-2x
       %li.nav-item.pl-1
         %a.nav-link{ href: "#" }
