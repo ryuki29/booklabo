@@ -12,33 +12,20 @@ class BooksController < ApplicationController
       status: status
     )
 
-    if params[:review].present?
-      require 'Date'
-      date = review_params[:date].present? ?
-        Date.strptime(review_params[:date], '%Y/%m/%d') :
-        nil
+    create_review if params[:review].present?
 
-      review = Review.new(
-        user: current_user, 
-        book: @book,
-        date: date,
-        text: review_params[:text],
-        rating: review_params[:rating].to_i
-      )
-
-      if @book.save && review.save && user_book.save
-        redirect_to user_path(current_user, status: status)
-      else
-        redirect_to root_path(alert: "登録に失敗しました")
-      end
-
+    if @book.save && user_book.save
+      render json: {
+        "status": "OK",
+        "code": 200,
+        "user_id": current_user.id, 
+        "book_status": status
+      }
     else
-      if @book.save && user_book.save
-        render json: {
-          "user_id": current_user.id, 
-          "status": status
-        }
-      end
+      render json: {
+        "status": "NG",
+        "code": 500
+      }
     end
   end
 
@@ -106,5 +93,27 @@ class BooksController < ApplicationController
 
   def review_params
     params.require(:review).permit(:date, :text, :rating)
+  end
+
+  def create_review
+    require 'Date'
+    date = review_params[:date].present? ?
+      Date.strptime(review_params[:date], '%Y/%m/%d') :
+      nil
+
+    review = Review.new(
+      user: current_user, 
+      book: @book,
+      date: date,
+      text: review_params[:text],
+      rating: review_params[:rating].to_i
+    )
+
+    unless review.save
+      render json: {
+        "status": "NG",
+        "code": 500
+      }
+    end
   end
 end

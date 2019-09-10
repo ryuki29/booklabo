@@ -17,7 +17,7 @@ $(document).on("turbolinks:load", function() {
       dataType: "json"
     })
       .done(function(data) {
-        let url = "/users/" + data.user_id + "?status=" + data.status;
+        let url = "/users/" + data.user_id + "?status=" + data.book_status;
         window.location.replace(url);
       })
       .fail(function() {
@@ -31,5 +31,38 @@ $(document).on("turbolinks:load", function() {
 
   $("#will-read-book").on("click", function() {
     createBook(2);
+  });
+
+  $("#review-submit").on("click", function(e) {
+    e.preventDefault();
+
+    $.ajax({
+      url: "/books",
+      method: "post",
+      data: {
+        book: {
+          title: $("#read-book").attr("data-title"),
+          authors: $("#read-book").attr("data-authors"),
+          image_url: $("#read-book").attr("data-image"),
+          uid: $("#read-book").attr("data-uid")
+        },
+        user_book: {
+          status: 0
+        },
+        review: {
+          date: $("#date-input").val(),
+          text: $("#review-text").val(),
+          rating: $("#book-rating").val()
+        }
+      },
+      dataType: "json"
+    })
+      .done(function(data) {
+        let url = "/users/" + data.user_id;
+        window.location.replace(url);
+      })
+      .fail(function() {
+        alert("エラーが発生しました");
+      });
   });
 });
