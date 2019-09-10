@@ -7,12 +7,13 @@
     .form-inline.d-none.d-sm-inline
       = render 'shared/search-form'
     %ul.navbar-nav
-      %li.nav-item
-        = link_to(user_path(current_user), class: 'nav-link') do
-          %i.fas.fa-user-circle.fa-2x
-      %li.nav-item.pl-1
-        %a.nav-link{ href: "#" }
-          %i.fas.fa-cog.fa-2x
+      - if user_signed_in?
+        %li.nav-item
+          = link_to(user_path(current_user), class: 'nav-link') do
+            %i.fas.fa-user-circle.fa-2x
+        %li.nav-item.pl-1
+          %a.nav-link{ href: "#" }
+            %i.fas.fa-cog.fa-2x
 .search-form.bg-white.d-sm-none.py-4
   .container
     .form-inline.px-4.justify-content-center
