@@ -12,7 +12,7 @@ class BooksController < ApplicationController
       status: status
     )
 
-    # create_review if params[:review].present?
+    create_review if params[:review].present?
 
     if @book.save && user_book.save
       render json: {
@@ -101,7 +101,7 @@ class BooksController < ApplicationController
       Date.strptime(review_params[:date], '%Y/%m/%d') :
       nil
 
-    review = Review.new(
+    review = Review.create(
       user: current_user, 
       book: @book,
       date: date,
@@ -109,11 +109,11 @@ class BooksController < ApplicationController
       rating: review_params[:rating].to_i
     )
 
-    unless review.save
-      render json: {
-        "status": "NG",
-        "code": 500
-      }
-    end
+    # unless review.save
+    #   render json: {
+    #     "status": "NG",
+    #     "code": 500
+    #   }
+    # end
   end
 end
