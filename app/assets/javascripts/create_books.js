@@ -33,8 +33,8 @@ $(document).on("turbolinks:load", function() {
     createBook(2);
   });
 
-  $("#review-submit").on("click", function(e) {
-    e.preventDefault();
+  $("#review-submit").on("click", function() {
+    $("#review-submit").prop("disabled", true);
 
     $.ajax({
       url: "/books",
