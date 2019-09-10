@@ -96,15 +96,15 @@ class BooksController < ApplicationController
   end
 
   def create_review
-    # require 'Date'
-    # date = review_params[:date].present? ?
-    #   Date.strptime(review_params[:date], '%Y/%m/%d') :
-    #   nil
+    require 'date'
+    date = review_params[:date].present? ?
+      Date.strptime(review_params[:date], '%Y/%m/%d') :
+      nil
 
     review = Review.create(
       user: current_user, 
       book: @book,
-      date: nil,
+      date: date,
       text: review_params[:text],
       rating: review_params[:rating].to_i
     )
