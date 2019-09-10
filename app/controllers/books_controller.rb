@@ -12,7 +12,7 @@ class BooksController < ApplicationController
       status: status
     )
 
-    create_review if params[:review].present?
+    # create_review if params[:review].present?
 
     if @book.save && user_book.save
       render json: {

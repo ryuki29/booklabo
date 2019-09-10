@@ -58,7 +58,7 @@ $(document).on("turbolinks:load", function() {
       dataType: "json"
     })
       .done(function(data) {
-        let url = "/users/" + data.user_id + "?status=" + data.book_status;
+        let url = "/users/" + data.user_id;
         window.location.replace(url);
       })
       .fail(function() {
