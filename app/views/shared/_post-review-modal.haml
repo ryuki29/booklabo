@@ -21,13 +21,6 @@
                       method: :post,
                       remote: true,
                       html: {class: "post-review"}) do |f|
-            = f.fields_for :book do |book_f|
-              = book_f.hidden_field(:title,     id: 'read-bookTitle')
-              = book_f.hidden_field(:authors,   id: 'read-bookAuthors')
-              = book_f.hidden_field(:image_url, id: 'read-bookImage')
-              = book_f.hidden_field(:uid,       id: 'read-bookUid')
-            = f.fields_for :user_book do |user_book_f|
-              = user_book_f.hidden_field(:status, value: 0)
             = f.fields_for :review do |review_f|
               .row.mb-2
                 = review_f.label(:date, '読み終わった日',
