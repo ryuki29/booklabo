@@ -69,13 +69,13 @@ class BooksController < ApplicationController
       title = item["volumeInfo"]["title"] ||= ""
       authors = item["volumeInfo"]["authors"] ||= []
       image_url = item["volumeInfo"]["imageLinks"] ? 
-        item["volumeInfo"]["imageLinks"]["thumbnail"] : 
+        item["volumeInfo"]["imageLinks"]["thumbnail"].sub(/http/, 'https') : 
         "book-default.png"
 
       book = {
         uid: uid,
         title: title,
-        authors: authors,
+        authors: authors.join(', '),
         image_url: image_url
       }
       @books << book
