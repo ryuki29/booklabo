@@ -5,10 +5,10 @@ $(document).on("turbolinks:load", function() {
       method: "post",
       data: {
         book: {
-          title: $("#read-book").data("title"),
-          authors: $("#read-book").data("authors"),
-          image_url: $("#read-book").data("image"),
-          uid: $("#read-book").data("uid")
+          title: $("#read-book").attr("data-title"),
+          authors: $("#read-book").attr("data-authors"),
+          image_url: $("#read-book").attr("data-image"),
+          uid: $("#read-book").attr("data-uid")
         },
         user_book: {
           status: status

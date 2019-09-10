@@ -34,10 +34,10 @@ $(document).on("turbolinks:load", function() {
   }
 
   $(".add-book").on("click", function() {
-    let title = $(this).data("title");
-    let authors = $(this).data("authors");
-    let image = $(this).data("image");
-    let uid = $(this).data("uid");
+    let title = $(this).attr("data-title");
+    let authors = $(this).attr("data-authors");
+    let image = $(this).attr("data-image");
+    let uid = $(this).attr("data-uid");
 
     $("#modal-book-title").text(title);
     $("#modal-book-author").text(authors);
