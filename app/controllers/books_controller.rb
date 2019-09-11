@@ -29,6 +29,15 @@ class BooksController < ApplicationController
     end
   end
 
+  def destroy
+    book = Book.find(params[:id]);
+    book.destroy
+    render json: { 
+      "status": "OK",
+      "code": 200
+    }
+  end
+
   def search
     require 'net/http'
     require 'uri'

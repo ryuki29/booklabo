@@ -136,6 +136,16 @@
       transition: 0.2s;
     }
   }
+
+  .btn-selected {
+    background-color: $gray-9;
+    border: 1px solid $gray-9;
+    color: $white;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 }
 
 .modal-text {

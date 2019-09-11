@@ -1,12 +1,12 @@
-.modal.fade#post-book-modal{ aria: {hidden: true },
-                           role: "dialog",
-                           tabindex: "-1" }
+.modal.fade#post-book-modal{ aria: { hidden: true },
+                             role: "dialog",
+                             tabindex: "-1" }
   .modal-dialog.modal-dialog-centered{ role: "document" }
     .modal-content
       .modal-header
         %h5.modal-title 本を登録する
-        %button.close{ aria: { label: "Close"},
-                       data: {dismiss: "modal"},
+        %button.close{ aria: { label: "Close" },
+                       data: { dismiss: "modal" },
                        type: "button" }
           %span{ aria: { hidden: true } }
             %i.fas.fa-times.text-muted
@@ -19,13 +19,13 @@
           %p#modal-book-author
       .modal-footer
         .modal-footer-btn#read-book{ data: { dismiss: 'modal',
-                                            toggle: 'modal' },
-                                    href: '#post-review-modal' }
+                                             toggle: 'modal' },
+                                     href: '#post-review-modal' }
           %i.fas.fa-book.pr-2
           読んだ本に登録
-        .modal-footer-btn#reading-book
+        .modal-footer-btn#reading-book{ data: { status: 1 } }
           %i.fas.fa-book-open.pr-1
-          読んでる本に登録
-        .modal-footer-btn#will-read-book
+          %span 読んでる本に登録
+        .modal-footer-btn#will-read-book{ data: { status: 2 } }
           %i.fas.fa-sticky-note.pr-1
-          読みたい本に登録
+          %span 読みたい本に登録

@@ -25,13 +25,15 @@ $(document).on("turbolinks:load", function() {
       });
   }
 
-  $("#reading-book").on("click", function() {
-    createBook(1);
-  });
+  if ($(".search-main").length) {
+    $("#reading-book").on("click", function() {
+      createBook(1);
+    });
 
-  $("#will-read-book").on("click", function() {
-    createBook(2);
-  });
+    $("#will-read-book").on("click", function() {
+      createBook(2);
+    });
+  }
 
   $("#review-submit").on("click", function() {
     $("#review-submit").prop("disabled", true);
