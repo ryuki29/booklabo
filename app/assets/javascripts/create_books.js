@@ -25,15 +25,17 @@ $(document).on("turbolinks:load", function() {
       });
   }
 
-  if ($(".search-main").length) {
-    $("#reading-book").on("click", function() {
+  $("#reading-book").on("click", function() {
+    if (!$(this).hasClass("btn-selected")) {
       createBook(1);
-    });
+    }
+  });
 
-    $("#will-read-book").on("click", function() {
+  $("#will-read-book").on("click", function() {
+    if (!$(this).hasClass("btn-selected")) {
       createBook(2);
-    });
-  }
+    }
+  });
 
   $("#review-submit").on("click", function() {
     $("#review-submit").prop("disabled", true);
