@@ -26,6 +26,14 @@ $(document).on("turbolinks:load", function() {
       .css("color", "#fc0");
   }
 
+  function removeBookFromList(id) {
+    let deletedBookId = "#" + id;
+    $(".users-show-items")
+      .find(deletedBookId)
+      .parent()
+      .remove();
+  }
+
   $(".users-show-nav-item").on("click", function() {
     let status = $(this).data("status");
 
@@ -125,6 +133,7 @@ $(document).on("turbolinks:load", function() {
       $("#book-title").text(title);
       $("#book-authors").text(authors);
       $("#book-img").attr("src", image);
+      $("#delete-read-book").attr("data-id", id);
 
       let url = "/books/" + id + "/review";
       $.ajax({
@@ -156,18 +165,12 @@ $(document).on("turbolinks:load", function() {
         dataType: "json"
       })
         .done(function() {
-          console.log($(this)[0]);
           selectedButton.removeClass("btn-selected");
-
-          let deletedBookId = "#" + id;
-          $(".users-show-items")
-            .find(deletedBookId)
-            .parent()
-            .remove();
+          removeBookFromList(id);
 
           if (status === "1") {
             selectedButton.find("span").text("読んでる本に登録");
-          } else if (status === "2") {
+          } else {
             selectedButton.find("span").text("読みたい本に登録");
           }
         })
@@ -176,4 +179,25 @@ $(document).on("turbolinks:load", function() {
         });
     });
   }
+
+  $("#delete-read-book").on("click", function() {
+    if (!confirm("本当に削除しますか？")) {
+      return false;
+    } else {
+      let id = $(this).attr("data-id");
+
+      $.ajax({
+        url: "/books/" + id,
+        type: "delete",
+        dataType: "json"
+      })
+        .done(function() {
+          removeBookFromList(id);
+          $("#show-review-modal").modal("hide");
+        })
+        .fail(function() {
+          alert("エラーが発生しました");
+        });
+    }
+  });
 });
