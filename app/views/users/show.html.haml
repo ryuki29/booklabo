@@ -39,25 +39,16 @@
   .card.book-list.border-0
     .card-body.row#user-show-item-list
       - @books.each do |book|
-        - if book.user_books[0].status == @status
-          .users-show-items.card.col-sm-3.border-0
-            = image_tag(book.image_url,
-              class: 'users-show-book-img',
-              id: book.id,
-              data: { toggle: 'modal',
-                      target: '#post-book-modal',
-                      title: book.title,
-                      authors: book.authors,
-                      image: book.image_url,
-                      uid: book.uid,
-                      status: @status } )
-            .card-body
-              %h5.card-title
-                = book.title
-              .card-text
-                = book.authors
+        - if @status == 0
+          = render 'book',
+            book: book,
+            status: @status,
+            modal: "#show-review-modal"
+        - else
+          = render 'book',
+            book: book,
+            status: @status,
+            modal: "#post-book-modal"
 = render 'shared/post-book-modal'
 = render 'shared/post-review-modal'
-//= render 'show-review-modal'
-//= edit_review
-
+= render 'shared/show-review-modal'

@@ -1,0 +1,49 @@
+.modal.fade#show-review-modal{ aria: { hidden: true },
+                               role: "dialog",
+                               tabindex: "-1" }
+  .modal-dialog.modal-lg.modal-dialog-centered{ role: "document" }
+    .modal-content.show-review-modal
+      .modal-header
+        .modal-title
+          %h2.review-book-title#book-title
+          %h6.review-book-author#book-authors
+        %button.close{ aria: { label: "Close"},
+                       data: {dismiss: "modal"},
+                       type: "button" }
+          %span{ aria: { hidden: true } }
+            %i.fas.fa-times.text-muted
+      .modal-body.row#modal-book-data
+        .col-sm-3.border-right.text-center
+          = image_tag('book-default.png',
+                      class: 'post-review-img',
+                      id: 'book-img')
+        .modal-text.col-sm-9
+          .row.mb-3
+            .col-3
+              読み終わった日：
+            .col-3.review-show-text#review-show-date
+          .row.mb-3
+            .col-3
+              評価：
+            .col-3
+              .review-rating#review-show-rating
+                %i.fas.fa-star.fa-lg#rating-1
+                %i.fas.fa-star.fa-lg#rating-2
+                %i.fas.fa-star.fa-lg#rating-3
+                %i.fas.fa-star.fa-lg#rating-4
+                %i.fas.fa-star.fa-lg#rating-5
+          .row.mb-3
+            .col-3
+              感想・レビュー
+            .col-9.review-show-text#review-show-text
+              感想
+          .row
+            .col-3
+            .col-3
+              .show-review-btn
+                %i.fas.fa-edit
+                編集
+            .col-3
+              .show-review-btn
+                %i.fas.fa-trash-alt
+                削除

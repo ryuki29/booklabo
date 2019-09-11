@@ -9,5 +9,9 @@ Rails.application.routes.draw do
       get 'search'
       get 'fetch'
     end
+
+    member do
+      get 'review', to: 'reviews#show'
+    end
   end
 end

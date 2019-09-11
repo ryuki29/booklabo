@@ -1,0 +1,41 @@
+@import "config/variables";
+
+.review-book-title {
+  color: $black-3;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-bottom: 8px;
+}
+
+.review-book-author {
+  color: $gray-6;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.review-rating {
+  color: $gray-d;
+  display: flex;
+}
+
+.review-show-text {
+  color: $black-3;
+  font-weight: 400;
+}
+
+.show-review-btn {
+  border: 1px solid $gray-b;
+  border-radius: 5px;
+  color: $gray-9;
+  cursor: pointer;
+  font-weight: 400;
+  padding: 5px 10px;
+  text-align: center;
+
+  &:hover {
+    background-color: $gray-e;
+    border: 1px solid $gray-9;
+    color: $gray-6;
+    transition: 0.2s;
+  }
+}

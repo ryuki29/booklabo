@@ -10,6 +10,7 @@ $theme-colors: (
 @import "shared/header";
 @import "shared/main";
 @import "books/search";
+@import "books/show-review-modal";
 @import "devise/sign-up";
 @import "devise/sign-in";
 @import "users/show";

@@ -1,8 +1,9 @@
 $(document).on("turbolinks:load", function() {
   function buildHTML(book, status) {
+    var modal = status === 0 ? "#show-review-modal" : "#post-book-modal";
     var html = `
     <div class="users-show-items card col-sm-3 border-0">
-      <img id="${book.id}" class="users-show-book-img" src="${book.image_url}" data-toggle="modal" data-target="#post-book-modal" data-title="${book.title}" data-authors="${book.authors}" data-image="${book.image_url}" data-uid="${book.uid}" data-status="${status}">
+      <img id="${book.id}" class="users-show-book-img" src="${book.image_url}" data-toggle="modal" data-target="${modal}" data-title="${book.title}" data-authors="${book.authors}" data-image="${book.image_url}" data-uid="${book.uid}" data-status="${status}">
       <div class="card-body">
         <h5 class="card-title">
           ${book.title}
@@ -13,6 +14,16 @@ $(document).on("turbolinks:load", function() {
       </div>
     </div>`;
     return html;
+  }
+
+  function setRating(review) {
+    let rating = "#rating-" + review.rating;
+    $(".fa-star").css("color", "#ddd");
+    $("#review-show-rating")
+      .find(rating)
+      .css("color", "#fc0")
+      .prevAll()
+      .css("color", "#fc0");
   }
 
   $(".users-show-nav-item").on("click", function() {
@@ -110,6 +121,26 @@ $(document).on("turbolinks:load", function() {
       $("#read-bookAuthors").attr("value", authors);
       $("#read-bookImage").attr("value", image);
       $("#read-bookUid").attr("value", uid);
+    } else {
+      $("#book-title").text(title);
+      $("#book-authors").text(authors);
+      $("#book-img").attr("src", image);
+
+      let url = "/books/" + id + "/review";
+      $.ajax({
+        url: url,
+        type: "get",
+        dataType: "json"
+      })
+        .done(function(review) {
+          $("#review-show-date").text(review.date);
+          $("#review-show-text").text(review.text);
+          $("#review-show-rating").attr("data-rating", review.rating);
+          setRating(review);
+        })
+        .fail(function() {
+          alert("エラーが発生しました");
+        });
     }
   });
 
