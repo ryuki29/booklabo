@@ -40,7 +40,9 @@
           .row
             .col-3
             .col-3
-              .show-review-btn
+              .show-review-btn#edit-review{ data: { dismiss: 'modal',
+                                            toggle: 'modal' },
+                                            href: '#post-review-modal' }
                 %i.fas.fa-edit
                 編集
             .col-3

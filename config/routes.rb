@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
     member do
       get 'review', to: 'reviews#show'
+      put 'review', to: 'reviews#update'
     end
   end
 end

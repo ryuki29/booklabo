@@ -18,7 +18,7 @@ $(document).on("turbolinks:load", function() {
 
   function setRating(review) {
     let rating = "#rating-" + review.rating;
-    $(".fa-star").css("color", "#ddd");
+    $("#review-show-rating .fa-star").css("color", "#ddd");
     $("#review-show-rating")
       .find(rating)
       .css("color", "#fc0")
@@ -199,5 +199,41 @@ $(document).on("turbolinks:load", function() {
           alert("エラーが発生しました");
         });
     }
+  });
+
+  $("#edit-review").on("click", function() {
+    $(".post-review-title").text("レビューを編集する");
+    $("#review-submit").text("更新する");
+
+    let image = $("#book-img").attr("src");
+    $("#post-review-img").attr("src", image);
+
+    let initial_date = $("#review-show-date").text();
+
+    if (initial_date !== "") {
+      $("#date-check").prop("checked", false);
+      $("#date-input, #calender")
+        .attr("disabled", false)
+        .removeClass("form-disabled");
+      $("#date-input").val(initial_date);
+    } else {
+      $("#date-check").prop("checked", true);
+      $("#date-input, #calender")
+        .attr("disabled", true)
+        .addClass("form-disabled");
+    }
+
+    let initial_text = $("#review-show-text").text();
+    $("#word-count").text(initial_text.length);
+    $("#review-text").val(initial_text);
+
+    let initial_rating = $("#review-show-rating").attr("data-rating");
+    $("#book-rating").val(initial_rating);
+    $("#review-post-rating .fa-star").removeClass("star-active");
+    let selector = `#review-post-rating .fa-star:nth-child(${initial_rating})`;
+    $(selector)
+      .addClass("star-active")
+      .prevAll()
+      .addClass("star-active");
   });
 });

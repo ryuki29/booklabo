@@ -11,7 +11,7 @@
           %span{ aria: { hidden: true } }
             %i.fas.fa-times.text-muted
       .modal-body.row#modal-book-data
-        .col-sm-3.border-right
+        .col-sm-3.border-right.text-center
           = image_tag('',
                       class: 'post-review-img',
                       id: 'post-review-img')
@@ -40,6 +40,7 @@
                 感想・レビュー
               %textarea{ type: 'text',
                          name: 'text',
+                         rows: 10,
                          id: 'review-text',
                          class: 'review-text col form-control mr-3' }
             .row.mb-1
@@ -52,7 +53,7 @@
                       name: 'rating',
                       value: 0,
                       id: 'book-rating' }
-              .book-rating.pl-0.pr-3.my-auto
+              .book-rating.pl-0.pr-3.my-auto#review-post-rating
                 %i.fas.fa-star.fa-lg{ data: { rating: 1 } }
                 %i.fas.fa-star.fa-lg{ data: { rating: 2 } }
                 %i.fas.fa-star.fa-lg{ data: { rating: 3 } }
