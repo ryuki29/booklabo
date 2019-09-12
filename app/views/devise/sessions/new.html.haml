@@ -25,7 +25,8 @@
           class: 'signin-fb py-2 d-block') do
           %i.fab.fa-facebook-square.fa-lg.mr-1
           Facebookでログイン
-        = link_to(root_path,
+        = link_to(user_twitter_omniauth_authorize_path,
+          method: :post,
           class: 'signin-twitter py-2 d-block') do
           %i.fab.fa-twitter.fa-lg
           Twitterでログイン

@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :user_books, dependent: :destroy
   has_many :books, through: :user_books
+  has_one  :sns_uid
 
   def self.find_for_oauth(auth)
     sns_uid = SnsUid.where(uid: auth.uid, provider: auth.provider).first
@@ -18,7 +19,7 @@ class User < ApplicationRecord
         password: Devise.friendly_token[0, 20]
       )
 
-      sns_uid = SnsUid.create(
+      SnsUid.create(
         uid:      auth.uid,
         provider: auth.provider,
         user: user
