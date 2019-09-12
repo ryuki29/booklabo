@@ -36,6 +36,8 @@ $(document).on("turbolinks:load", function() {
 
   $(".users-show-nav-item").on("click", function() {
     let status = $(this).data("status");
+    let userId = $("#user-id").attr("data-id");
+    console.log(userId);
 
     if (!$(this).hasClass("active")) {
       $(".user-show-nav")
@@ -48,7 +50,8 @@ $(document).on("turbolinks:load", function() {
         url: "/books/fetch",
         type: "get",
         data: {
-          status: status
+          status: status,
+          user_id: userId
         },
         dataType: "json"
       })

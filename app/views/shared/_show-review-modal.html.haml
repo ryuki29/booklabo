@@ -37,15 +37,16 @@
               感想・レビュー
             .col-9.review-show-text#review-show-text
               感想
-          .row
-            .col-3
-            .col-3
-              .show-review-btn#edit-review{ data: { dismiss: 'modal',
-                                            toggle: 'modal' },
-                                            href: '#post-review-modal' }
-                %i.fas.fa-edit
-                編集
-            .col-3
-              .show-review-btn#delete-read-book
-                %i.fas.fa-trash-alt
-                削除
+          - if current_user.present? && user.id == current_user.id
+            .row
+              .col-3
+              .col-3
+                .show-review-btn#edit-review{ data: { dismiss: 'modal',
+                                              toggle: 'modal' },
+                                              href: '#post-review-modal' }
+                  %i.fas.fa-edit
+                  編集
+              .col-3
+                .show-review-btn#delete-read-book
+                  %i.fas.fa-trash-alt
+                  削除

@@ -82,7 +82,8 @@ class BooksController < ApplicationController
 
   def fetch
     status = params[:status].to_i
-    @books = current_user.books.includes(:user_books).order(created_at: 'desc')
+    user = User.find(params[:user_id])
+    @books = user.books.includes(:user_books).order(created_at: 'desc')
     @books = @books.select {|book|
       book.user_books[0].status == status
     }

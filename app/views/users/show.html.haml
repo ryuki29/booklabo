@@ -5,11 +5,12 @@
         class: 'user-show-avatar')
     .col-sm-8
       .user-info-head
-        %h1.user-name
-          = current_user.name
-        = link_to('プロフィールを編集',
-          edit_user_registration_path,
-          class: 'user-edit')
+        %h1.user-name#user-id{ data: { id: @user.id } }
+          = @user.name
+        - if current_user.present? && @user.id == current_user.id
+          = link_to('プロフィールを編集',
+            edit_user_registration_path,
+            class: 'user-edit')
       .user-info
         .followers.d-inline.pr-4
           %strong 10
@@ -49,6 +50,8 @@
             book: book,
             status: @status,
             modal: "#post-book-modal"
-= render 'shared/post-book-modal'
-= render 'shared/post-review-modal'
-= render 'shared/show-review-modal'
+- if current_user.present? && @user.id == current_user.id
+  = render 'shared/post-book-modal'
+  = render 'shared/post-review-modal'
+= render 'shared/show-review-modal',
+  user: @user
