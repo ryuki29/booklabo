@@ -48,7 +48,7 @@ class BooksController < ApplicationController
     @total_items = 0
     @page = params[:page]
 
-    return if params[:keyword].empty?
+    return unless params[:keyword].present?
 
     encoded_uri = URI.encode(
       "https://www.googleapis.com/books/v1/volumes?maxResults=20&startIndex=#{params[:page]}&q=#{params[:keyword]}&fields=totalItems,items(id,volumeInfo(title,authors,imageLinks/thumbnail))"
