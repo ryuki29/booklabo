@@ -1,0 +1,2 @@
+class SnsUid < ApplicationRecord
+end
