@@ -9,14 +9,18 @@
     %ul.navbar-nav
       - if user_signed_in?
         %li.nav-item
-          = link_to(user_path(current_user), class: 'nav-link') do
+          = link_to(user_path(current_user),
+                    class: 'nav-link') do
             %i.fas.fa-user-circle.fa-2x
         %li.nav-item.pl-1
-          = link_to(destroy_user_session_path, method: :delete, class: 'nav-link') do
+          = link_to(destroy_user_session_path,
+                    method: :delete,
+                    class: 'nav-link') do
             %i.fas.fa-sign-out-alt.fa-2x
-      - else 
+      - else
         %li.nav-item.pl-1
-          = link_to(new_user_session_path, class: 'nav-link') do
+          = link_to(new_user_session_path,
+                    class: 'nav-link') do
             %i.fas.fa-sign-in-alt.fa-2x
 .search-form.bg-white.d-sm-none.py-4
   .container
