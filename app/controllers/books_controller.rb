@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!, except: %i[index search fetch]
+
   def index
   end
 

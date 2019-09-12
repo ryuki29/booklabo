@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :find_review_by_book_id, only: [:show, :update]
+  before_action :authenticate_user!, except: %i[show]
 
   def show
   end
