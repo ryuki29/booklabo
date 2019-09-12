@@ -25,17 +25,32 @@ $(document).on("turbolinks:load", function() {
       });
   }
 
-  $("#reading-book").on("click", function() {
-    createBook(1);
-  });
+  function updateReview() {
+    let id = $("#delete-read-book").attr("data-id");
+    let url = `/books/${id}/review`;
 
-  $("#will-read-book").on("click", function() {
-    createBook(2);
-  });
+    $.ajax({
+      url: url,
+      method: "put",
+      data: {
+        review: {
+          date: $("#date-input").val(),
+          text: $("#review-text").val(),
+          rating: $("#book-rating").val()
+        }
+      },
+      dataType: "json"
+    })
+      .done(function(data) {
+        let url = "/users/" + data.user_id;
+        window.location.replace(url);
+      })
+      .fail(function() {
+        alert("エラーが発生しました");
+      });
+  }
 
-  $("#review-submit").on("click", function() {
-    $("#review-submit").prop("disabled", true);
-
+  function createReview() {
     $.ajax({
       url: "/books",
       method: "post",
@@ -64,5 +79,27 @@ $(document).on("turbolinks:load", function() {
       .fail(function() {
         alert("エラーが発生しました");
       });
+  }
+
+  $("#reading-book").on("click", function() {
+    if (!$(this).hasClass("btn-selected")) {
+      createBook(1);
+    }
+  });
+
+  $("#will-read-book").on("click", function() {
+    if (!$(this).hasClass("btn-selected")) {
+      createBook(2);
+    }
+  });
+
+  $("#review-submit").on("click", function() {
+    $(this).prop("disabled", true);
+
+    if ($("#review-submit").text() === "更新する") {
+      updateReview();
+    } else {
+      createReview();
+    }
   });
 });

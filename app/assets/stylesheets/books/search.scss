@@ -136,6 +136,16 @@
       transition: 0.2s;
     }
   }
+
+  .btn-selected {
+    background-color: $gray-9;
+    border: 1px solid $gray-9;
+    color: $white;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 }
 
 .modal-text {
@@ -183,6 +193,11 @@
 .post-review-label {
   color: $gray-9;
   font-size: 0.85rem;
+}
+
+.review-text {
+  font-size: 0.9rem;
+  resize: none;
 }
 
 .review-text,

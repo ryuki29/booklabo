@@ -82,17 +82,25 @@
     background-color: $bg-white;
   }
 
-  .card-img-top {
+  .users-show-book-img {
+    cursor: pointer;
     height: 166px;
     margin: 0 auto;
     width: 100px;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
   .card-title {
+    color: $gray-6;
     font-size: 0.8rem;
+    font-weight: bold;
   }
 
   .card-text {
+    color: $gray-6;
     font-size: 0.8rem;
   }
 }

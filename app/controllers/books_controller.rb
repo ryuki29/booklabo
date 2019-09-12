@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!, except: %i[index search fetch]
+
   def index
   end
 
@@ -29,6 +31,15 @@ class BooksController < ApplicationController
     end
   end
 
+  def destroy
+    book = Book.find(params[:id]);
+    book.destroy
+    render json: { 
+      "status": "OK",
+      "code": 200
+    }
+  end
+
   def search
     require 'net/http'
     require 'uri'
@@ -39,7 +50,7 @@ class BooksController < ApplicationController
     @total_items = 0
     @page = params[:page]
 
-    return if params[:keyword].empty?
+    return unless params[:keyword].present?
 
     encoded_uri = URI.encode(
       "https://www.googleapis.com/books/v1/volumes?maxResults=20&startIndex=#{params[:page]}&q=#{params[:keyword]}&fields=totalItems,items(id,volumeInfo(title,authors,imageLinks/thumbnail))"
@@ -71,7 +82,8 @@ class BooksController < ApplicationController
 
   def fetch
     status = params[:status].to_i
-    @books = current_user.books.includes(:user_books).order(created_at: 'desc')
+    user = User.find(params[:user_id])
+    @books = user.books.includes(:user_books).order(created_at: 'desc')
     @books = @books.select {|book|
       book.user_books[0].status == status
     }

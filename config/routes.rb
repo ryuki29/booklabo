@@ -4,10 +4,15 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[show]
 
-  resources :books, only: %i[create] do
+  resources :books, only: %i[create destroy] do
     collection do
       get 'search'
       get 'fetch'
+    end
+
+    member do
+      get 'review', to: 'reviews#show'
+      put 'review', to: 'reviews#update'
     end
   end
 end

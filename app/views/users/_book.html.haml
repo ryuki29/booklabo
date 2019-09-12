@@ -1,0 +1,16 @@
+.users-show-items.card.col-sm-3.border-0
+  = image_tag(book.image_url,
+    class: 'users-show-book-img',
+    id: book.id,
+    data: { toggle: 'modal',
+            target: modal,
+            title: book.title,
+            authors: book.authors,
+            image: book.image_url,
+            uid: book.uid,
+            status: status } )
+  .card-body
+    %h5.card-title
+      = book.title
+    .card-text
+      = book.authors

@@ -6,14 +6,15 @@
       .card-body.row
         - @books.each do |book|
           .search-item.card.col-md-3.border-0
-            .add-book-cover
-              .add-book{ data: { toggle: 'modal',
-                                 target: '#post-book-modal',
-                                 title:   book[:title],
-                                 authors: book[:authors],
-                                 image:   book[:image_url],
-                                 uid:     book[:uid] } }
-                本を登録する
+            - if user_signed_in?
+              .add-book-cover
+                .add-book{ data: { toggle: 'modal',
+                                  target: '#post-book-modal',
+                                  title:   book[:title],
+                                  authors: book[:authors],
+                                  image:   book[:image_url],
+                                  uid:     book[:uid] } }
+                  本を登録する
             = image_tag(book[:image_url],
                         class: 'card-img-top')
             .search-item-body.card-body
