@@ -11,6 +11,7 @@ class User < ApplicationRecord
 
   def self.find_for_oauth(auth)
     sns_uid = SnsUid.where(uid: auth.uid, provider: auth.provider).first
+    user = User.find(sns_uid.user_id)
 
     unless sns_uid
       user = User.create(
