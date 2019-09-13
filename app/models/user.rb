@@ -7,11 +7,11 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :user_books, dependent: :destroy
   has_many :books, through: :user_books
-  has_one  :sns_uid
+  has_many :sns_uids
 
   def self.find_for_oauth(auth)
     sns_uid = SnsUid.where(uid: auth.uid, provider: auth.provider).first
-    user = User.find(sns_uid.user_id)
+    user = sns_uid.user
 
     unless sns_uid
       user = User.create(
