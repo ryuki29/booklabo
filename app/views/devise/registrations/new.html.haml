@@ -10,9 +10,10 @@
         %button.btn.btn-fb.mt-4
           %i.fab.fa-facebook-square.fa-lg.mr-1
           Facebookで登録
-        %button.btn.btn-twitter
-          %i.fab.fa-twitter.fa-lg
-          Twitterで登録
+        = link_to(user_twitter_omniauth_authorize_path, method: :post) do
+          %button.btn.btn-twitter
+            %i.fab.fa-twitter.fa-lg
+            Twitterで登録
         %button.btn.btn-google
           = image_tag('google-icon.png',
           class: 'google-icon')

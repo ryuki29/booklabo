@@ -64,8 +64,9 @@
             .row
               .col-3
               .col-9.d-flex.pl-0
-                .tweet-btn.my-o
-                  %i.fab.fa-twitter
+                - if current_user.sns_uids.present?
+                  .tweet-btn
+                    %i.fab.fa-twitter
                 %button{ id: 'review-submit',
                          class: 'review-submit ml-auto my-0' }
                   登録する
