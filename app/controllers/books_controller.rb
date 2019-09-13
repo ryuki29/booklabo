@@ -122,7 +122,7 @@ class BooksController < ApplicationController
     )
 
     if review.save
-      create_tweet if review_params[:tweet] == "true"
+      create_tweet(review.text) if review_params[:tweet] == "true"
     else
       render json: {
         "status": "NG",
@@ -131,9 +131,12 @@ class BooksController < ApplicationController
     end
   end
 
-  def create_tweet
+  def create_tweet(review)
     client = twitter_client
-    text = "#{@book.authors}の#{@book.title}を読了"
+    text = "#{@book.authors}の#{@book.title}を読了\n感想：#{review}"
+    if text.length > 140
+      text = "#{text[0..136]}..." 
+    end
     client.update(text)
   end
 
