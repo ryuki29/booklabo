@@ -65,7 +65,10 @@
               .col-3
               .col-9.d-flex.pl-0
                 - if current_user.sns_uids.present?
-                  .tweet-btn
+                  %input#tweet-review{ type: 'hidden',
+                                       name: 'tweet',
+                                       value: false }
+                  .tweet-btn#tweet-btn
                     %i.fab.fa-twitter
                 %button{ id: 'review-submit',
                          class: 'review-submit ml-auto my-0' }

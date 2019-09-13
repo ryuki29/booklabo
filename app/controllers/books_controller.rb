@@ -104,7 +104,7 @@ class BooksController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:date, :text, :rating)
+    params.require(:review).permit(:date, :text, :rating, :tweet)
   end
 
   def create_review
@@ -113,7 +113,7 @@ class BooksController < ApplicationController
       Date.strptime(review_params[:date], '%Y/%m/%d') :
       nil
 
-    review = Review.create(
+    review = Review.new(
       user: current_user, 
       book: @book,
       date: date,
@@ -121,11 +121,30 @@ class BooksController < ApplicationController
       rating: review_params[:rating].to_i
     )
 
-    unless review.save
+    if review.save
+      create_tweet if review_params[:tweet] == "true"
+    else
       render json: {
         "status": "NG",
         "code": 500
       }
     end
+  end
+
+  def create_tweet
+    client = twitter_client
+    text = "#{@book.authors}の#{@book.title}を読了"
+    client.update(text)
+  end
+
+  def twitter_client
+    client = Twitter::REST::Client.new do |config|
+      config.access_token = session[:oauth_token]
+      config.access_token_secret = session[:oauth_token_secret]
+      config.consumer_key = Rails.application.credentials.twitter[:twitter_api_key]
+      config.consumer_secret = Rails.application.credentials.twitter[:twitter_api_secret]
+    end
+
+    return client
   end
 end
