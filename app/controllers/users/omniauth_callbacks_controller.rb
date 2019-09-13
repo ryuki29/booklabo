@@ -13,7 +13,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session[:oauth_token] = request.env['omniauth.auth']['credentials']['token']
       session[:oauth_token_secret] = request.env['omniauth.auth']['credentials']['secret']
       sign_in_and_redirect @user, event: :authentication
-      binding.pry
     else
       redirect_to new_user_session_path
     end
