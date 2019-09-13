@@ -11,9 +11,10 @@ class User < ApplicationRecord
 
   def self.find_for_oauth(auth)
     sns_uid = SnsUid.where(uid: auth.uid, provider: auth.provider).first
-    user = sns_uid.user
-
-    unless sns_uid
+    
+    if sns_uid
+      user = sns_uid.user
+    else
       user = User.create(
         email: User.dummy_email(auth),
         name: auth.info.nickname,
