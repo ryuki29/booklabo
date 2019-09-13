@@ -207,6 +207,7 @@ $(document).on("turbolinks:load", function() {
   $("#edit-review").on("click", function() {
     $(".post-review-title").text("レビューを編集する");
     $("#review-submit").text("更新する");
+    $("#tweet-btn").css("display", "none");
 
     let image = $("#book-img").attr("src");
     $("#post-review-img").attr("src", image);

@@ -66,6 +66,8 @@ $(document).on("turbolinks:load", function() {
     $("#word-count").text("0");
     $("#book-rating").attr("value", 0);
     $(".fa-star").removeClass("star-active");
+    $("#tweet-review").val(false);
+    $("#tweet-btn").removeClass("tweet-btn-active");
   });
 
   $(".fa-star").hover(
@@ -120,6 +122,16 @@ $(document).on("turbolinks:load", function() {
     } else {
       $("#word-count").css("color", "#1ea1f1");
       $("#review-submit").removeAttr("disabled");
+    }
+  });
+
+  $("#tweet-btn").on("click", function() {
+    if ($(this).hasClass("tweet-btn-active")) {
+      $(this).removeClass("tweet-btn-active");
+      $("#tweet-review").val(false);
+    } else {
+      $(this).addClass("tweet-btn-active");
+      $("#tweet-review").val(true);
     }
   });
 

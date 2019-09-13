@@ -10,7 +10,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.find_for_oauth(request.env['omniauth.auth'])
 
     if @user.present?
-      flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: provider.capitalize)
+      session[:oauth_token] = request.env['omniauth.auth']['credentials']['token']
+      session[:oauth_token_secret] = request.env['omniauth.auth']['credentials']['secret']
       sign_in_and_redirect @user, event: :authentication
     else
       redirect_to new_user_session_path

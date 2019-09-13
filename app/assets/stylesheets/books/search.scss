@@ -232,6 +232,10 @@
   justify-content: center;
   width: 40px;
 
+  &-active {
+    background-color: $color-twitter;
+  }
+
   &:hover,
   &:active {
     background-color: $color-twitter;
