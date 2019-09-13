@@ -79,3 +79,4 @@ gem 'font-awesome-sass', '~> 5.4.1'
 
 gem "devise", ">= 4.7.1"
 gem 'omniauth-twitter'
+gem "omniauth-rails_csrf_protection"
