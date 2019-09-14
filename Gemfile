@@ -84,3 +84,5 @@ gem 'omniauth-twitter'
 gem "omniauth-rails_csrf_protection"
 
 gem "aws-sdk-s3", require: false
+gem 'asset_sync'
+gem "fog-aws"
