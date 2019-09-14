@@ -12,11 +12,18 @@
                       type: "button" }
           %span{"aria-hidden" => "true"} ×
       .modal-body
-        = form_with model: @user do |f|
+        = form_with(model: @user,
+                    url: user_path,
+                    method: :put,
+                    local: true)  do |f|
           .row.mb-2
             .col-4.edit-user-image-container
-              = image_tag('default-user-image.jpg',
-                          class: "edit-user-image")
+              - if @user.image.attached?
+                = image_tag(@user.image,
+                            class: "edit-user-image")
+              -else
+                = image_tag('default-user-image.jpg',
+                            class: "edit-user-image")
               .custom-file
                 = f.label(:image,
                 class: "edit-user-image-label") do
@@ -32,9 +39,9 @@
               class: "form-control")
             %span.edit-user-count 0/50
           .form-group
-            = f.label(:name, "自己紹介",
+            = f.label(:description, "自己紹介",
               class: "edit-user-label")
-            = f.text_area(:name,
+            = f.text_area(:description,
               value: @user.description,
               rows: 6,
               placeholder: "自己紹介を追加",
@@ -45,7 +52,7 @@
             = f.label(:url,
               "ウェブサイト",
               class: "edit-user-label")
-            = f.text_field(:name,
+            = f.text_field(:url,
               value: @user.url,
               placeholder: "ウェブサイトを追加",
               class: "form-control")

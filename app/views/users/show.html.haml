@@ -12,7 +12,7 @@
         %h1.user-name#user-id{ data: { id: @user.id } }
           = @user.name
         - if current_user.present? && @user.id == current_user.id
-          .user-edit{ data: { toggle: "modal",
+          .user-edit#edit-profile{ data: { toggle: "modal",
           target: "#edit-user-modal" } }
             プロフィールを編集
       .user-info
@@ -23,7 +23,7 @@
           %strong 10
           フォロワー
       .user-description
-        I'm an university student in Kyoto, Japan.
+        = @user.description
   %ul.nav.user-show-nav{ data: { status: @status } }
     %li.nav-item.users-show-nav-item#read{ data: { status: 0 } }
       %span.nav-link
