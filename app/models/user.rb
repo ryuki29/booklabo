@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :user_books, dependent: :destroy
   has_many :books, through: :user_books
   has_many :sns_uids
+  has_one_attached :image
 
   def self.find_for_oauth(auth)
     sns_uid = SnsUid.where(uid: auth.uid, provider: auth.provider).first

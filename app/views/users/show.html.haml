@@ -1,8 +1,12 @@
 .container.user-show
   .row.pb-4.border-bottom
     .col-sm-4.text-center
-      = image_tag('default-user-image.jpg',
-        class: 'user-show-avatar')
+      - if @user.image.attached?
+        = image_tag(@user.image,
+          class: 'user-show-avatar')
+      - else
+        = image_tag('default-user-image.jpg',
+          class: 'user-show-avatar')
     .col-sm-8
       .user-info-head
         %h1.user-name#user-id{ data: { id: @user.id } }
