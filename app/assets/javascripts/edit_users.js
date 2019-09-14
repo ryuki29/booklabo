@@ -4,6 +4,10 @@ $(document).on("turbolinks:load", function() {
     let image = $(".user-show-avatar").attr("src");
     $(".edit-user-image").attr("src", image);
     $(".custom-file-input").val("");
+
+    $("#user-name-count").text($("#edit-user-name").val().length);
+    $("#user-description-count").text($("#edit-user-description").val().length);
+    $("#user-url-count").text($("#edit-user-url").val().length);
   });
 
   $(".custom-file-input").on("change", function(e) {
@@ -21,5 +25,20 @@ $(document).on("turbolinks:load", function() {
       };
     })(file);
     reader.readAsDataURL(file);
+  });
+
+  $("#edit-user-name").on("keyup", function() {
+    let nameLength = $(this).val().length;
+    $("#user-name-count").text(nameLength);
+  });
+
+  $("#edit-user-description").on("keyup", function() {
+    let descriptionLength = $(this).val().length;
+    $("#user-description-count").text(descriptionLength);
+  });
+
+  $("#edit-user-url").on("keyup", function() {
+    let urlLength = $(this).val().length;
+    $("#user-url-count").text(urlLength);
   });
 });
