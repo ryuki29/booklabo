@@ -1,0 +1,89 @@
+@import "config/variables";
+
+.edit-user {
+  border-radius: 15px;
+
+  .modal-title {
+    color: $gray-6;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  &-image-container {
+    height: 100px;
+    text-align: center;
+  }
+
+  &-image {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+  }
+
+  .custom-file {
+    background-color: $black-3;
+    border-radius: 50%;
+    bottom: 100px;
+    height: 100px;
+    opacity: 0.3;
+    padding-bottom: -100px;
+    position: relative;
+    width: 100px;
+
+    .fa-camera {
+      color: $white;
+      cursor: pointer;
+      margin-top: 35px;
+    }
+
+    input {
+      height: 0px;
+    }
+  }
+
+  .form-group {
+    background-color: $bg-white;
+    border-radius: 10px;
+    margin-bottom: 30px;
+  }
+
+  .form-control {
+    background-color: transparent;
+    border: none;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  &-label {
+    color: $gray-6;
+    font-size: 0.9rem;
+    padding: 5px 0 0 12px;
+  }
+
+  &-text-area {
+    font-size: 0.9rem;
+    resize: none;
+  }
+
+  &-count {
+    color: $gray-6;
+    float: right;
+    font-size: 0.9rem;
+  }
+
+  &-btn {
+    background-color: $color-twitter;
+    border: 1px solid $color-twitter;
+    border-radius: 5px;
+    color: $white;
+    float: right;
+    height: 35px;
+    width: 80px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

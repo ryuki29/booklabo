@@ -7,4 +7,7 @@ class UsersController < ApplicationController
       book.user_books[0].status == @status
     }
   end
+
+  def update
+  end
 end
