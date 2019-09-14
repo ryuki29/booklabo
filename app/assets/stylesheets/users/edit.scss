@@ -38,7 +38,7 @@
     }
 
     input {
-      height: 0px;
+      height: 0;
     }
   }
 
@@ -50,7 +50,7 @@
 
   .form-control {
     background-color: transparent;
-    border: none;
+    border: 0;
 
     &:focus {
       box-shadow: none;
