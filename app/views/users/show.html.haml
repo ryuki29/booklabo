@@ -17,13 +17,16 @@
             プロフィールを編集
       .user-info
         .followers.d-inline.pr-4
-          %strong 10
+          %strong 0
           フォロー中
         .follows.d-inline
-          %strong 10
+          %strong 0
           フォロワー
-      .user-description
+      .user-description.mb-2.mr-5
         = @user.description
+      .user-url
+        %i.fas.fa-link.fa-sm.text-muted
+        = link_to(@user.url, @user.url)
   %ul.nav.user-show-nav{ data: { status: @status } }
     %li.nav-item.users-show-nav-item#read{ data: { status: 0 } }
       %span.nav-link
