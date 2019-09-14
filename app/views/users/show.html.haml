@@ -1,25 +1,33 @@
 .container.user-show
   .row.pb-4.border-bottom
     .col-sm-4.text-center
-      = image_tag('default-user-image.jpg',
-        class: 'user-show-avatar')
+      - if @user.image.attached?
+        = image_tag(@user.image,
+          class: 'user-show-avatar')
+      - else
+        = image_tag('default-user-image.jpg',
+          class: 'user-show-avatar')
     .col-sm-8
       .user-info-head
-        %h1.user-name#user-id{ data: { id: @user.id } }
+        %h2.user-name#user-id{ data: { id: @user.id } }
           = @user.name
         - if current_user.present? && @user.id == current_user.id
-          = link_to('プロフィールを編集',
-            edit_user_registration_path,
-            class: 'user-edit')
+          .user-edit-btn#edit-profile{ data: { toggle: "modal",
+          target: "#edit-user-modal" } }
+            プロフィールを編集
       .user-info
         .followers.d-inline.pr-4
-          %strong 10
+          %strong 0
           フォロー中
         .follows.d-inline
-          %strong 10
+          %strong 0
           フォロワー
-      .user-description
-        I'm an university student in Kyoto, Japan.
+      .user-description.mb-2.mr-5
+        = @user.description
+      - if @user.url.present?
+        .user-url
+          %i.fas.fa-link.fa-sm.text-muted
+          = link_to(@user.url, @user.url)
   %ul.nav.user-show-nav{ data: { status: @status } }
     %li.nav-item.users-show-nav-item#read{ data: { status: 0 } }
       %span.nav-link
@@ -53,5 +61,7 @@
 - if current_user.present? && @user.id == current_user.id
   = render 'shared/post-book-modal'
   = render 'shared/post-review-modal'
+  = render 'users/edit-user-modal',
+    user: @user
 = render 'shared/show-review-modal',
   user: @user

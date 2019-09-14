@@ -19,16 +19,17 @@
 
   .user-name {
     display: inline;
-    font-size: 1.5rem;
-    font-weight: 400;
+    font-size: 1.2rem;
+    font-weight: bold;
     margin: 0;
   }
 
-  .user-edit {
+  .user-edit-btn {
     background-color: transparent;
     border: 1px solid $gray-d;
     border-radius: 5px;
     color: $black-3;
+    cursor: pointer;
     display: inline;
     font-size: 0.85rem;
     font-weight: bold;
@@ -45,6 +46,10 @@
 .user-info {
   flex-wrap: nowrap;
   padding: 0 0 15px;
+}
+
+.user-url a {
+  color: $gray-6;
 }
 
 .user-show-nav {
