@@ -82,3 +82,5 @@ gem "devise", ">= 4.7.1"
 gem "twitter"
 gem 'omniauth-twitter'
 gem "omniauth-rails_csrf_protection"
+
+gem "aws-sdk-s3", require: false
