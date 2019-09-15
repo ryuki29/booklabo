@@ -81,12 +81,10 @@ class BooksController < ApplicationController
   end
 
   def fetch
-    status = params[:status].to_i
-    user = User.find(params[:user_id])
-    @books = user.books.includes(:user_books).order(created_at: 'desc')
-    @books = @books.select {|book|
-      book.user_books[0].status == status
-    }
+    @books = Book.joins(:user_books).where(user_books: {
+      status: params[:status].to_i,
+      user_id: params[:user_id] 
+    })
   end
 
   private

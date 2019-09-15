@@ -37,7 +37,6 @@ $(document).on("turbolinks:load", function() {
   $(".users-show-nav-item").on("click", function() {
     let status = $(this).data("status");
     let userId = $("#user-id").attr("data-id");
-    console.log(userId);
 
     if (!$(this).hasClass("active")) {
       $(".user-show-nav")
@@ -83,6 +82,68 @@ $(document).on("turbolinks:load", function() {
     }
   }
 
+  function setReadingBookToSelected() {
+    $("#will-read-book").removeClass("btn-selected");
+    $("#will-read-book")
+      .find("span")
+      .text("読みたい本に追加");
+
+    $("#reading-book").addClass("btn-selected");
+    $("#reading-book")
+      .find("span")
+      .text("読んでる本から解除");
+  }
+
+  function setWillReadBookToSelected() {
+    $("#reading-book").removeClass("btn-selected");
+    $("#reading-book")
+      .find("span")
+      .text("読んでる本に追加");
+
+    $("#will-read-book").addClass("btn-selected");
+    $("#will-read-book")
+      .find("span")
+      .text("読みたい本から解除");
+  }
+
+  function setEditBookModal(image, title, authors) {
+    $("#modal-book-img").attr("src", image);
+    $("#modal-book-title").text(title);
+    $("#modal-book-author").text(authors);
+  }
+
+  function setDataToReadBookButton(title, authors, image, uid, id) {
+    $("#read-book")
+      .attr("data-title", title)
+      .attr("data-authors", authors)
+      .attr("data-image", image)
+      .attr("data-uid", uid)
+      .attr("data-id", id);
+  }
+
+  function setShowReviewModal(title, authors, image) {
+    $("#book-title").text(title);
+    $("#book-authors").text(authors);
+    $("#book-img").attr("src", image);
+  }
+
+  function fetchReview(url) {
+    $.ajax({
+      url: url,
+      type: "get",
+      dataType: "json"
+    })
+      .done(function(review) {
+        $("#review-show-date").text(review.date);
+        $("#review-show-text").text(review.text);
+        $("#review-show-rating").attr("data-rating", review.rating);
+        setRating(review);
+      })
+      .fail(function() {
+        alert("エラーが発生しました");
+      });
+  }
+
   $("#user-show-item-list").on("click", ".users-show-book-img", function() {
     let title = $(this).attr("data-title");
     let authors = $(this).attr("data-authors");
@@ -91,68 +152,25 @@ $(document).on("turbolinks:load", function() {
     let id = $(this).attr("id");
     let status = $(this).attr("data-status");
 
-    if (status === "1" || status === "2") {
-      if (status === "1") {
-        $("#will-read-book").removeClass("btn-selected");
-        $("#will-read-book")
-          .find("span")
-          .text("読みたい本に追加");
-
-        $("#reading-book").addClass("btn-selected");
-        $("#reading-book")
-          .find("span")
-          .text("読んでる本から解除");
-      }
-
-      if (status === "2") {
-        $("#reading-book").removeClass("btn-selected");
-        $("#reading-book")
-          .find("span")
-          .text("読んでる本に追加");
-
-        $("#will-read-book").addClass("btn-selected");
-        $("#will-read-book")
-          .find("span")
-          .text("読みたい本から解除");
-      }
-
-      $("#modal-book-img").attr("src", image);
-      $("#modal-book-title").text(title);
-      $("#modal-book-author").text(authors);
-
-      $("#read-book")
-        .attr("data-title", title)
-        .attr("data-authors", authors)
-        .attr("data-image", image)
-        .attr("data-uid", uid)
-        .attr("data-id", id);
-
-      $("#post-review-img").attr("src", image);
-      $("#read-bookTitle").attr("value", title);
-      $("#read-bookAuthors").attr("value", authors);
-      $("#read-bookImage").attr("value", image);
-      $("#read-bookUid").attr("value", uid);
-    } else {
-      $("#book-title").text(title);
-      $("#book-authors").text(authors);
-      $("#book-img").attr("src", image);
-      $("#delete-read-book").attr("data-id", id);
-
-      let url = "/books/" + id + "/review";
-      $.ajax({
-        url: url,
-        type: "get",
-        dataType: "json"
-      })
-        .done(function(review) {
-          $("#review-show-date").text(review.date);
-          $("#review-show-text").text(review.text);
-          $("#review-show-rating").attr("data-rating", review.rating);
-          setRating(review);
-        })
-        .fail(function() {
-          alert("エラーが発生しました");
-        });
+    switch (status) {
+      case "0":
+        setShowReviewModal(title, authors, image);
+        $("#delete-read-book").attr("data-id", id);
+        let url = "/books/" + id + "/review";
+        fetchReview(url);
+        break;
+      case "1":
+        setReadingBookToSelected();
+        setEditBookModal(image, title, authors);
+        setDataToReadBookButton(title, authors, image, uid, id);
+        $("#post-review-img").attr("src", image);
+        break;
+      case "2":
+        setWillReadBookToSelected();
+        setEditBookModal(image, title, authors);
+        setDataToReadBookButton(title, authors, image, uid, id);
+        $("#post-review-img").attr("src", image);
+        break;
     }
   });
 
