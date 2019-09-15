@@ -1,0 +1,8 @@
+- if page.current?
+  %li.page-item.active
+    = content_tag(:a, page, data: { remote: remote },
+      rel: page.rel, class: 'page-link px-0 text-white')
+- else
+  %li.page-item
+    = link_to(page, url, remote: remote,
+      rel: page.rel, class: 'page-link px-0')

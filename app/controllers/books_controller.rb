@@ -81,10 +81,11 @@ class BooksController < ApplicationController
   end
 
   def fetch
+    @status = params[:status].to_i
     @books = Book.joins(:user_books).where(user_books: {
-      status: params[:status].to_i,
+      status: @status,
       user_id: params[:user_id] 
-    })
+    }).order(created_at: "DESC").page(params[:page])
   end
 
   private
@@ -119,13 +120,8 @@ class BooksController < ApplicationController
       rating: review_params[:rating].to_i
     )
 
-    if review.save
-      create_tweet(review.text) if review_params[:tweet] == "true"
-    else
-      render json: {
-        "status": "NG",
-        "code": 500
-      }
+    if review.save && review_params[:tweet] == "true"
+      create_tweet(review.text)
     end
   end
 

@@ -64,7 +64,7 @@
             .row
               .col-3
               .col-9.d-flex.pl-0
-                - if current_user.sns_uids.present?
+                - if session[:oauth_token].present?
                   %input#tweet-review{ type: 'hidden',
                                        name: 'tweet',
                                        value: false }

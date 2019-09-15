@@ -1,0 +1,4 @@
+%li.page-item
+  - unless current_page.last?
+    = link_to(url, remote: remote, rel: 'next', class: 'page-link') do
+      %i.fas.fa-angle-right

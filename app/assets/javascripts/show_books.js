@@ -1,21 +1,4 @@
 $(document).on("turbolinks:load", function() {
-  function buildHTML(book, status) {
-    var modal = status === 0 ? "#show-review-modal" : "#post-book-modal";
-    var html = `
-    <div class="users-show-items card col-sm-3 border-0">
-      <img id="${book.id}" class="users-show-book-img" src="${book.image_url}" data-toggle="modal" data-target="${modal}" data-title="${book.title}" data-authors="${book.authors}" data-image="${book.image_url}" data-uid="${book.uid}" data-status="${status}">
-      <div class="card-body">
-        <h5 class="card-title">
-          ${book.title}
-        </h5>
-        <div class="card-text">
-          ${book.authors}
-        </div>
-      </div>
-    </div>`;
-    return html;
-  }
-
   function setRating(review) {
     let rating = "#rating-" + review.rating;
     $("#review-show-rating .fa-star").css("color", "#ddd");
@@ -37,33 +20,8 @@ $(document).on("turbolinks:load", function() {
   $(".users-show-nav-item").on("click", function() {
     let status = $(this).data("status");
     let userId = $("#user-id").attr("data-id");
-
-    if (!$(this).hasClass("active")) {
-      $(".user-show-nav")
-        .children(".active")
-        .removeClass("active");
-      $(this).addClass("active");
-
-      $(".users-show-items").remove();
-      $.ajax({
-        url: "/books/fetch",
-        type: "get",
-        data: {
-          status: status,
-          user_id: userId
-        },
-        dataType: "json"
-      })
-        .done(function(data) {
-          data.forEach(function(book) {
-            let html = buildHTML(book, status);
-            $("#user-show-item-list").append(html);
-          });
-        })
-        .fail(function() {
-          alert("エラーが発生しました");
-        });
-    }
+    let url = `/users/${userId}/?status=${status}`;
+    window.location.replace(url);
   });
 
   if ($(".user-show-nav").length) {

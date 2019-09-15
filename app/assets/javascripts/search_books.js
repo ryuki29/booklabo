@@ -1,5 +1,5 @@
 $(document).on("turbolinks:load", function() {
-  if ($(".pagination").length) {
+  if ($("#pagination-nav").length) {
     let page = $("#pagination-nav").data("page");
     let total = $("#pagination-nav").data("total");
 
