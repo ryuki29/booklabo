@@ -11,10 +11,13 @@
       .user-info-head
         %h2.user-name#user-id{ data: { id: @user.id } }
           = @user.name
-        - if current_user.present? && @user.id == current_user.id
+        - if user_signed_in? && @user.id == current_user.id
           .user-edit-btn#edit-profile{ data: { toggle: "modal",
           target: "#edit-user-modal" } }
             プロフィールを編集
+        - elsif user_signed_in?
+          .follow-btn
+            フォローする
       .user-info
         .followers.d-inline.pr-4
           %strong 0
