@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   resources :books, only: %i[create destroy] do
     collection do
       get 'search'
-      get 'fetch'
     end
 
     member do
