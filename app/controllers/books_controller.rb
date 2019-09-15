@@ -80,14 +80,6 @@ class BooksController < ApplicationController
     end
   end
 
-  def fetch
-    @status = params[:status].to_i
-    @books = Book.joins(:user_books).where(user_books: {
-      status: @status,
-      user_id: params[:user_id] 
-    }).order(created_at: "DESC").page(params[:page])
-  end
-
   private
   def book_params
     params.require(:book).permit(
