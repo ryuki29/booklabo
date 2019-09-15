@@ -10,6 +10,9 @@ class User < ApplicationRecord
   has_many :sns_uids
   has_one_attached :image
 
+  has_many :relationships, foreign_key: "follower_id"
+  has_many :following, through: :relationships, source: :followed
+
   def self.find_for_oauth(auth)
     sns_uid = SnsUid.where(uid: auth.uid, provider: auth.provider).first
     

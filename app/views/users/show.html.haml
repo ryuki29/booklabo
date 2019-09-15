@@ -15,15 +15,20 @@
           .user-edit-btn#edit-profile{ data: { toggle: "modal",
           target: "#edit-user-modal" } }
             プロフィールを編集
-        - elsif user_signed_in?
-          .follow-btn
+        - elsif user_signed_in? && @current_user_following == false
+          .follow-btn#follow-btn
             フォローする
+        - elsif user_signed_in? && @current_user_following == true
+          .follow-btn.following#follow-btn
+            フォロー中
       .user-info
         .followers.d-inline.pr-4
-          %strong 0
+          %strong#following
+            = @following
           フォロー中
         .follows.d-inline
-          %strong 0
+          %strong#followed
+            = @followers
           フォロワー
       .user-description.mb-2.mr-5
         = @user.description
