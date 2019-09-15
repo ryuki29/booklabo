@@ -75,13 +75,15 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap', '~> 4.3.1'
 gem 'bootstrap4-datetime-picker-rails'
 gem 'jquery-rails'
-gem "haml-rails", "~> 2.0"
+gem 'haml-rails', '~> 2.0'
 
-gem "devise", ">= 4.7.1"
-gem "twitter"
+gem 'devise', '>= 4.7.1'
+gem 'twitter'
 gem 'omniauth-twitter'
-gem "omniauth-rails_csrf_protection"
+gem 'omniauth-rails_csrf_protection'
 
-gem "aws-sdk-s3", require: false
+gem 'aws-sdk-s3', require: false
 gem 'asset_sync'
-gem "fog-aws"
+gem 'fog-aws'
+
+gem 'kaminari'
