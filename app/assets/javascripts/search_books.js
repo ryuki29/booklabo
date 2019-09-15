@@ -1,5 +1,5 @@
 $(document).on("turbolinks:load", function() {
-  if ($(".pagination").length) {
+  if ($("#pagination-nav").length) {
     let page = $("#pagination-nav").data("page");
     let total = $("#pagination-nav").data("total");
 
@@ -50,10 +50,6 @@ $(document).on("turbolinks:load", function() {
       .attr("data-uid", uid);
 
     $("#post-review-img").attr("src", image);
-    $("#read-bookTitle").attr("value", title);
-    $("#read-bookAuthors").attr("value", authors);
-    $("#read-bookImage").attr("value", image);
-    $("#read-bookUid").attr("value", uid);
   });
 
   $("#read-book").on("click", function() {

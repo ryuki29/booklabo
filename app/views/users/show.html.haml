@@ -58,6 +58,7 @@
             book: book,
             status: @status,
             modal: "#post-book-modal"
+    = paginate @books, window: 2
 - if current_user.present? && @user.id == current_user.id
   = render 'shared/post-book-modal'
   = render 'shared/post-review-modal'
