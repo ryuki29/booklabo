@@ -7,6 +7,11 @@ class UsersController < ApplicationController
       status: @status,
       user_id: params[:id]
     }).order(created_at: "DESC").page(params[:page])
+
+    @following = @user.following.count
+    @followers = @user.followers.count
+    @current_user_following = @user.follower_ids.include?(current_user.id) ?
+                              true : false
   end
 
   def update
