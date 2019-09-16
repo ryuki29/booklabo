@@ -3,9 +3,8 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
   
-  root to: 'books#index'
-
-  resources :users, only: %i[show update]
+  root to: 'users#index'
+  resources :users, only: %i[index show update]
   resources :relationships, only: %i[create destroy] do
     member do
       get 'followers'

@@ -1,6 +1,14 @@
 class UsersController < ApplicationController
   before_action :find_user, only: [:show, :update]
 
+  def index
+    if user_signed_in?
+      redirect_to user_path(current_user)
+    else
+      redirect_to new_user_session_path
+    end
+  end
+
   def show
     @status = params[:status] ? params[:status].to_i : 0
     @books = Book.joins(:user_books).where(user_books: {
