@@ -6,7 +6,12 @@ Rails.application.routes.draw do
   root to: 'books#index'
 
   resources :users, only: %i[show update]
-  resources :relationships, only: %i[create destroy]
+  resources :relationships, only: %i[create destroy] do
+    member do
+      get 'followers'
+      get 'following'      
+    end
+  end
 
   resources :books, only: %i[create destroy] do
     collection do

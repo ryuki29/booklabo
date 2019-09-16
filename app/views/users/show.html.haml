@@ -22,11 +22,13 @@
           .follow-btn.following#follow-btn
             フォロー中
       .user-info
-        .followers.d-inline.pr-4
+        .followers.d-inline.pr-4#show-following{ data: { toggle: "modal",
+          target: "#show-relationship-modal" } }
           %strong#following
             = @following
           フォロー中
-        .follows.d-inline
+        .follows.d-inline#show-followers{ data: { toggle: "modal",
+          target: "#show-relationship-modal" } }
           %strong#followed
             = @followers
           フォロワー
@@ -74,3 +76,4 @@
     user: @user
 = render 'shared/show-review-modal',
   user: @user
+= render 'users/show-relationship-modal'
