@@ -16,10 +16,10 @@
           target: "#edit-user-modal" } }
             プロフィールを編集
         - elsif user_signed_in? && @current_user_following == false
-          .follow-btn#follow-btn
+          .follow-btn
             フォローする
         - elsif user_signed_in? && @current_user_following == true
-          .follow-btn.following#follow-btn
+          .follow-btn.following
             フォロー中
       .user-info
         .followers.d-inline.pr-4#show-following{ data: { toggle: "modal",

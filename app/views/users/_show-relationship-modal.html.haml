@@ -1,22 +1,14 @@
-.modal.fade#show-relationship-modal{"aria-hidden" => "true", "aria-labelledby" => "exampleModalCenterTitle", :role => "dialog", :tabindex => "-1"}
+.modal.fade#show-relationship-modal{ aria: { hidden: true,
+  labbelledby: "show-relationship-modal-title" },
+  role: "dialog",
+  tabindex: "-1" }
   .modal-dialog.modal-dialog-centered.justify-content-center{role: "document"}
     .modal-content.followers-modal
       .modal-header.py-2
-        %h5#show-relationship-modal-title.modal-title
+        %h5.modal-title#show-relationship-modal-title
           フォロワー
-        %button.close{aria: {label: "Close"},
-                      data: { dismiss: "modal" },
-                      type: "button"}
-          %span{"aria-hidden" => "true"} ×
+        %button.close{ aria: { label: "Close" },
+                       data: { dismiss: "modal" },
+                       type: "button" }
+          %span{ aria: { hidden: true } } ×
       .modal-body.follower-list#user-list
-        -# - followers.each do |person|
-        -#   .follower-item.d-flex.mb-4
-        -#     - if person.image.attached?
-        -#       = image_tag(person.image,
-        -#         class: 'follower-image mr-2')
-        -#     - else
-        -#       = image_tag('default-user-image.jpg',
-        -#         class: 'follower-image mr-2')
-        -#     = link_to(person.name,
-        -#       user_path(person),
-        -#       class: "follower-name")

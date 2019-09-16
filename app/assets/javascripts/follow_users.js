@@ -13,7 +13,7 @@ $(document).on("turbolinks:load", function() {
         following_count = following_count + 1;
         $("#followed").text(following_count);
 
-        $("#follow-btn")
+        $(".follow-btn")
           .text("フォロー中")
           .addClass("following");
       })
@@ -33,7 +33,7 @@ $(document).on("turbolinks:load", function() {
         following_count = following_count - 1;
         $("#followed").text(following_count);
 
-        $("#follow-btn")
+        $(".follow-btn")
           .text("フォローする")
           .removeClass("following");
       })
@@ -42,7 +42,7 @@ $(document).on("turbolinks:load", function() {
       });
   }
 
-  $("#follow-btn").on("click", function() {
+  $(".follow-btn").on("click", function() {
     let followed_id = $("#user-id").attr("data-id");
 
     if ($(this).hasClass("following")) {
