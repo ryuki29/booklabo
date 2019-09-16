@@ -21,23 +21,36 @@
           .border-line
           %span.signup-border-text
             または
-        = link_to(root_path,
-          class: 'signin-fb py-2 d-block') do
-          %i.fab.fa-facebook-square.fa-lg.mr-1
-          Facebookでログイン
-        = link_to(user_twitter_omniauth_authorize_path,
-          method: :post,
-          class: 'signin-twitter py-2 d-block') do
-          %i.fab.fa-twitter.fa-lg
-          Twitterでログイン
-        = link_to(root_path,
-          class: 'signin-google pt-2 pb-3 d-block') do
-          = image_tag('google-icon.png',
-          class: 'google-icon')
-          Googleでログイン
-        = link_to('パスワードを忘れた場合',
-          new_user_password_path,
-          class: 'signin-password-link')
+        .py-2
+          = form_with(model: @user,
+            url: user_session_path,
+            local: true) do |test_f|
+            = test_f.hidden_field(:email,
+              id: 'testuser_email',
+              value: 'testuser1@email.com')
+            = test_f.hidden_field(:password,
+              id: 'testuser_pass',
+              value: 'testuser1')
+            = test_f.submit("テストユーザーでログイン",
+              data: { confirm: "【管理者からのお願い】\nご覧になられた後は、必ずサインアウトするようお願いいたします。\n(ヘッダー右端のアイコンをクリックすることでサインアウト可能です)" },
+              class: 'btn btn-info')
+        .py-2
+          = link_to(root_path,
+            class: 'signin-fb') do
+            %i.fab.fa-facebook-square.fa-lg.mr-1
+            Facebookでログイン
+        .py-2
+          = link_to(user_twitter_omniauth_authorize_path,
+            method: :post,
+            class: 'signin-twitter') do
+            %i.fab.fa-twitter.fa-lg
+            Twitterでログイン
+        .py-2
+          = link_to(root_path,
+            class: 'signin-google') do
+            = image_tag('google-icon.png',
+            class: 'google-icon')
+            Googleでログイン
     .card.mx-auto
       .signin-footer
         アカウントをお持ちではありませんか？

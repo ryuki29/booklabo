@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   }
   
   root to: 'users#index'
-  resources :users, only: %i[index show update]
+  resources :users, only: %i[index show update] do
+    collection do
+      get 'test'
+    end
+  end
+
   resources :relationships, only: %i[create destroy] do
     member do
       get 'followers'
