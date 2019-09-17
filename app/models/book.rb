@@ -5,5 +5,5 @@ class Book < ApplicationRecord
   paginates_per 20
 
   validates :image_url, presence: true
-  validates :uid,      presence: true
+  validates :uid,       presence: true
 end
