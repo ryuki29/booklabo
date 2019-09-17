@@ -88,3 +88,4 @@ gem 'asset_sync'
 gem 'fog-aws'
 
 gem 'kaminari'
+gem 'rails-i18n'
