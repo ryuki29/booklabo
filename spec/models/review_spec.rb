@@ -6,7 +6,7 @@ RSpec.describe Review, type: :model do
     expect(review).to be_valid
   end
 
-  it "is invalid when the date is after tommorow" do
+  it "is invalid when the date is after tomorrow" do
     review = FactoryBot.build(:review, date: Date.today + 1)
     review.valid?
     expect(review.errors[:date]).to include("は本日以前の日付を選択してください")
