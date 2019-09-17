@@ -136,6 +136,8 @@ RSpec.describe User, type: :model do
       :user,
       url: "http:/invalid.com"
     )
+    user.valid?
+    expect(user.errors[:url]).to include("のフォーマットが不適切です")
   end
 
   it "is valid with a desription with 160 characters" do
