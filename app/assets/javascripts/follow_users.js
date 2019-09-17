@@ -53,12 +53,9 @@ $(document).on("turbolinks:load", function() {
   });
 
   function buildUserHTML(user) {
-    console.log(user.image);
-    let image =
-      user.image === undefined ? "/assets/default-user-image.jpg" : user.image;
     let html = `
     <div class="follower-item d-flex mb-4">
-      <img src="${image}" class="follower-image">
+      <img src="${user.image}" class="follower-image">
       <a class="follower-name" href="/users/${user.id}">
         ${user.name}
       </a>

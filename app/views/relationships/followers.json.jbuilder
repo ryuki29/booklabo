@@ -4,5 +4,7 @@ json.array! @followers do |user|
 
   if user.image.attached?
     json.image url_for(user.image)
+  else
+    json.image url_for("/assets/default-user-image.jpg")
   end
 end
