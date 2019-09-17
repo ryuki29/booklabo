@@ -1,5 +1,21 @@
 ja:
   activerecord:
+    models:
+      user: ユーザー
+      book: 本
+      review: レビュー
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード(確認)
+        url: ウェブサイト
+        desctiption: 自己紹介
+      review:
+        date: 読了日
+        text: 感想
+        rating: 評価
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"

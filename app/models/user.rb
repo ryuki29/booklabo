@@ -36,12 +36,14 @@ class User < ApplicationRecord
                        format: {
                          with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{7,128}\z/,
                          message: "には英字と数字の両方を含めてください"
-                       }
+                       },
+                       confirmation: true
   validates :password_confirmation, presence: true
   validates :url, length: { maximum: 100 },
                   format: {
-                    with: /\A(https?:\/\/[\S]+|\s*)\z/,
-                    message: "のフォーマットが不適切です"
+                    with: /\Ahttps?:\/\/[\S]+\z/,
+                    message: "のフォーマットが不適切です",
+                    allow_nil: true
                   }
   validates :description, length: { maximum: 160 }
 

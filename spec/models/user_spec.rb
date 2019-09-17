@@ -85,6 +85,16 @@ RSpec.describe User, type: :model do
     expect(user.errors[:password]).to include("は128文字以内で入力してください")
   end
 
+  it "is invalid when the password doesn't match with the confirmation" do
+    user = FactoryBot.build(
+      :user,
+      password: "password1",
+      password_confirmation: "password2"
+    )
+    user.valid?
+    expect(user.errors[:password_confirmation]).to include("とパスワードの入力が一致しません")
+  end
+
   it "is invalid with a password only with alphabets" do
     user = FactoryBot.build(
       :user,
