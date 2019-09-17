@@ -1,8 +1,8 @@
 # 本アプリについて
 ###### URL： https://www.booklabo.net
-ログイン画面の**「テストユーザーでログイン」**ボタンをクリックして頂きますと、１クリックでログイン可能です。
+ログイン画面の「テストユーザーでログイン」ボタンをクリックして頂きますと、１クリックでログイン可能です。
 
-<u> ※ ご覧になられた後は、お手数ですが、必ずログアウトをお願い致します。</u>
+※ ご覧になられた後は、お手数ですが、必ずログアウトをお願い致します。
 
 ### 本アプリの概要
 本アプリのコンセプトは「ミニマルにデザインされた読書管理アプリ」です。
@@ -31,19 +31,19 @@
 
 ## 参考画像
 
-#### ユーザー詳細ページ
+- #### ユーザー詳細ページ
 
 <img width="600" alt="Booklabo_mypage" src="https://user-images.githubusercontent.com/52557788/65003591-1972ee00-d934-11e9-9e5d-ac0ffbf4fd18.png">
 
-#### 読んだ本の詳細表示
+- #### 読んだ本の詳細表示
 
 <img width="600" alt="Booklabo_review" src="https://user-images.githubusercontent.com/52557788/65004454-6906e900-d937-11e9-9b4a-05d2733cb364.png">
 
-#### AWSインフラ構成
+- #### AWSインフラ構成
 
 <img width="400" alt="Booklabo_AWS" src="https://user-images.githubusercontent.com/52557788/65004447-60aeae00-d937-11e9-8ab2-82e86e2176be.png">
 
-#### ER図
+- #### ER図
 
 <img width="600" alt="Booklabo_ERD" src="https://user-images.githubusercontent.com/52557788/64958396-01668480-d8ca-11e9-9057-675e0a34f835.png">
 
