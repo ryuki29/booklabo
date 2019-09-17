@@ -24,19 +24,24 @@ class User < ApplicationRecord
   VALID_EMAIL_REGIX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :email, presence: true,
                     uniqueness: true,
-                    format: { with: VALID_EMAIL_REGIX }
+                    format: {
+                      with: VALID_EMAIL_REGIX,
+                      message: "のフォーマットが不適切です"
+                    }
   validates :password, presence: true,
-                       length: { 
-                         minimum: 7, 
+                       length: {
+                         minimum: 7,
                          maximum: 128
                        },
                        format: {
-                         with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{7,128}\z/, 
+                         with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{7,128}\z/,
                          message: "には英字と数字の両方を含めてください"
                        }
+  validates :password_confirmation, presence: true
   validates :url, length: { maximum: 100 },
-                  format: { 
-                    with: /\Ahttps?:\/\/[\S]+\z/
+                  format: {
+                    with: /\A(https?:\/\/[\S]+|\s*)\z/,
+                    message: "のフォーマットが不適切です"
                   }
   validates :description, length: { maximum: 160 }
 
