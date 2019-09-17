@@ -3,8 +3,8 @@ json.array! @following do |user|
   json.name user.name
   
   if user.image.attached?
-    json.image url_for(user.image)
+    json.image image_tag(user.image, class: "follower-image")
   else
-    json.image url_for("/assets/default-user-image.jpg")
+    json.image image_tag("default-user-image.jpg", class: "follower-image")
   end
 end

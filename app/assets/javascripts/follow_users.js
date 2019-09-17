@@ -55,7 +55,7 @@ $(document).on("turbolinks:load", function() {
   function buildUserHTML(user) {
     let html = `
     <div class="follower-item d-flex mb-4">
-      <img src="${user.image}" class="follower-image">
+      ${user.image}
       <a class="follower-name" href="/users/${user.id}">
         ${user.name}
       </a>
