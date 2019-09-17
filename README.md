@@ -43,5 +43,7 @@
 
 <img width="400" alt="Booklabo_AWS" src="https://user-images.githubusercontent.com/52557788/65004447-60aeae00-d937-11e9-8ab2-82e86e2176be.png">
 
+#### ER図
+
 <img width="600" alt="Booklabo_ERD" src="https://user-images.githubusercontent.com/52557788/64958396-01668480-d8ca-11e9-9057-675e0a34f835.png">
 
