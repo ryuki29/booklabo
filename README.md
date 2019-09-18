@@ -17,16 +17,16 @@
 
 - ### フロントエンド
   - Haml/Sass でのマークアップ
-  - Bootstrap を使用し、レスポンシブデザイン化
+  - Bootstrap とメディアクエリを使用し、レスポンシブデザイン化
 - ### サーバーサイド
   - 書籍の検索機能 (GoogleBooksAPI を利用)
   - 読んだ本/読んでる本/読みたい本の登録機能
-  - 読んだ本のレビュー・評価の投稿(&編集・削除)機能
+  - 読んだ本のレビュー・評価の投稿(& 編集・削除)機能
   - ユーザー登録機能 (gem Devise を利用)
   - ユーザー画像の登録機能 (ActiveStorage を利用)
   - 他ユーザーのフォロー機能
-  - Twitter アカウントでのログイン機能 (gem OmniAuth を利用)
-  - Twitter へのレビューの同時投稿 (TwitterAPI を利用)
+  - Twitter および Facebook アカウントでのログイン機能 (gem OmniAuth を利用)
+  - Twitter へのレビューの同時投稿機能 (TwitterAPI を利用)
   - 単体テスト (RSpec)
   - 統合テスト (System Spec)
 - ### インフラ

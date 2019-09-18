@@ -39,3 +39,20 @@
     transition: 0.2s;
   }
 }
+
+@media screen and (max-width: 565px) {
+  .post-review-img {
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .show-review-label {
+    margin-bottom: 5px;
+  }
+
+  .show-review-btn {
+    margin: 0 auto 10px;
+    max-width: 250px;
+  }
+}
