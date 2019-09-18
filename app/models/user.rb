@@ -33,12 +33,14 @@ class User < ApplicationRecord
                        length: {
                          minimum: 7,
                          maximum: 128
-                       }
+                       },
+                       on: :create
   validates :url, length: { maximum: 100 },
                   format: {
                     with: /\Ahttps?:\/\/[\S]+\z/,
                     message: "のフォーマットが不適切です",
-                    allow_nil: true
+                    allow_nil: true,
+                    allow_blank: true
                   }
   validates :description, length: { maximum: 160 }
 
