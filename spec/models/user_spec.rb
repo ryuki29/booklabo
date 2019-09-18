@@ -95,35 +95,6 @@ RSpec.describe User, type: :model do
     expect(user.errors[:password_confirmation]).to include("とパスワードの入力が一致しません")
   end
 
-  it "is invalid with a password only with alphabets" do
-    user = FactoryBot.build(
-      :user,
-      password: "password",
-      password_confirmation: "password"
-    )
-    user.valid?
-    expect(user.errors[:password]).to include("には英字と数字の両方を含めてください")
-  end
-
-  it "is invalid with a password only with numbers" do
-    user = FactoryBot.build(
-      :user,
-      password: "12345678",
-      password_confirmation: "12345678"
-    )
-    user.valid?
-    expect(user.errors[:password]).to include("には英字と数字の両方を含めてください")
-  end
-
-  it "is invalid without a password confirmation" do
-    user = FactoryBot.build(
-      :user,
-      password_confirmation: nil
-    )
-    user.valid?
-    expect(user.errors[:password_confirmation]).to include("を入力してください")
-  end
-
   it "is valid with a url with 101 characters" do
     user = FactoryBot.build(
       :user,
