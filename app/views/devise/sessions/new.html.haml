@@ -35,7 +35,8 @@
               data: { confirm: "【皆様へのお願い】\nご覧になられた後は、必ずサインアウトするようお願いいたします。\n(ヘッダー右端のアイコンをクリックすることでサインアウト可能です)" },
               class: 'btn btn-info')
         .py-2
-          = link_to(root_path,
+          = link_to(user_facebook_omniauth_authorize_path,
+            method: :post,
             class: 'signin-fb') do
             %i.fab.fa-facebook-square.fa-lg.mr-1
             Facebookでログイン
@@ -46,7 +47,8 @@
             %i.fab.fa-twitter.fa-lg
             Twitterでログイン
         .py-2
-          = link_to(root_path,
+          = link_to(user_google_omniauth_authorize_path,
+            method: :post,
             class: 'signin-google') do
             = image_tag('google-icon.png',
             class: 'google-icon')

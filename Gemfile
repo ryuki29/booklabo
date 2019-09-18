@@ -82,6 +82,8 @@ gem 'haml-rails', '~> 2.0'
 gem 'devise', '>= 4.7.1'
 gem 'twitter'
 gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection'
 
 gem 'aws-sdk-s3', require: false

@@ -2,7 +2,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: %i[twitter facebook google]
   
   has_many :reviews,    dependent: :destroy
   has_many :user_books, dependent: :destroy
@@ -32,13 +33,7 @@ class User < ApplicationRecord
                        length: {
                          minimum: 7,
                          maximum: 128
-                       },
-                       format: {
-                         with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{7,128}\z/,
-                         message: "には英字と数字の両方を含めてください"
-                       },
-                       confirmation: true
-  validates :password_confirmation, presence: true
+                       }
   validates :url, length: { maximum: 100 },
                   format: {
                     with: /\Ahttps?:\/\/[\S]+\z/,
@@ -50,26 +45,56 @@ class User < ApplicationRecord
   def self.find_for_oauth(auth)
     sns_uid = SnsUid.where(uid: auth.uid, provider: auth.provider).first
     
-    if sns_uid
+    if sns_uid.present?
       user = sns_uid.user
+    elsif auth.provider == "twitter"
+      user = User.create_user_with_twitter(auth)
     else
-      user = User.create(
-        email: User.dummy_email(auth),
-        name: auth.info.nickname,
-        password: Devise.friendly_token[0, 20]
-      )
-
-      SnsUid.create(
-        uid:      auth.uid,
-        provider: auth.provider,
-        user: user
-      )
+      user = User.where(email: auth.info.email).first
+      
+      if user.present?
+        SnsUid.create(
+          uid:      auth.uid,
+          provider: auth.provider,
+          user: user
+        )
+      else
+        user = User.create_user_with_facebook_or_google(auth)
+      end
     end
 
     return user
   end
 
   private
+  def self.create_user_with_twitter(auth)
+    user = User.new(
+      email: User.dummy_email(auth),
+      name: auth.info.nickname,
+      password: Devise.friendly_token[0, 20]
+    )
+    sns_uid = SnsUid.new(
+      uid:      auth.uid,
+      provider: auth.provider,
+      user: user
+    )
+    
+    return user if user.save && sns_uid.save
+  end
+
+  def self.create_user_with_facebook_or_google(auth)
+    user = User.new(
+      email: auth.info.email,
+      name: auth.info.name,
+      password: Devise.friendly_token[0, 20]
+    )
+    sns_uid = SnsUid.new(
+      uid:      auth.uid,
+      provider: auth.provider,
+      user: user
+    )
+    return user if user.save && sns_uid.save
+  end
 
   def self.dummy_email(auth)
     "#{auth.uid}-#{auth.provider}@example.com"
