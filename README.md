@@ -28,6 +28,7 @@
   - Twitter アカウントでのログイン機能 (gem OmniAuth を利用)
   - Twitter へのレビューの同時投稿 (TwitterAPI を利用)
   - 単体テスト (RSpec)
+  - 統合テスト (System Spec)
 - ### インフラ
   - Capistrano による EC2 インスタンスへの自動デプロイ
   - DB として、Amazon RDS(MySQL)を使用
