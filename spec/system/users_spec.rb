@@ -17,4 +17,43 @@ describe 'Users', type: :system do
       end.to change(User, :count).by(1)
     end
   end
+
+  describe "ログイン機能" do
+    let(:user) {
+      FactoryBot.create(
+        :user,
+        password: "test1234",
+        password_confirmation: "test1234"
+      )
+    }
+
+    it "既存のユーザーでログインできる" do
+      visit new_user_session_path
+      fill_in 'user_email', with: user.email
+      fill_in 'user_password', with: "test1234"
+      click_button 'ログインする'
+
+      expect(page).to have_selector ".user-show"
+      expect(page).to have_content user.name
+      expect(page).to have_content "プロフィールを編集"
+    end
+
+    it "テストユーザーでログインできる" do
+      FactoryBot.create(
+        :user,
+        name: "テストユーザー",
+        email: "testuser1@email.com",
+        password: "testuser1",
+        password_confirmation: "testuser1"
+      )
+
+      visit new_user_session_path
+      click_button 'テストユーザーでログイン'
+      page.driver.browser.switch_to.alert.accept
+
+      expect(page).to have_selector ".user-show"
+      expect(page).to have_content "テストユーザー"
+      expect(page).to have_content "プロフィールを編集"
+    end
+  end
 end
