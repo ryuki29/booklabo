@@ -19,13 +19,13 @@
                       id: 'book-img')
         .modal-text.col-sm-9
           .row.mb-3
-            .col-3
+            .col-lg-3.show-review-label
               読み終わった日：
-            .col-3.review-show-text#review-show-date
+            .col-lg-3.review-show-text#review-show-date
           .row.mb-3
-            .col-3
+            .col-lg-3.show-review-label
               評価：
-            .col-3
+            .col-lg-3
               .review-rating#review-show-rating
                 %i.fas.fa-star.fa-lg#rating-1
                 %i.fas.fa-star.fa-lg#rating-2
@@ -33,19 +33,19 @@
                 %i.fas.fa-star.fa-lg#rating-4
                 %i.fas.fa-star.fa-lg#rating-5
           .row.mb-3
-            .col-3
+            .col-lg-3.show-review-label
               感想・レビュー
-            .col-9.review-show-text#review-show-text
+            .col-lg-9.review-show-text#review-show-text
               感想
           - if current_user.present? && user.id == current_user.id
             .row
-              .col-3
-              .col-3
+              .col-lg-3
+              .col-lg-3
                 .show-review-btn#edit-review{ data: { dismiss: 'modal',
                 toggle: 'modal' }, href: '#post-review-modal' }
                   %i.fas.fa-edit
                   編集
-              .col-3
+              .col-lg-3
                 .show-review-btn#delete-read-book
                   %i.fas.fa-trash-alt
                   削除
