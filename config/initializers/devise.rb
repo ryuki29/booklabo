@@ -262,9 +262,6 @@ Devise.setup do |config|
   config.omniauth :twitter,
     Rails.application.credentials.twitter[:twitter_api_key],
     Rails.application.credentials.twitter[:twitter_api_secret]
-  config.omniauth :google_oauth2,
-    Rails.application.credentials[Rails.env.to_sym][:google][:google_client_id],
-    Rails.application.credentials[Rails.env.to_sym][:google][:google_client_secret]
   config.omniauth :facebook,
     Rails.application.credentials[Rails.env.to_sym][:facebook][:facebook_client_id],
     Rails.application.credentials[Rails.env.to_sym][:facebook][:facebook_client_secret]
