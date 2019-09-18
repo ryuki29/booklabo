@@ -56,4 +56,28 @@ describe 'Users', type: :system do
       expect(page).to have_content "プロフィールを編集"
     end
   end
+
+  describe "ログアウト機能" do
+    let(:user) {
+      FactoryBot.create(
+        :user,
+        password: "test1234",
+        password_confirmation: "test1234"
+      )
+    }
+    
+    before do
+      visit new_user_session_path
+      fill_in 'user_email', with: user.email
+      fill_in 'user_password', with: "test1234"
+      click_button 'ログインする'
+    end
+
+    it "ユーザーがログアウトできる" do
+      visit root_path
+      expect(page).to have_link 'users-sign-out-link'
+      click_link 'users-sign-out-link'
+      expect(page).to have_button "ログインする"
+    end
+  end
 end
