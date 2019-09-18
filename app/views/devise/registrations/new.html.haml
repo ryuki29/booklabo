@@ -15,11 +15,6 @@
           %button.btn.btn-twitter
             %i.fab.fa-twitter.fa-lg
             Twitterで登録
-        = link_to(user_google_omniauth_authorize_path, method: :post) do
-          %button.btn.btn-google
-            = image_tag('google-icon.png',
-            class: 'google-icon')
-            Googleで登録
         .signup-border
           .border-line
           %span.signup-border-text

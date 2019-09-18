@@ -46,13 +46,6 @@
             class: 'signin-twitter') do
             %i.fab.fa-twitter.fa-lg
             Twitterでログイン
-        .py-2
-          = link_to(user_google_omniauth_authorize_path,
-            method: :post,
-            class: 'signin-google') do
-            = image_tag('google-icon.png',
-            class: 'google-icon')
-            Googleでログイン
     .card.mx-auto
       .signin-footer
         アカウントをお持ちではありませんか？

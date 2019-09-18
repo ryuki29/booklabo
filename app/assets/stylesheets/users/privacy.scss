@@ -1,0 +1,37 @@
+@import "config/variables";
+
+.privacy {
+  * {
+    line-height: 1.5rem;
+  }
+
+  h1 {
+    color: $black-3;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  h2 {
+    color: $gray-9;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  p,
+  li {
+    color: $gray-6;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .privacy {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .privacy {
+    margin-top: 120px;
+  }
+}
