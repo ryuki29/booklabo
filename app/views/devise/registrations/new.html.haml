@@ -7,17 +7,14 @@
           class: 'signup-logo')
         %h5.signup-text
           読んだ本を登録・公開しましょう
-        %button.btn.btn-fb.mt-4
-          %i.fab.fa-facebook-square.fa-lg.mr-1
-          Facebookで登録
+        = link_to(user_facebook_omniauth_authorize_path, method: :post) do
+          %button.btn.btn-fb.mt-4
+            %i.fab.fa-facebook-square.fa-lg.mr-1
+            Facebookで登録
         = link_to(user_twitter_omniauth_authorize_path, method: :post) do
           %button.btn.btn-twitter
             %i.fab.fa-twitter.fa-lg
             Twitterで登録
-        %button.btn.btn-google
-          = image_tag('google-icon.png',
-          class: 'google-icon')
-          Googleで登録
         .signup-border
           .border-line
           %span.signup-border-text

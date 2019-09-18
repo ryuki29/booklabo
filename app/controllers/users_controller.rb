@@ -32,7 +32,9 @@ class UsersController < ApplicationController
 
   def test
     @user = User.find(1)
-    
+  end
+
+  def privacy
   end
 
   private
