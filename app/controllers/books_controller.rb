@@ -41,22 +41,14 @@ class BooksController < ApplicationController
   end
 
   def search
-    require 'net/http'
-    require 'uri'
-    require 'json'
-
     @books = []
-    @keyword = params[:keyword]
     @total_items = 0
-    @page = params[:page]
+    keyword = params[:keyword]
+    page = params[:page]
 
     return unless params[:keyword].present?
 
-    encoded_uri = URI.encode(
-      "https://www.googleapis.com/books/v1/volumes?maxResults=20&startIndex=#{params[:page]}&q=#{params[:keyword]}&fields=totalItems,items(id,volumeInfo(title,authors,imageLinks/thumbnail))"
-    )
-    parsed_uri = URI.parse(encoded_uri)
-    result = JSON.parse(Net::HTTP.get(parsed_uri))
+    result = Book.search_books(keyword, page)
 
     @total_items = result["totalItems"]
     return if @total_items == 0
@@ -70,12 +62,7 @@ class BooksController < ApplicationController
         item["volumeInfo"]["imageLinks"]["thumbnail"].sub(/http/, 'https') : 
         "book-default.png"
 
-      book = {
-        uid: uid,
-        title: title,
-        authors: authors.join(', '),
-        image_url: image_url
-      }
+      book = { uid: uid, title: title, authors: authors.join(', '), image_url: image_url }
       @books << book
     end
   end
