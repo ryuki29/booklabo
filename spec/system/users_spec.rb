@@ -39,8 +39,7 @@ describe 'Users', type: :system do
     end
 
     it "テストユーザーでログインできる" do
-      FactoryBot.create(
-        :user,
+      User.create(
         name: "テストユーザー",
         email: "testuser1@email.com",
         password: "testuser1",
@@ -58,22 +57,10 @@ describe 'Users', type: :system do
   end
 
   describe "ログアウト機能" do
-    let(:user) {
-      FactoryBot.create(
-        :user,
-        password: "test1234",
-        password_confirmation: "test1234"
-      )
-    }
-    
-    before do
-      visit new_user_session_path
-      fill_in 'user_email', with: user.email
-      fill_in 'user_password', with: "test1234"
-      click_button 'ログインする'
-    end
-
     it "ユーザーがログアウトできる" do
+      user = FactoryBot.create(:user)
+      sign_in(user)
+
       visit root_path
       expect(page).to have_link 'users-sign-out-link'
       click_link 'users-sign-out-link'
