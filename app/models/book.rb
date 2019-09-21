@@ -16,8 +16,7 @@ class Book < ApplicationRecord
     return result
   end
 
-  def self.set_search_result(result)
-    books = []
+  def self.set_search_result(result, books)
     result["items"].each do |item|
       uid = item["id"]
       title = item["volumeInfo"]["title"] ||= ""
@@ -34,7 +33,6 @@ class Book < ApplicationRecord
       }
       books << book
     end
-
     return books
   end
 end

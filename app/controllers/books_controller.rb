@@ -30,14 +30,14 @@ class BooksController < ApplicationController
   end
 
   def search
+    @books = []
     @total_items = 0
     @keyword = params[:keyword]
     @page = params[:page]
 
-    return unless params[:keyword].present?
+    return if params[:keyword].empty?
 
     result = Book.search_books(@keyword, @page)
-    @total_items = Book.set_total_items(result["totalItems"])
 
     @total_items = result["totalItems"]
     if @total_items == 0
@@ -46,7 +46,7 @@ class BooksController < ApplicationController
       @total_items = 100
     end
 
-    @books = Book.set_search_result(result)
+    @books = Book.set_search_result(result, @books)
   end
 
   private
