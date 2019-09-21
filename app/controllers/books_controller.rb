@@ -18,15 +18,8 @@ class BooksController < ApplicationController
 
     if @book.save && user_book.save
       render json: {
-        "status": "OK",
-        "code": 200,
         "user_id": current_user.id, 
         "book_status": status
-      }
-    else
-      render json: {
-        "status": "NG",
-        "code": 500
       }
     end
   end
@@ -34,37 +27,26 @@ class BooksController < ApplicationController
   def destroy
     book = Book.find(params[:id]);
     book.destroy
-    render json: { 
-      "status": "OK",
-      "code": 200
-    }
   end
 
   def search
-    @books = []
     @total_items = 0
-    keyword = params[:keyword]
-    page = params[:page]
+    @keyword = params[:keyword]
+    @page = params[:page]
 
     return unless params[:keyword].present?
 
-    result = Book.search_books(keyword, page)
+    result = Book.search_books(@keyword, @page)
+    @total_items = Book.set_total_items(result["totalItems"])
 
     @total_items = result["totalItems"]
-    return if @total_items == 0
-    @total_items = 100 if @total_items > 0
-    
-    result["items"].each do |item|
-      uid = item["id"]
-      title = item["volumeInfo"]["title"] ||= ""
-      authors = item["volumeInfo"]["authors"] ||= []
-      image_url = item["volumeInfo"]["imageLinks"] ? 
-        item["volumeInfo"]["imageLinks"]["thumbnail"].sub(/http/, 'https') : 
-        "book-default.png"
-
-      book = { uid: uid, title: title, authors: authors.join(', '), image_url: image_url }
-      @books << book
+    if @total_items == 0
+      return
+    elsif @total_items > 100
+      @total_items = 100
     end
+
+    @books = Book.set_search_result(result)
   end
 
   private
