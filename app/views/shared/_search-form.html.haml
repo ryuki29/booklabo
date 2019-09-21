@@ -7,5 +7,6 @@
       class: 'form-control form-control-sm')
     = hidden_field_tag(:page, 0)
     .input-group-append
-      %button.input-group-text.bg-white{ type: 'submit' }
+      %button.input-group-text.bg-white{ id: 'search-submit',
+                                         type: 'submit' }
         %i.fas.fa-search.text-muted
