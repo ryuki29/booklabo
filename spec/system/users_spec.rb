@@ -38,7 +38,7 @@ describe 'Users', type: :system do
       expect(page).to have_content "プロフィールを編集"
     end
 
-    it "テストユーザーでログインできる" do
+    it "テストユーザーでログインできる", js: true do
       User.create(
         name: "テストユーザー",
         email: "testuser1@email.com",
