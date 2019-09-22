@@ -113,7 +113,7 @@ describe 'Users', type: :system do
         OmniAuth.config.mock_auth[:facebook] = nil
         OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
           :provider => 'twitter',
-          :uid => 'twitter-signup-uid',
+          :uid => 'twitter-signin-uid',
           :info => { :nickname => "twitter-user" },
           :credentials => {
             :token => "twitter-token-12345678",
@@ -122,7 +122,7 @@ describe 'Users', type: :system do
         })
         OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
           :provider => 'facebook',
-          :uid => 'facebook-signup-uid',
+          :uid => 'facebook-signin-uid',
           :info => {
             :name => "facebook-user",
             :email => "facebook-signin@example.com"
@@ -131,23 +131,39 @@ describe 'Users', type: :system do
       end
 
       it "Twitterアカウントでログインできる" do
+        user = FactoryBot.create(:user, name: "twitter-user")
+        FactoryBot.create(
+          :sns_uid,
+          provider: 'twitter',
+          uid: 'twitter-signin-uid',
+          user: user
+        )
+
         expect do
           visit new_user_session_path
           click_link 'signin-twitter'
           expect(page).to have_selector ".user-show"
           expect(page).to have_content "twitter-user"
           expect(page).to have_content "プロフィールを編集"
-        end.to change(User, :count).by(1)
+        end.to_not change(User, :count)
       end
 
-      it "Facebookアカウントで新規登録できる" do
+      it "Facebookアカウントでログインできる" do
+        user = FactoryBot.create(:user, name: "facebook-user")
+        FactoryBot.create(
+          :sns_uid,
+          provider: 'facebook',
+          uid: 'facebook-signin-uid',
+          user: user
+        )
+
         expect do
           visit new_user_session_path
           click_link 'signin-facebook'
           expect(page).to have_selector ".user-show"
           expect(page).to have_content "facebook-user"
           expect(page).to have_content "プロフィールを編集"
-        end.to change(User, :count).by(1)
+        end.to_not change(User, :count)
       end
     end
   end
