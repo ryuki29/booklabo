@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Users', type: :system do
   describe "新規登録機能" do
-    it "名前、メールアドレス、パスワードをフォームに入力し、「登録する」をクリックすると、新規ユーザーが作成され、ユーザー詳細ページにリダイレクトされる" do
+    it "名前とメールアドレス、パスワードを入力・送信すると、新規ユーザーが作成される" do
       expect do
         visit new_user_registration_path
         fill_in 'user_name', with: 'testuser'
