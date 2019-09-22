@@ -191,13 +191,47 @@ describe 'Books', type: :system do
       end
     end
 
-    context "読みたい本が登録されている場合" do
-      it "読みたい本を削除できる" do
+    context "読んでる本が登録されている場合" do
+      before do
+        FactoryBot.create(:user_book, status: 1, user: user, book: book)
+        FactoryBot.create(:review, user: user, book: book)
+        sign_in(user)
+      end
+
+      it "読んでる本を削除できる" do
+        visit user_path(user)
+        expect(page).to_not have_content(book.title)
+        find('#reading').click
+        expect(page).to have_content(book.title)
+        find('.users-show-book-img').click
+        expect(page).to have_content("読んでる本から解除")
+        expect(page).to have_css("#reading-book.btn-selected")
+        expect do
+          find('#reading-book').click
+          find('.close').click
+        end.to change(Book, :count).by(-1)
       end
     end
 
-    context "読んでる本が登録されている場合" do
-      it "読んでる本を削除できる" do
+    context "読みたい本が登録されている場合" do
+      before do
+        FactoryBot.create(:user_book, status: 2, user: user, book: book)
+        FactoryBot.create(:review, user: user, book: book)
+        sign_in(user)
+      end
+
+      it "読みたい本を削除できる" do
+        visit user_path(user)
+        expect(page).to_not have_content(book.title)
+        find('#will-read').click
+        expect(page).to have_content(book.title)
+        find('.users-show-book-img').click
+        expect(page).to have_content("読みたい本から解除")
+        expect(page).to have_css("#will-read-book.btn-selected")
+        expect do
+          find('#will-read-book').click
+          find('.close').click
+        end.to change(Book, :count).by(-1)
       end
     end
   end
