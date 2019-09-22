@@ -162,4 +162,43 @@ describe 'Books', type: :system do
          .and change(UserBook, :count).by(1)
     end
   end
+
+  describe "本の編集機能および削除機能" do
+    let(:user) { FactoryBot.create(:user) }
+    let(:book) { FactoryBot.create(:book) }
+
+    context "読んだ本が登録されている場合" do
+      before do
+        FactoryBot.create(:user_book, status: 0, user: user, book: book)
+        FactoryBot.create(:review, user: user, book: book)
+        sign_in(user)
+      end
+
+      it "読んだ本のレビューを編集できる" do
+      end
+  
+      it "読んだ本を削除できる" do
+        visit user_path(user)
+        expect(page).to have_content(book.title)
+        find('.users-show-book-img').click
+        expect(page).to have_content("削除")
+
+        expect do
+          find('#delete-read-book').click
+          page.driver.browser.switch_to.alert.accept
+          expect(page).to_not have_content(book.title)
+        end.to change(Book, :count).by(-1)
+      end
+    end
+
+    context "読みたい本が登録されている場合" do
+      it "読みたい本を削除できる" do
+      end
+    end
+
+    context "読んでる本が登録されている場合" do
+      it "読んでる本を削除できる" do
+      end
+    end
+  end
 end
