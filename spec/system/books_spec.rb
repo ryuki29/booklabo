@@ -74,6 +74,23 @@ describe 'Books', type: :system do
          .and change(UserBook, :count).by(1)
     end
 
+    it "レビューをTwitterに同時投稿できる" do
+      expect do
+        find("#read-book").click
+        expect(page).to have_content "読んだ本に登録する"
+        fill_in "review-text", with: "Twitterへの投稿機能の統合テスト"
+        find("#tweet-btn").click
+        click_button "review-submit"
+
+        expect(page).to have_selector ".user-show"
+        expect(page).to have_content user.name
+        expect(page).to have_css('#read.active')
+        expect(page).to have_content "坊っちゃん"
+      end.to  change(Book, :count).by(1)
+         .and change(Review, :count).by(1)
+         .and change(UserBook, :count).by(1)
+    end
+
     it "読みたい本を登録できる" do
       expect do
         find("#will-read-book").click
