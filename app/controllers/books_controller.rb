@@ -87,22 +87,14 @@ class BooksController < ApplicationController
   end
 
   def create_tweet(review)
-    client = twitter_client
+    client = SnsUid.create_twitter_client(
+      session[:oauth_token],
+      session[:oauth_token_secret]
+    )
     text = "#{@book.authors}の#{@book.title}を読了\n感想：#{review}"
     if text.length > 140
       text = "#{text[0..136]}..." 
     end
     client.update(text)
-  end
-
-  def twitter_client
-    client = Twitter::REST::Client.new do |config|
-      config.access_token = session[:oauth_token]
-      config.access_token_secret = session[:oauth_token_secret]
-      config.consumer_key = Rails.application.credentials.twitter[:twitter_api_key]
-      config.consumer_secret = Rails.application.credentials.twitter[:twitter_api_secret]
-    end
-
-    return client
   end
 end
