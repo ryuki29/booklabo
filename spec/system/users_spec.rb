@@ -16,6 +16,54 @@ describe 'Users', type: :system do
         expect(page).to have_content "プロフィールを編集"
       end.to change(User, :count).by(1)
     end
+
+    describe "SNS認証での新規登録" do
+      before do
+        Rails.application.env_config["devise.mapping"] = Devise.mappings[:user]
+        Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
+        Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
+        OmniAuth.config.test_mode = true
+        OmniAuth.config.mock_auth[:twitter] = nil
+        OmniAuth.config.mock_auth[:facebook] = nil
+        OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
+          :provider => 'twitter',
+          :uid => 'twitter-new-uid',
+          :info => { :nickname => "twitter-user" },
+          :credentials => {
+            :token => "twitter-token-12345678",
+            :secret => "twitter-secret-12345678"
+          }
+        })
+        OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
+          :provider => 'facebook',
+          :uid => 'facebook-new-uid',
+          :info => {
+            :name => "facebook-user",
+            :email => "facebook-signup@example.com"
+          }
+        })
+      end
+
+      it "Twitterアカウントで新規登録できる" do
+        expect do
+          visit new_user_registration_path
+          click_link 'signup-twitter'
+          expect(page).to have_selector ".user-show"
+          expect(page).to have_content "twitter-user"
+          expect(page).to have_content "プロフィールを編集"
+        end.to change(User, :count).by(1)
+      end
+
+      it "Facebookアカウントで新規登録できる" do
+        expect do
+          visit new_user_registration_path
+          click_link 'signup-facebook'
+          expect(page).to have_selector ".user-show"
+          expect(page).to have_content "facebook-user"
+          expect(page).to have_content "プロフィールを編集"
+        end.to change(User, :count).by(1)
+      end
+    end
   end
 
   describe "ログイン機能" do
@@ -53,6 +101,54 @@ describe 'Users', type: :system do
       expect(page).to have_selector ".user-show"
       expect(page).to have_content "テストユーザー"
       expect(page).to have_content "プロフィールを編集"
+    end
+
+    describe "SNS認証でのログイン機能" do
+      before do
+        Rails.application.env_config["devise.mapping"] = Devise.mappings[:user]
+        Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
+        Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
+        OmniAuth.config.test_mode = true
+        OmniAuth.config.mock_auth[:twitter] = nil
+        OmniAuth.config.mock_auth[:facebook] = nil
+        OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
+          :provider => 'twitter',
+          :uid => 'twitter-signup-uid',
+          :info => { :nickname => "twitter-user" },
+          :credentials => {
+            :token => "twitter-token-12345678",
+            :secret => "twitter-secret-12345678"
+          }
+        })
+        OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
+          :provider => 'facebook',
+          :uid => 'facebook-signup-uid',
+          :info => {
+            :name => "facebook-user",
+            :email => "facebook-signin@example.com"
+          }
+        })
+      end
+
+      it "Twitterアカウントでログインできる" do
+        expect do
+          visit new_user_session_path
+          click_link 'signin-twitter'
+          expect(page).to have_selector ".user-show"
+          expect(page).to have_content "twitter-user"
+          expect(page).to have_content "プロフィールを編集"
+        end.to change(User, :count).by(1)
+      end
+
+      it "Facebookアカウントで新規登録できる" do
+        expect do
+          visit new_user_session_path
+          click_link 'signin-facebook'
+          expect(page).to have_selector ".user-show"
+          expect(page).to have_content "facebook-user"
+          expect(page).to have_content "プロフィールを編集"
+        end.to change(User, :count).by(1)
+      end
     end
   end
 
