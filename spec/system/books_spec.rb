@@ -170,11 +170,41 @@ describe 'Books', type: :system do
     context "読んだ本が登録されている場合" do
       before do
         FactoryBot.create(:user_book, status: 0, user: user, book: book)
-        FactoryBot.create(:review, user: user, book: book)
+        @review = FactoryBot.create(:review, text: "未編集のレビュー", user: user, book: book)
         sign_in(user)
       end
 
       it "読んだ本のレビューを編集できる" do
+        visit user_path(user)
+        page.execute_script "$('.fade').removeClass('fade');"
+
+        expect(page).to have_content(book.title)
+        find('.users-show-book-img').click
+        expect(page).to have_content("編集")
+        expect(page).to have_content(@review.text)
+        expect(page).to have_content(@review.date)
+        find("#edit-review").click
+        expect(page).to have_content("レビューを編集する")
+
+        expect(find_field("date-input").value).to eq(@review.date.strftime("%Y-%m-%d"))
+        fill_in "date-input", with: "2019-01-01"
+
+        expect(find_field("review-text").value).to eq(@review.text)
+        fill_in "review-text", with: "編集済みのレビュー"
+
+        expect(page).to have_css("#rating-3.star-active")
+        expect(page).to_not have_css("#rating-5.star-active")
+        find("#rating-5").click
+
+        expect do
+          find("#review-submit").click
+        end.to_not change(Review, :count)
+
+        find('.users-show-book-img').click
+        expect(page).to have_content("編集済みのレビュー")
+        expect(page).to have_content("2019-01-01")
+        find("#edit-review").click
+        expect(page).to have_css("#rating-5.star-active")
       end
   
       it "読んだ本を削除できる" do
