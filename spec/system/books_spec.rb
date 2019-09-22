@@ -62,29 +62,13 @@ describe 'Books', type: :system do
       expect do
         find("#read-book").click
         expect(page).to have_content "読んだ本に登録する"
+        expect(page).to_not have_selector "#tweet-btn"
         fill_in "review-text", with: "レビュー機能の統合テスト"
         click_button "review-submit"
 
         expect(page).to have_selector ".user-show"
         expect(page).to have_content user.name
-        expect(page).to have_css('#read.active')
-        expect(page).to have_content "坊っちゃん"
-      end.to  change(Book, :count).by(1)
-         .and change(Review, :count).by(1)
-         .and change(UserBook, :count).by(1)
-    end
-
-    it "レビューをTwitterに同時投稿できる" do
-      expect do
-        find("#read-book").click
-        expect(page).to have_content "読んだ本に登録する"
-        fill_in "review-text", with: "Twitterへの投稿機能の統合テスト"
-        find("#tweet-btn").click
-        click_button "review-submit"
-
-        expect(page).to have_selector ".user-show"
-        expect(page).to have_content user.name
-        expect(page).to have_css('#read.active')
+        expect(page).to have_css '#read.active'
         expect(page).to have_content "坊っちゃん"
       end.to  change(Book, :count).by(1)
          .and change(Review, :count).by(1)
@@ -96,7 +80,7 @@ describe 'Books', type: :system do
         find("#will-read-book").click
         expect(page).to have_selector ".user-show"
         expect(page).to have_content user.name
-        expect(page).to have_css('#will-read.active')
+        expect(page).to have_css '#will-read.active'
         expect(page).to have_content "坊っちゃん"
       end.to  change(Book, :count).by(1)
          .and change(UserBook, :count).by(1)
@@ -107,9 +91,74 @@ describe 'Books', type: :system do
         find("#reading-book").click
         expect(page).to have_selector ".user-show"
         expect(page).to have_content user.name
-        expect(page).to have_css('#reading.active')
+        expect(page).to have_css '#reading.active'
         expect(page).to have_content "坊っちゃん"
       end.to  change(Book, :count).by(1)
+         .and change(UserBook, :count).by(1)
+    end
+  end
+
+  describe "Twitterへの同時投稿機能" do
+    let(:user) { FactoryBot.create(:user) }
+
+    before do
+      json = {
+        "totalItems" => 1,
+        "items" =>
+         [{"id"=>"MXJT-12RchcC",
+           "volumeInfo"=>
+            {"title"=>"坊っちゃん",
+             "authors"=>["夏目漱石"],
+             "imageLinks"=>{"thumbnail"=>"http://books.google.com/books/content?id=MXJT-12RchcC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"}}}]}
+      allow(Book).to receive(:search_books).and_return(json)
+
+      Rails.application.env_config["devise.mapping"] = Devise.mappings[:user]
+      Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
+      OmniAuth.config.test_mode = true
+      OmniAuth.config.mock_auth[:twitter] = nil
+      OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
+        :provider => 'twitter',
+        :uid => 'twitter-post-review-uid',
+        :info => { :nickname => "twitter-user" },
+        :credentials => {
+          :token => "twitter-token-12345678",
+          :secret => "twitter-secret-12345678"
+        }
+      })
+      FactoryBot.create(
+        :sns_uid,
+        provider: 'twitter',
+        uid: 'twitter-post-review-uid',
+        user: user
+      )
+      visit new_user_session_path
+      click_link 'signin-twitter'
+
+      visit root_path
+      fill_in 'keyword', with: '夏目漱石'
+      click_button 'search-submit'
+      find('.add-book-cover').hover
+      find(".add-book").click
+      find("#read-book").click
+    end
+
+    it "レビューをTwitterに同時投稿できる" do
+      expect do
+        fill_in "review-text", with: "レビュー機能の統合テスト"
+        expect(page).to have_selector("#tweet-btn")
+        find("#tweet-btn").click
+        click_button "review-submit"
+
+        twitter_client_mock = double('Twitter client')
+        allow(SnsUid).to receive(:create_twitter_client).and_return(twitter_client_mock)
+        expect(twitter_client_mock).to receive(:update)
+
+        expect(page).to have_selector ".user-show"
+        expect(page).to have_content user.name
+        expect(page).to have_css '#read.active'
+        expect(page).to have_content "坊っちゃん"
+      end.to  change(Book, :count).by(1)
+         .and change(Review, :count).by(1)
          .and change(UserBook, :count).by(1)
     end
   end
