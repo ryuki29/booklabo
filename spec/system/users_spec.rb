@@ -179,4 +179,26 @@ describe 'Users', type: :system do
       expect(page).to have_button "ログインする"
     end
   end
+
+  describe "フォロー機能" do
+    let(:follower) { FactoryBot.create(:user, name: "Alice") }
+    let(:followed) { FactoryBot.create(:user, name: "Bob") }
+
+    it "他のユーザーをフォローできる" do
+      sign_in(follower)
+      visit user_path(followed)
+      expect(find('#followed').text).to eq("0")
+      expect do
+        find('.follow-btn').click
+        expect(page).to have_css('.follow-btn.following')
+      end.to change(Relationship, :count).by(1)
+      expect(find('#followed').text).to eq("1")
+      find('#show-followers').click
+      expect(page).to have_content(follower.name)
+      find('.follower-name').click
+
+      expect(page).to have_content(follower.name)
+      expect(find('#following').text).to eq("1")
+    end
+  end
 end
