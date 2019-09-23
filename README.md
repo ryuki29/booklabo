@@ -28,7 +28,7 @@
   - Twitter および Facebook アカウントでのログイン機能 (gem OmniAuth を利用)
   - Twitter へのレビューの同時投稿機能 (TwitterAPI を利用)
   - 単体テスト (RSpec)
-  - 統合テスト (System Spec, 外部 API を利用した機能のテスト(モック/スタブの使用))
+  - 統合テスト (System Spec, 外部 API を利用した機能のテスト(モック/スタブの使用), gem simplecov によるテストカバレッジの計測)
 - ### インフラ
   - Capistrano による EC2 インスタンスへの自動デプロイ
   - DB として、Amazon RDS(MySQL)を使用

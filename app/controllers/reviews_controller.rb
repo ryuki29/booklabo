@@ -8,14 +8,7 @@ class ReviewsController < ApplicationController
   def update
     if @review.update(review_params)
       render json: {
-        "status": "OK",
-        "code": 200,
         "user_id": current_user.id
-      }
-    else
-      render json: {
-        "status": "NG",
-        "code": 500
       }
     end
   end

@@ -213,4 +213,30 @@ describe 'Users', type: :system do
       expect(find('#followed').text).to eq("0")
     end
   end
+
+  describe "プロフィールの編集機能" do
+    let(:user) { FactoryBot.create(:user) }
+
+    before do
+      sign_in(user)
+    end
+
+    it "プロフィールを編集できる" do
+      visit user_path(user)
+      expect(page).to have_content "プロフィールを編集"
+      find("#edit-profile").click
+      find("#user_image", visible: false).attach_file('tmp/images/test-user-image.jpg')
+      fill_in "edit-user-name", with: "編集済みのユーザー名"
+      fill_in "edit-user-description", with: "テストユーザーの自己紹介です"
+      fill_in "edit-user-url", with: "https://testuser.com"
+      expect do
+        click_button "保存"
+      end.to change(ActiveStorage::Blob, :count).by(1)
+         .and change(ActiveStorage::Attachment, :count).by(1)
+      expect(page).to have_css("img[src*='test-user-image.jpg']")
+      expect(page).to have_content "編集済みのユーザー名"
+      expect(page).to have_content "テストユーザーの自己紹介です"
+      expect(page).to have_content "https://testuser.com"
+    end
+  end
 end

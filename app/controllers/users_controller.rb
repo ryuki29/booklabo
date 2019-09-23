@@ -27,10 +27,6 @@ class UsersController < ApplicationController
     redirect_to user_path(current_user)
   end
 
-  def test
-    @user = User.find(1)
-  end
-
   def privacy
   end
 
