@@ -13,7 +13,6 @@ class Book < ApplicationRecord
     )
     parsed_uri = URI.parse(encoded_uri)
     result = JSON.parse(Net::HTTP.get(parsed_uri))
-    return result
   end
 
   def self.set_search_result(result, books)
