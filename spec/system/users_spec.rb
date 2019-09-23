@@ -52,6 +52,7 @@ describe 'Users', type: :system do
           expect(page).to have_content "twitter-user"
           expect(page).to have_content "プロフィールを編集"
         end.to change(User, :count).by(1)
+           .and change(SnsUid, :count).by(1)
       end
 
       it "Facebookアカウントで新規登録できる" do
@@ -62,6 +63,7 @@ describe 'Users', type: :system do
           expect(page).to have_content "facebook-user"
           expect(page).to have_content "プロフィールを編集"
         end.to change(User, :count).by(1)
+           .and change(SnsUid, :count).by(1)
       end
     end
   end
