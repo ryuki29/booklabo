@@ -201,6 +201,16 @@ describe 'Users', type: :system do
 
       expect(page).to have_content(follower.name)
       expect(find('#following').text).to eq("1")
+      find('#show-following').click
+      find('.follower-name').click
+      expect(page).to have_content(followed.name)
+
+      #フォローの解除
+      expect do
+        find('.follow-btn').click
+        expect(page).to_not have_css('.follow-btn.following')
+      end.to change(Relationship, :count).by(-1)
+      expect(find('#followed').text).to eq("0")
     end
   end
 end
