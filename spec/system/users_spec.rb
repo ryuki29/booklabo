@@ -146,7 +146,6 @@ describe 'Users', type: :system do
           click_link 'signin-twitter'
           expect(page).to have_selector ".user-show"
           expect(page).to have_content "twitter-user"
-          expect(page).to have_content "プロフィールを編集"
         end.to_not change(User, :count)
       end
 
@@ -164,8 +163,32 @@ describe 'Users', type: :system do
           click_link 'signin-facebook'
           expect(page).to have_selector ".user-show"
           expect(page).to have_content "facebook-user"
-          expect(page).to have_content "プロフィールを編集"
         end.to_not change(User, :count)
+      end
+
+      context "Facebookのメールアドレスで既にユーザー登録されている場合" do
+        before do
+          OmniAuth.config.mock_auth[:facebook] = nil
+          OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
+            :provider => 'facebook',
+            :uid => 'facebook-signin-uid',
+            :info => {
+              :name => "facebook-user",
+              :email => "facebook-user@example.com"
+            }
+          })
+          FactoryBot.create(:user, name: "登録済みのユーザー名", email: "facebook-user@example.com")
+        end
+
+        it "FacebookのIDのみ登録される" do
+          visit new_user_session_path
+          expect do
+            click_link 'signin-facebook'
+          end.to change(User, :count).by(0)
+             .and change(SnsUid, :count).by(1)
+          expect(page).to have_selector ".user-show"
+          expect(page).to have_content "登録済みのユーザー名"
+        end
       end
     end
   end
@@ -236,7 +259,6 @@ describe 'Users', type: :system do
       expect(page).to have_css("img[src*='test-user-image.jpg']")
       expect(page).to have_content "編集済みのユーザー名"
       expect(page).to have_content "テストユーザーの自己紹介です"
-      expect(page).to have_content "https://testuser.com"
     end
   end
 end
