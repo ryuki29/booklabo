@@ -143,15 +143,15 @@ describe 'Books', type: :system do
     end
 
     it "レビューをTwitterに同時投稿できる" do
+      twitter_client_mock = double('Twitter client')
+      allow(Twitter::REST::Client).to receive(:new).and_return(twitter_client_mock)
+      expect(twitter_client_mock).to receive(:update)
+
       expect do
         fill_in "review-text", with: "レビュー機能の統合テスト"
         expect(page).to have_selector("#tweet-btn")
         find("#tweet-btn").click
         click_button "review-submit"
-
-        twitter_client_mock = double('Twitter client')
-        allow(SnsUid).to receive(:create_twitter_client).and_return(twitter_client_mock)
-        expect(twitter_client_mock).to receive(:update)
 
         expect(page).to have_selector ".user-show"
         expect(page).to have_content user.name
