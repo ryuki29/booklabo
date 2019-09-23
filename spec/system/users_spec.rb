@@ -65,6 +65,13 @@ describe 'Users', type: :system do
         end.to change(User, :count).by(1)
            .and change(SnsUid, :count).by(1)
       end
+
+      it "ユーザーがSNSアカウントを持たない場合、ログインページにリダイレクトされる" do
+        allow(User).to receive(:find_for_oauth).and_return(nil)
+        visit new_user_registration_path
+        click_link 'signup-twitter'
+        expect(page).to have_current_path new_user_session_path
+      end
     end
   end
 
