@@ -61,7 +61,7 @@ class User < ApplicationRecord
           user: user
         )
       else
-        user = User.create_user_with_facebook_or_google(auth)
+        user = User.create_user_with_facebook(auth)
       end
     end
 
@@ -84,7 +84,7 @@ class User < ApplicationRecord
     return user if user.save && sns_uid.save
   end
 
-  def self.create_user_with_facebook_or_google(auth)
+  def self.create_user_with_facebook(auth)
     user = User.new(
       email: auth.info.email,
       name: auth.info.name,
