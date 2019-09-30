@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class RelationshipsController < ApplicationController
-  before_action :find_user, only: [:followers, :following]
+  before_action :find_user, only: %i[followers following]
 
   def create
     current_user.active_relationships.create(
@@ -23,6 +25,7 @@ class RelationshipsController < ApplicationController
   end
 
   private
+
   def find_user
     @user = User.find(params[:id])
   end

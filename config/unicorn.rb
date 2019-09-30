@@ -1,4 +1,6 @@
-app_path = File.expand_path('../../../', __FILE__)
+# frozen_string_literal: true
+
+app_path = File.expand_path('../..', __dir__)
 
 worker_processes 1
 working_directory "#{app_path}/current"
@@ -21,9 +23,7 @@ before_fork do |server, worker|
   defined?(ActiveRecord::Base) &&
     ActiveRecord::Base.connection.disconnect!
 
-  if run_once
-    run_once = false
-  end
+  run_once = false if run_once
 
   old_pid = "#{server.config[:pid]}.oldbin"
   if File.exist?(old_pid) && server.pid != old_pid

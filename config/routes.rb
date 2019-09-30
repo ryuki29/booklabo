@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
-  
+
   root to: 'users#index'
   resources :users, only: %i[index show update] do
     collection do
@@ -14,7 +16,7 @@ Rails.application.routes.draw do
   resources :relationships, only: %i[create destroy] do
     member do
       get 'followers'
-      get 'following'      
+      get 'following'
     end
   end
 

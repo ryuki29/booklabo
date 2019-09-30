@@ -1,0 +1,28 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - vendor/bundle/**/*
+    - bin/*
+    - db/**/*
+    - config/**/*
+    - Gemfile
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+
+Metrics/LineLength:
+  Max: 180
+
+Metrics/MethodLength:
+  Max: 15
+
+Metrics/AbcSize:
+  Max: 25
+
+ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false

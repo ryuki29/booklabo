@@ -28,3 +28,4 @@
 
 .DS_store
 /coverage/*
+.rubocop_todo.yml
