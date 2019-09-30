@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Book < ApplicationRecord
-  has_one  :review,    dependent: :destroy
+  has_one  :review, dependent: :destroy
   has_many :user_books, dependent: :destroy
   has_many :users,      through: :user_books
   paginates_per 20
@@ -16,13 +18,13 @@ class Book < ApplicationRecord
   end
 
   def self.set_search_result(result, books)
-    result["items"].each do |item|
-      uid = item["id"]
-      title = item["volumeInfo"]["title"] ||= ""
-      authors = item["volumeInfo"]["authors"] ||= []
-      image_url = item["volumeInfo"]["imageLinks"] ? 
-        item["volumeInfo"]["imageLinks"]["thumbnail"].sub(/http/, 'https') : 
-        "book-default.png"
+    result['items'].each do |item|
+      uid = item['id']
+      title = item['volumeInfo']['title'] ||= ''
+      authors = item['volumeInfo']['authors'] ||= []
+      image_url = item['volumeInfo']['imageLinks'] ?
+        item['volumeInfo']['imageLinks']['thumbnail'].sub(/http/, 'https') :
+        'book-default.png'
 
       book = {
         uid: uid,
@@ -32,6 +34,6 @@ class Book < ApplicationRecord
       }
       books << book
     end
-    return books
+    books
   end
 end

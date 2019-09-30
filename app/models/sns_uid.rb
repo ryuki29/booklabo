@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class SnsUid < ApplicationRecord
   belongs_to :user
 
   validates :provider, presence: true,
-                       inclusion: { in: %w(twitter facebook google) }
+                       inclusion: { in: %w[twitter facebook google] }
   validates :uid, presence: true
 
   def self.create_twitter_client(oauth_token, oauth_token_secret)
@@ -13,6 +15,6 @@ class SnsUid < ApplicationRecord
       config.consumer_secret = Rails.application.credentials.twitter[:twitter_api_secret]
     end
 
-    return client
+    client
   end
 end

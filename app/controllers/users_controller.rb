@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
-  before_action :find_user, only: [:show, :update]
+  before_action :find_user, only: %i[show update]
 
   def index
     if user_signed_in?
@@ -12,9 +14,9 @@ class UsersController < ApplicationController
   def show
     @status = params[:status] ? params[:status].to_i : 0
     @books = Book.joins(:user_books).where(user_books: {
-      status: @status,
-      user_id: params[:id]
-    }).order(created_at: "DESC").page(params[:page])
+                                             status: @status,
+                                             user_id: params[:id]
+                                           }).order(created_at: 'DESC').page(params[:page])
 
     @following = @user.following.count
     @followers = @user.followers.count
@@ -27,10 +29,10 @@ class UsersController < ApplicationController
     redirect_to user_path(current_user)
   end
 
-  def privacy
-  end
+  def privacy; end
 
   private
+
   def user_params
     params.require(:user).permit(:name, :image, :url, :description)
   end

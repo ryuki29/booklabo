@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Review < ApplicationRecord
   belongs_to :user
   belongs_to :book
@@ -5,14 +7,13 @@ class Review < ApplicationRecord
   validate :validate_review_with_date_after_tomorrow
   validates :text, length: { maximum: 255 }
   validates :rating, numericality: {
-                       less_than: 6,
-                       greater_than_or_equal_to: 0
-                     }
+    less_than: 6,
+    greater_than_or_equal_to: 0
+  }
 
   private
+
   def validate_review_with_date_after_tomorrow
-    if date.present? && date > Date.today
-      errors.add(:date, "は本日以前の日付を選択してください")
-    end
+    errors.add(:date, 'は本日以前の日付を選択してください') if date.present? && date > Date.today
   end
 end

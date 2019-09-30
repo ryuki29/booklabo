@@ -1,33 +1,35 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[twitter facebook google]
-  
+
   has_many :reviews,    dependent: :destroy
   has_many :user_books, dependent: :destroy
   has_many :books,      through: :user_books,
                         dependent: :destroy
   has_many :sns_uids,   dependent: :destroy
   has_one_attached :image
-  has_many :active_relationships, class_name:  "Relationship",
-                                  foreign_key: "follower_id",
-                                  dependent:   :destroy
-  has_many :passive_relationships, class_name:  "Relationship",
-                                   foreign_key: "followed_id",
-                                   dependent:   :destroy
+  has_many :active_relationships, class_name: 'Relationship',
+                                  foreign_key: 'follower_id',
+                                  dependent: :destroy
+  has_many :passive_relationships, class_name: 'Relationship',
+                                   foreign_key: 'followed_id',
+                                   dependent: :destroy
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
   validates :name, presence: true,
                    length: { maximum: 20 }
-  VALID_EMAIL_REGIX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+  VALID_EMAIL_REGIX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i.freeze
   validates :email, presence: true,
                     uniqueness: true,
                     format: {
                       with: VALID_EMAIL_REGIX,
-                      message: "のフォーマットが不適切です"
+                      message: 'のフォーマットが不適切です'
                     }
   validates :password, presence: true,
                        length: {
@@ -37,8 +39,8 @@ class User < ApplicationRecord
                        on: :create
   validates :url, length: { maximum: 100 },
                   format: {
-                    with: /\Ahttps?:\/\/[\S]+\z/,
-                    message: "のフォーマットが不適切です",
+                    with: %r{\Ahttps?://[\S]+\z},
+                    message: 'のフォーマットが不適切です',
                     allow_nil: true,
                     allow_blank: true
                   }
@@ -46,17 +48,17 @@ class User < ApplicationRecord
 
   def self.find_for_oauth(auth)
     sns_uid = SnsUid.where(uid: auth.uid, provider: auth.provider).first
-    
+
     if sns_uid.present?
       user = sns_uid.user
-    elsif auth.provider == "twitter"
+    elsif auth.provider == 'twitter'
       user = User.create_user_with_twitter(auth)
     else
       user = User.where(email: auth.info.email).first
-      
+
       if user.present?
         SnsUid.create(
-          uid:      auth.uid,
+          uid: auth.uid,
           provider: auth.provider,
           user: user
         )
@@ -65,10 +67,11 @@ class User < ApplicationRecord
       end
     end
 
-    return user
+    user
   end
 
   private
+
   def self.create_user_with_twitter(auth)
     user = User.new(
       email: User.dummy_email(auth),
@@ -76,11 +79,11 @@ class User < ApplicationRecord
       password: Devise.friendly_token[0, 20]
     )
     sns_uid = SnsUid.new(
-      uid:      auth.uid,
+      uid: auth.uid,
       provider: auth.provider,
       user: user
     )
-    
+
     return user if user.save && sns_uid.save
   end
 
@@ -91,7 +94,7 @@ class User < ApplicationRecord
       password: Devise.friendly_token[0, 20]
     )
     sns_uid = SnsUid.new(
-      uid:      auth.uid,
+      uid: auth.uid,
       provider: auth.provider,
       user: user
     )

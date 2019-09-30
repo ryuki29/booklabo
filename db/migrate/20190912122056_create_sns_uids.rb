@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateSnsUids < ActiveRecord::Migration[5.2]
   def change
     create_table :sns_uids do |t|
