@@ -57,11 +57,7 @@ class User < ApplicationRecord
       user = User.where(email: auth.info.email).first
 
       if user.present?
-        SnsUid.create(
-          uid: auth.uid,
-          provider: auth.provider,
-          user: user
-        )
+        SnsUid.create(uid: auth.uid, provider: auth.provider, user: user)
       else
         user = User.create_user_with_facebook(auth)
       end
@@ -69,8 +65,6 @@ class User < ApplicationRecord
 
     user
   end
-
-  private
 
   def self.create_user_with_twitter(auth)
     user = User.new(

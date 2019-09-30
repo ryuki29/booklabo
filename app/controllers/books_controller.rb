@@ -16,13 +16,9 @@ class BooksController < ApplicationController
     )
 
     create_review if params[:review].present?
+    return unless @book.save && user_book.save
 
-    if @book.save && user_book.save
-      render json: {
-        "user_id": current_user.id,
-        "book_status": status
-      }
-    end
+    render json: { "user_id": current_user.id, "book_status": status }
   end
 
   def destroy
@@ -41,12 +37,10 @@ class BooksController < ApplicationController
     result = Book.search_books(@keyword, @page)
 
     @total_items = result['totalItems']
-    if @total_items == 0
-      return
-    elsif @total_items > 100
-      @total_items = 100
-    end
 
+    return if @total_items.zero?
+
+    @total_items = 100 if @total_items > 100
     @books = Book.set_search_result(result, @books)
   end
 
@@ -71,9 +65,7 @@ class BooksController < ApplicationController
 
   def create_review
     require 'date'
-    date = review_params[:date].present? ?
-      Date.strptime(review_params[:date], '%Y/%m/%d') :
-      nil
+    date = review_params[:date].present? ? Date.strptime(review_params[:date], '%Y/%m/%d') : nil
 
     review = Review.new(
       user: current_user,

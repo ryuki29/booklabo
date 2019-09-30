@@ -7,11 +7,7 @@ class ReviewsController < ApplicationController
   def show; end
 
   def update
-    if @review.update(review_params)
-      render json: {
-        "user_id": current_user.id
-      }
-    end
+    render json: { "user_id": current_user.id } if @review.update(review_params)
   end
 
   private

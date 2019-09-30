@@ -20,8 +20,7 @@ class UsersController < ApplicationController
 
     @following = @user.following.count
     @followers = @user.followers.count
-    @current_user_following = @user.follower_ids.include?(current_user.id) ?
-                              true : false
+    @current_user_following = @user.follower_ids.include?(current_user.id) ? true : false
   end
 
   def update

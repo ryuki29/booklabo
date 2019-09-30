@@ -71,8 +71,8 @@ RSpec.describe User, type: :model do
   it 'is valid with a password with 128 characters' do
     user = FactoryBot.build(
       :user,
-      password: 'QMuAktZciJ3fwL633AnHYZfG5OxQdSURsehAy4CECtKY4GPW42tQQwnJbIpco8TGcY4yQw3iOB5I5KuXBLDh8QQ7n49B0Q62E0pklgrZFkvAUOnjpQqlv5gGXf5NV1Dn',
-      password_confirmation: 'QMuAktZciJ3fwL633AnHYZfG5OxQdSURsehAy4CECtKY4GPW42tQQwnJbIpco8TGcY4yQw3iOB5I5KuXBLDh8QQ7n49B0Q62E0pklgrZFkvAUOnjpQqlv5gGXf5NV1Dn'
+      password: 'a1' * 64,
+      password_confirmation: 'a1' * 64
     )
     expect(user).to be_valid
   end
@@ -80,8 +80,8 @@ RSpec.describe User, type: :model do
   it 'is invalid with a password with 129 characters' do
     user = FactoryBot.build(
       :user,
-      password: 'QMuAktZciJ3fwL633AnHYZfG5OxQdSURsehAy4CECtKY4GPW42tQQwnJbIpco8TGcY4yQw3iOB5I5KuXBLDh8QQ7n49B0Q62E0pklgrZFkvAUOnjpQqlv5gGXf5NV1DnA',
-      password_confirmation: 'QMuAktZciJ3fwL633AnHYZfG5OxQdSURsehAy4CECtKY4GPW42tQQwnJbIpco8TGcY4yQw3iOB5I5KuXBLDh8QQ7n49B0Q62E0pklgrZFkvAUOnjpQqlv5gGXf5NV1DnA'
+      password: 'a1' * 64 + 'a',
+      password_confirmation: 'a1' * 64 + 'a'
     )
     user.valid?
     expect(user.errors[:password]).to include('は128文字以内で入力してください')
@@ -97,10 +97,10 @@ RSpec.describe User, type: :model do
     expect(user.errors[:password_confirmation]).to include('とパスワードの入力が一致しません')
   end
 
-  it 'is valid with a url with 101 characters' do
+  it 'is valid with a url with 100 characters' do
     user = FactoryBot.build(
       :user,
-      url: 'https://Ag1AYg3TPs7Qy7z5sSftsilC7AUwmWQK1F8PMZwpiu6EptxH9A1pIaPGyy0KkHi9agOM6b0ctUEId1dap2qX23rqri0A'
+      url: 'https://' + 'a' * 92
     )
     expect(user).to be_valid
   end
@@ -108,7 +108,7 @@ RSpec.describe User, type: :model do
   it 'is invalid with a url with 101 characters' do
     user = FactoryBot.build(
       :user,
-      url: 'https://Ag1AYg3TPs7Qy7z5sSftsilC7AUwmWQK1F8PMZwpiu6EptxH9A1pIaPGyy0KkHi9agOM6b0ctUEId1dap2qX23rqri0AN'
+      url: 'https://' + 'a' * 93
     )
     user.valid?
     expect(user.errors[:url]).to include('は100文字以内で入力してください')
@@ -126,7 +126,7 @@ RSpec.describe User, type: :model do
   it 'is valid with a desription with 160 characters' do
     user = FactoryBot.build(
       :user,
-      description: 'ぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをんぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろ'
+      description: 'あ' * 160
     )
     expect(user).to be_valid
   end
@@ -134,7 +134,7 @@ RSpec.describe User, type: :model do
   it 'is invalid with a discription with 161 characters' do
     user = FactoryBot.build(
       :user,
-      description: 'ぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをんぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎ'
+      description: 'あ' * 161
     )
     user.valid?
     expect(user.errors[:description]).to include('は160文字以内で入力してください')

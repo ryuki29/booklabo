@@ -237,7 +237,6 @@ describe 'Users', type: :system do
       find('.follower-name').click
       expect(page).to have_content(followed.name)
 
-      # フォローの解除
       expect do
         find('.follow-btn').click
         expect(page).to_not have_css('.follow-btn.following')
